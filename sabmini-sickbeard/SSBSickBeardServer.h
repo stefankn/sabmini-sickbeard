@@ -8,6 +8,25 @@
 
 #import <Foundation/Foundation.h>
 
+@protocol SSBSickBeardServerDelegate <NSObject>
+
+@optional
+- (void)shutdownResponse;
+- (void)restartResponse;
+
+@end
+
 @interface SSBSickBeardServer : NSObject
+
+- (NSString *)urlString;
+- (void)restartSickBeard;
+- (void)shutdownSickBeard;
+
+@end
+
+@interface SSBSickBeardServers : NSObject
+
++ (NSArray *)getServers;
++ (SSBSickBeardServer *)createServer:(NSString *)friendlyName withHost:(NSString *)host withPort:(NSString *)port withApikey:(NSString *)apikey enableHttps:(BOOL)https store:(BOOL)store;
 
 @end
