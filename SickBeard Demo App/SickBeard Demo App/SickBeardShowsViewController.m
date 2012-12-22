@@ -10,10 +10,12 @@
 #import "SSBSickBeardServer.h"
 #import "SSBSickBeard.h"
 #import "SSBSickBeardShow.h"
+#import "SSBSickBeardResult.h"
+#import "SickBeardShowViewController.h"
 
 @interface SickBeardShowsViewController ()
 
-@property (nonatomic, strong) NSArray *shows;
+@property (nonatomic, strong) NSMutableArray *shows;
 
 @end
 
@@ -36,12 +38,16 @@
     [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
     [SSBSickBeard getShows:@"id" onlyPaused:NO onComplete:^(NSDictionary *data) {
 
-        self.shows = [NSArray arrayWithArray:[data objectForKey:@"results"]];
+        self.shows = [NSMutableArray arrayWithArray:[data objectForKey:@"results"]];
         [self.tableView reloadData];
         [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
         
     } onFailure:^(SSBSickBeardResult *result) {
         
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"An Error occurred" message:result.message delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        [alert show];
+        [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
+
     }];
 }
 
@@ -49,6 +55,16 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    UITableViewCell *cell = (UITableViewCell *) sender;
+    NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
+    
+    SSBSickBeardShow *show = [self.shows objectAtIndex:indexPath.row];
+    SickBeardShowViewController *showViewController = (SickBeardShowViewController *)segue.destinationViewController;
+    showViewController.show = show;
 }
 
 #pragma mark - Table view data source
@@ -88,14 +104,38 @@
     return cell;
 }
 
-/*
-// Override to support conditional editing of the table view.
+-(UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+	return UITableViewCellEditingStyleDelete;
+}
+
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    // Return NO if you do not want the specified item to be editable.
     return YES;
 }
-*/
+
+-(void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
+    if (editingStyle == UITableViewCellEditingStyleDelete) {
+        SSBSickBeardShow *show = [self.shows objectAtIndex:indexPath.row];
+        [show deleteShow:^(SSBSickBeardResult *result) {
+            if (result.success) {
+                [self.shows removeObjectAtIndex:indexPath.row];
+                [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationRight];
+            }
+            else {
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"An error occurred" message:result.message delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+                [alert show];
+            }
+            
+            [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
+        } onFailure:^(SSBSickBeardResult *result) {
+            [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
+        }];
+        
+    }
+}
 
 /*
 // Override to support editing the table view.
