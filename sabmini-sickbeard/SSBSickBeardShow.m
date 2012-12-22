@@ -35,23 +35,23 @@
 
 - (void)setAttributes:(NSDictionary *)attributes
 {
-    self.air_by_date = [[attributes objectForKey:@"air_by_date"] boolValue];
-    self.airs = [attributes objectForKey:@"airs"];
-    self.show_cache = [attributes objectForKey:@"cache"];
-    self.flatten_folders = [[attributes objectForKey:@"flatten_folders"] boolValue];
-    self.genre = [attributes objectForKey:@"genre"];
-    self.language = [attributes objectForKey:@"language"];
-    self.location = [attributes objectForKey:@"location"];
-    self.network = [attributes objectForKey:@"network"];
-    self.next_ep_airdate = [attributes objectForKey:@"next_ep_airdate"];
-    self.paused = [[attributes objectForKey:@"paused"] boolValue];
-    self.quality = [attributes objectForKey:@"quality"];
-    self.quality_details = [attributes objectForKey:@"quality_details"];
-    self.season_list = [[attributes objectForKey:@"season_list"] sortedArrayUsingSelector:@selector(compare:)];
-    self.show_name = [attributes objectForKey:@"show_name"];
-    self.status = [attributes objectForKey:@"status"];
-    self.tvrage_id = [[attributes objectForKey:@"tv_rage_id"] stringValue];
-    self.tvrage_name = [attributes objectForKey:@"tvrage_name"];
+    if ([attributes objectForKey:@"air_by_date"]) self.air_by_date = [[attributes objectForKey:@"air_by_date"] boolValue];
+    if ([attributes objectForKey:@"airs"]) self.airs = [attributes objectForKey:@"airs"];
+    if ([attributes objectForKey:@"cache"]) self.show_cache = [attributes objectForKey:@"cache"];
+    if ([attributes objectForKey:@"flatten_folders"]) self.flatten_folders = [[attributes objectForKey:@"flatten_folders"] boolValue];
+    if ([attributes objectForKey:@"genre"]) self.genre = [attributes objectForKey:@"genre"];
+    if ([attributes objectForKey:@"language"]) self.language = [attributes objectForKey:@"language"];
+    if ([attributes objectForKey:@"location"]) self.location = [attributes objectForKey:@"location"];
+    if ([attributes objectForKey:@"network"]) self.network = [attributes objectForKey:@"network"];
+    if ([attributes objectForKey:@"next_ep_airdate"]) self.next_ep_airdate = [attributes objectForKey:@"next_ep_airdate"];
+    if ([attributes objectForKey:@"paused"]) self.paused = [[attributes objectForKey:@"paused"] boolValue];
+    if ([attributes objectForKey:@"quality"]) self.quality = [attributes objectForKey:@"quality"];
+    if ([attributes objectForKey:@"quality_details"]) self.quality_details = [attributes objectForKey:@"quality_details"];
+    if ([attributes objectForKey:@"season_list"]) self.season_list = [[attributes objectForKey:@"season_list"] sortedArrayUsingSelector:@selector(compare:)];
+    if ([attributes objectForKey:@"show_name"]) self.show_name = [attributes objectForKey:@"show_name"];
+    if ([attributes objectForKey:@"status"]) self.status = [attributes objectForKey:@"status"];
+    if ([attributes objectForKey:@"tvrage_id"]) self.tvrage_id = [attributes objectForKey:@"tvrage_id"];
+    if ([attributes objectForKey:@"tvrage_name"]) self.tvrage_name = [attributes objectForKey:@"tvrage_name"];
 }
 
 - (void)getFullDetails:(SSBSickBeardShowRequestResponseBlock)complete onFailure:(SSBSickBeardShowRequestResponseBlock)failed
@@ -91,6 +91,7 @@
             NSMutableDictionary *attributes = [NSMutableDictionary dictionaryWithDictionary:[[data objectForKey:@"data"] objectForKey:key]];
             [attributes setObject:key forKey:@"episode"];
             SSBSickBeardEpisode *episode = [[SSBSickBeardEpisode alloc] initWithAttributes:attributes];
+            episode.tvdbid = self.identifier;
             [episodes addObject:episode];
         }
         
@@ -98,6 +99,41 @@
     }];
 }
 
+- (void)pause:(SSBSickBeardShowRequestResponseBlock)complete onFailure:(SSBSickBeardShowRequestResponseBlock)failed
+{
+    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@show.pause&tvdbid=%@&pause=1", [[SSBSharedServer sharedServer].server urlString], self.identifier]];
+    SSBSickBeardConnector *connector = [[SSBSickBeardConnector alloc] initWithURL:url];
+    [connector getData:^(NSDictionary *data) {
+        complete([[SSBSickBeardResult alloc] initWithAttributes:data]);
+    }];
+}
+
+- (void)unpause:(SSBSickBeardShowRequestResponseBlock)complete onFailure:(SSBSickBeardShowRequestResponseBlock)failed
+{
+    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@show.pause&tvdbid=%@&pause=0", [[SSBSharedServer sharedServer].server urlString], self.identifier]];
+    SSBSickBeardConnector *connector = [[SSBSickBeardConnector alloc] initWithURL:url];
+    [connector getData:^(NSDictionary *data) {
+        complete([[SSBSickBeardResult alloc] initWithAttributes:data]);
+    }];
+}
+
+- (void)refresh:(SSBSickBeardShowRequestResponseBlock)complete onFailure:(SSBSickBeardShowRequestResponseBlock)failed
+{
+    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@show.refresh&tvdbid=%@", [[SSBSharedServer sharedServer].server urlString], self.identifier]];
+    SSBSickBeardConnector *connector = [[SSBSickBeardConnector alloc] initWithURL:url];
+    [connector getData:^(NSDictionary *data) {
+        complete([[SSBSickBeardResult alloc] initWithAttributes:data]);
+    }];
+}
+
+- (void)update:(SSBSickBeardShowRequestResponseBlock)complete onFailure:(SSBSickBeardShowRequestResponseBlock)failed
+{
+    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@show.update&tvdbid=%@", [[SSBSharedServer sharedServer].server urlString], self.identifier]];
+    SSBSickBeardConnector *connector = [[SSBSickBeardConnector alloc] initWithURL:url];
+    [connector getData:^(NSDictionary *data) {
+        complete([[SSBSickBeardResult alloc] initWithAttributes:data]);
+    }];
+}
 
 
 
@@ -141,32 +177,11 @@
     }];
 }
 
-- (void)pause:(SSBSickBeardShowRequestResponseBlock)complete onFailure:(SSBSickBeardShowRequestResponseBlock)failed
-{
-    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@show.pause&tvdbid=%@&pause=1", [[SSBSharedServer sharedServer].server urlString], self.identifier]];
-    SSBSickBeardConnector *connector = [[SSBSickBeardConnector alloc] initWithURL:url];
-    [connector getData:^(NSDictionary *data) {
-        complete([[SSBSickBeardResult alloc] initWithAttributes:data]);
-    }];
-}
 
-- (void)resume:(SSBSickBeardShowRequestResponseBlock)complete onFailure:(SSBSickBeardShowRequestResponseBlock)failed
-{
-    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@show.pause&tvdbid=%@&pause=0", [[SSBSharedServer sharedServer].server urlString], self.identifier]];
-    SSBSickBeardConnector *connector = [[SSBSickBeardConnector alloc] initWithURL:url];
-    [connector getData:^(NSDictionary *data) {
-        complete([[SSBSickBeardResult alloc] initWithAttributes:data]);
-    }];
-}
 
-- (void)refresh:(SSBSickBeardShowRequestResponseBlock)complete onFailure:(SSBSickBeardShowRequestResponseBlock)failed
-{
-    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@show.refresh&tvdbid=%@", [[SSBSharedServer sharedServer].server urlString], self.identifier]];
-    SSBSickBeardConnector *connector = [[SSBSickBeardConnector alloc] initWithURL:url];
-    [connector getData:^(NSDictionary *data) {
-        complete([[SSBSickBeardResult alloc] initWithAttributes:data]);
-    }];
-}
+
+
+
 
 - (void)getSeasonList:(NSString *)sort onComplete:(SSBSickBeardShowRequestResponseBlock)complete onFailure:(SSBSickBeardShowRequestResponseBlock)failed
 {
@@ -187,9 +202,6 @@
     
 }
 
-- (void)update:(SSBSickBeardShowRequestResponseBlock)complete onFailure:(SSBSickBeardShowRequestResponseBlock)failed
-{
-    
-}
+
 
 @end

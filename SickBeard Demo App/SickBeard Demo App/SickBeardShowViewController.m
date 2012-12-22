@@ -11,7 +11,10 @@
 #import "SSBSickBeardResult.h"
 #import "SickBeardEpisodesViewController.h"
 
-@interface SickBeardShowViewController ()
+@interface SickBeardShowViewController () <UIActionSheetDelegate>
+
+- (void)refreshShowDetails;
+- (IBAction)showActions:(id)sender;
 
 @end
 
@@ -31,6 +34,11 @@
 {
     [super viewDidLoad];
     
+    [self refreshShowDetails];
+}
+
+- (void)refreshShowDetails
+{
     [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
     [self.show getFullDetails:^(SSBSickBeardResult *result) {
         [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
@@ -48,13 +56,73 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (IBAction)showActions:(id)sender
+{
+    NSString *statusString;
+    if (self.show.paused) {
+        statusString = @"Unpause show";
+    }
+    else {
+        statusString = @"Pause show";
+    }
+    
+    UIActionSheet *sheet = [[UIActionSheet alloc] initWithTitle:@"Actions" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:statusString, @"Refresh show", @"Update show", nil];
+	[sheet showInView:[UIApplication sharedApplication].keyWindow];
+	sheet.actionSheetStyle = UIActionSheetStyleDefault;
+}
+
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    UITableViewCell *cell = (UITableViewCell *) sender;
-    NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
+    UITableViewCell *cell = (UITableViewCell *)sender;
     SickBeardEpisodesViewController *episodesViewController = (SickBeardEpisodesViewController *)segue.destinationViewController;
     episodesViewController.show = show;
     episodesViewController.season = cell.tag;
+}
+
+#pragma mark -
+#pragma mark UIActionSheet Delegate Methods
+
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (buttonIndex == 0)
+    {
+        if (self.show.paused) {
+            [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
+            [self.show unpause:^(SSBSickBeardResult *result) {
+                [self refreshShowDetails];
+            } onFailure:^(SSBSickBeardResult *result) {
+                [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
+            }];
+        }
+        else {
+            [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
+            [self.show pause:^(SSBSickBeardResult *result) {
+                [self refreshShowDetails];
+            } onFailure:^(SSBSickBeardResult *result) {
+                [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
+            }];
+        }
+    }
+    
+    if (buttonIndex == 1)
+    {
+        [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
+        [self.show refresh:^(SSBSickBeardResult *result) {
+            [self refreshShowDetails];
+        } onFailure:^(SSBSickBeardResult *result) {
+            [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
+        }];
+    }
+    
+    if (buttonIndex == 2)
+    {
+        [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
+        [self.show update:^(SSBSickBeardResult *result) {
+            [self refreshShowDetails];
+        } onFailure:^(SSBSickBeardResult *result) {
+            [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
+        }];
+    }
 }
 
 #pragma mark - Table view data source

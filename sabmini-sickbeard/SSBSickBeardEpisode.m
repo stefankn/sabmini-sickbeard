@@ -7,6 +7,10 @@
 //
 
 #import "SSBSickBeardEpisode.h"
+#import "SSBSharedServer.h"
+#import "SSBSickBeardServer.h"
+#import "SSBSickBeardConnector.h"
+#import "SSBSickBeardResult.h"
 
 @interface SSBSickBeardEpisode()
 
@@ -15,7 +19,7 @@
 @end
 
 @implementation SSBSickBeardEpisode
-@synthesize airdate, show_description, file_size, file_size_human, location, name, quality, release_name, status, airs, ep_name, ep_plot, episode, network, paused, season, show_name, show_status, tvdbid, weekday, date, provider, resource, resource_path;
+@synthesize airdate, file_size, file_size_human, location, name, quality, release_name, status, airs, ep_name, ep_plot, episode, network, paused, season, show_name, show_status, tvdbid, weekday, date, provider, resource, resource_path;
 
 - (id)initWithAttributes:(NSDictionary *)attributes
 {
@@ -29,30 +33,53 @@
 
 - (void)setAttributes:(NSDictionary *)attributes
 {
-    self.airdate = [attributes objectForKey:@"airdate"];
-    self.show_description = [attributes objectForKey:@"description"];
-    self.file_size = [[attributes objectForKey:@"file_size"] intValue];
-    self.file_size_human = [attributes objectForKey:@"file_size_human"];
-    self.location = [attributes objectForKey:@"location"];
-    self.name = [attributes objectForKey:@"name"];
-    self.quality = [attributes objectForKey:@"quality"];
-    self.release_name = [attributes objectForKey:@"release_name"];
-    self.status = [attributes objectForKey:@"status"];
-    self.airs = [attributes objectForKey:@"airs"];
-    self.ep_name = [attributes objectForKey:@"ep_name"];
-    self.ep_plot = [attributes objectForKey:@"ep_plot"];
-    self.episode = [attributes objectForKey:@"episode"];
-    self.network = [attributes objectForKey:@"network"];
-    self.paused = [[attributes objectForKey:@"ep_name"] boolValue];
-    self.season = [attributes objectForKey:@"season"];
-    self.show_name = [attributes objectForKey:@"show_name"];
-    self.show_status = [attributes objectForKey:@"show_status"];
-    self.tvdbid = [attributes objectForKey:@"tvdbid"];
-    self.weekday = [attributes objectForKey:@"weekday"];
-    self.date = [attributes objectForKey:@"date"];
-    self.provider = [attributes objectForKey:@"provider"];
-    self.resource = [attributes objectForKey:@"resource"];
-    self.resource_path = [attributes objectForKey:@"resource_path"];
+    if ([attributes objectForKey:@"airdate"]) self.airdate = [attributes objectForKey:@"airdate"];
+    if ([attributes objectForKey:@"description"]) self.ep_plot = [attributes objectForKey:@"description"];
+    if ([attributes objectForKey:@"file_size"]) self.file_size = [[attributes objectForKey:@"file_size"] intValue];
+    if ([attributes objectForKey:@"file_size_human"]) self.file_size_human = [attributes objectForKey:@"file_size_human"];
+    if ([attributes objectForKey:@"location"]) self.location = [attributes objectForKey:@"location"];
+    if ([attributes objectForKey:@"name"]) self.name = [attributes objectForKey:@"name"];
+    if ([attributes objectForKey:@"quality"]) self.quality = [attributes objectForKey:@"quality"];
+    if ([attributes objectForKey:@"release_name"]) self.release_name = [attributes objectForKey:@"release_name"];
+    if ([attributes objectForKey:@"status"]) self.status = [attributes objectForKey:@"status"];
+    if ([attributes objectForKey:@"airs"]) self.airs = [attributes objectForKey:@"airs"];
+    if ([attributes objectForKey:@"ep_name"]) self.ep_name = [attributes objectForKey:@"ep_name"];
+    if ([attributes objectForKey:@"ep_plot"]) self.ep_plot = [attributes objectForKey:@"ep_plot"];
+    if ([attributes objectForKey:@"episode"]) self.episode = [attributes objectForKey:@"episode"];
+    if ([attributes objectForKey:@"network"]) self.network = [attributes objectForKey:@"network"];
+    if ([attributes objectForKey:@"paused"]) self.paused = [[attributes objectForKey:@"paused"] boolValue];
+    if ([attributes objectForKey:@"season"]) self.season = [attributes objectForKey:@"season"];
+    if ([attributes objectForKey:@"show_name"]) self.show_name = [attributes objectForKey:@"show_name"];
+    if ([attributes objectForKey:@"show_status"]) self.show_status = [attributes objectForKey:@"show_status"];
+    if ([attributes objectForKey:@"tvdbid"]) self.tvdbid = [attributes objectForKey:@"tvdbid"];
+    if ([attributes objectForKey:@"weekday"]) self.weekday = [attributes objectForKey:@"weekday"];
+    if ([attributes objectForKey:@"date"]) self.date = [attributes objectForKey:@"date"];
+    if ([attributes objectForKey:@"provider"]) self.provider = [attributes objectForKey:@"provider"];
+    if ([attributes objectForKey:@"resource"]) self.resource = [attributes objectForKey:@"resource"];
+    if ([attributes objectForKey:@"resource_path"]) self.resource_path = [attributes objectForKey:@"resource_path"];
+}
+
+- (void)getFullDetails:(SSBSickBeardEpisodeRequestResponseBlock)complete onFailure:(SSBSickBeardEpisodeRequestResponseBlock)failed
+{
+    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@episode&tvdbid=%@&season=%@&episode=%@", [[SSBSharedServer sharedServer].server urlString], self.tvdbid, self.season, self.episode]];
+    
+    SSBSickBeardConnector *connector = [[SSBSickBeardConnector alloc] initWithURL:url];
+    [connector getData:^(NSDictionary *data) {
+        [self setAttributes:[data objectForKey:@"data"]];
+        complete([[SSBSickBeardResult alloc] initWithAttributes:data]);
+    }];
+}
+
+- (void)changeStatus:(NSString *)status onComplete:(SSBSickBeardEpisodeRequestResponseBlock)complete onFailure:(SSBSickBeardEpisodeRequestResponseBlock)failed
+{
+    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@episode.setstatus&tvdbid=%@&season=%@&episode=%@&status=%@", [[SSBSharedServer sharedServer].server urlString], self.tvdbid, self.season, self.episode, status]];
+    
+    SSBSickBeardConnector *connector = [[SSBSickBeardConnector alloc] initWithURL:url];
+    [connector getData:^(NSDictionary *data) {
+        NSLog(@"%@", data);
+        [self setAttributes:[data objectForKey:@"data"]];
+        complete([[SSBSickBeardResult alloc] initWithAttributes:data]);
+    }];
 }
 
 @end

@@ -10,6 +10,7 @@
 #import "SSBSickBeard.h"
 #import "SSBSickBeardResult.h"
 #import "SSBSickBeardEpisode.h"
+#import "SickBeardEpisodeViewController.h"
 
 @interface SSBSickBeardUpcomingEpisodesViewController ()
 
@@ -51,6 +52,29 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    UITableViewCell *cell = (UITableViewCell *) sender;
+    NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
+    
+    SSBSickBeardEpisode *episode;
+    if (indexPath.section == 0 && [self.upcomingEpisodes objectForKey:@"missing"]) {
+        episode = [[self.upcomingEpisodes objectForKey:@"missing"] objectAtIndex:indexPath.row];
+    }
+    else if (indexPath.section == 1 && [self.upcomingEpisodes objectForKey:@"today"]) {
+        episode = [[self.upcomingEpisodes objectForKey:@"today"] objectAtIndex:indexPath.row];
+    }
+    else if (indexPath.section == 2 && [self.upcomingEpisodes objectForKey:@"soon"]) {
+        episode = [[self.upcomingEpisodes objectForKey:@"soon"] objectAtIndex:indexPath.row];
+    }
+    else {
+        episode = [[self.upcomingEpisodes objectForKey:@"later"] objectAtIndex:indexPath.row];
+    }
+
+    SickBeardEpisodeViewController *episodeViewController = (SickBeardEpisodeViewController *)segue.destinationViewController;
+    episodeViewController.episode = episode;
 }
 
 #pragma mark - Table view data source
@@ -107,6 +131,16 @@
     
     cell.textLabel.text = episode.show_name;
     cell.detailTextLabel.text = [NSString stringWithFormat:@"S%@E%@ - %@", episode.season, episode.episode, episode.ep_name];
+    
+    if ([episode.quality isEqualToString:@"HD"]) {
+        cell.imageView.image = [UIImage imageNamed:@"hd"];
+    }
+    else if ([episode.quality isEqualToString:@"SD"]) {
+        cell.imageView.image = [UIImage imageNamed:@"sd"];
+    }
+    else {
+        cell.imageView.image = [UIImage imageNamed:@"cu"];
+    }
     
     return cell;
 }

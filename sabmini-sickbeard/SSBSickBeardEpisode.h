@@ -7,11 +7,14 @@
 //
 
 #import <Foundation/Foundation.h>
+@class SSBSickBeardResult;
+
+typedef void (^SSBSickBeardEpisodeRequestDataBlock) (NSDictionary *data);
+typedef void (^SSBSickBeardEpisodeRequestResponseBlock) (SSBSickBeardResult *result);
 
 @interface SSBSickBeardEpisode : NSObject
 
 @property (nonatomic, strong) NSString *airdate;
-@property (nonatomic, strong) NSString *show_description;
 @property (nonatomic, assign) int file_size; // large int?
 @property (nonatomic, strong) NSString *file_size_human;
 @property (nonatomic, strong) NSString *location;
@@ -36,5 +39,7 @@
 @property (nonatomic, strong) NSString *resource_path;
 
 - (id)initWithAttributes:(NSDictionary *)attributes;
+- (void)getFullDetails:(SSBSickBeardEpisodeRequestResponseBlock)complete onFailure:(SSBSickBeardEpisodeRequestResponseBlock)failed;
+- (void)changeStatus:(NSString *)status onComplete:(SSBSickBeardEpisodeRequestResponseBlock)complete onFailure:(SSBSickBeardEpisodeRequestResponseBlock)failed;
 
 @end

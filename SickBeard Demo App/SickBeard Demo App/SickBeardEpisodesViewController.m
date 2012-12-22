@@ -9,6 +9,7 @@
 #import "SickBeardEpisodesViewController.h"
 #import "SSBSickBeardShow.h"
 #import "SSBSickBeardEpisode.h"
+#import "SickBeardEpisodeViewController.h"
 
 @interface SickBeardEpisodesViewController ()
 
@@ -50,6 +51,17 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    UITableViewCell *cell = (UITableViewCell *) sender;
+    NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
+    
+    SSBSickBeardEpisode *episode = [self.episodes objectAtIndex:indexPath.row];
+    episode.season = [NSString stringWithFormat:@"%i", self.season];
+    SickBeardEpisodeViewController *episodeViewController = (SickBeardEpisodeViewController *)segue.destinationViewController;
+    episodeViewController.episode = episode;
 }
 
 #pragma mark - Table view data source
