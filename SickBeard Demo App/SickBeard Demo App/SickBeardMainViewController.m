@@ -9,7 +9,6 @@
 #import "SickBeardMainViewController.h"
 #import "SSBSickBeardServer.h"
 #import "SSBSickBeard.h"
-#import "SSBSickBeardShow.h"
 
 @interface SickBeardMainViewController ()
 
@@ -29,7 +28,9 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-
+    
+    SSBSickBeardServer *server = [SSBSickBeardServers createServer:@"Test server" withHost:@"10.0.1.110" withPort:@"8081" withApikey:@"8b1a4a7850815520f2c06cf1ebc9586c" enableHttps:YES store:NO];
+    [SSBSickBeard setActiveServer:server];
 }
 
 - (void)didReceiveMemoryWarning

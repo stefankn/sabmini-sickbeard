@@ -1,24 +1,24 @@
 //
-//  SickBeardShowsViewController.m
+//  SSBSickBeardUpcomingEpisodesViewController.m
 //  SickBeard Demo App
 //
 //  Created by Stefan Klein Nulent on 21-12-12.
 //  Copyright (c) 2012 Stefan Klein Nulent. All rights reserved.
 //
 
-#import "SickBeardShowsViewController.h"
-#import "SSBSickBeardServer.h"
+#import "SSBSickBeardUpcomingEpisodesViewController.h"
 #import "SSBSickBeard.h"
-#import "SSBSickBeardShow.h"
+#import "SSBSickBeardResult.h"
+#import "SSBSickBeardEpisode.h"
 
-@interface SickBeardShowsViewController ()
+@interface SSBSickBeardUpcomingEpisodesViewController ()
 
-@property (nonatomic, strong) NSArray *shows;
+@property (nonatomic, strong) NSDictionary *upcomingEpisodes;
 
 @end
 
-@implementation SickBeardShowsViewController
-@synthesize shows;
+@implementation SSBSickBeardUpcomingEpisodesViewController
+@synthesize upcomingEpisodes;
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -34,12 +34,15 @@
     [super viewDidLoad];
     
     [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
-    [SSBSickBeard getShows:@"id" onlyPaused:NO onComplete:^(NSDictionary *data) {
 
-        self.shows = [NSArray arrayWithArray:[data objectForKey:@"results"]];
-        [self.tableView reloadData];
-        [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
+    [SSBSickBeard getFutureEpisodesForType:@"later" withPaused:YES sortOn:@"date" onComplete:^(NSDictionary *data) {
         
+        self.upcomingEpisodes = [NSDictionary dictionaryWithDictionary:[data objectForKey:@"data"]];
+        NSLog(@"%@", data);
+
+        //[self.tableView reloadData];
+        [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
+
     } onFailure:^(SSBSickBeardResult *result) {
         
     }];
@@ -56,34 +59,53 @@
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     // Return the number of sections.
-    return 1;
+    return 4;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     // Return the number of rows in the section.
-    return [self.shows count];
+    if (section == 0 && [self.upcomingEpisodes objectForKey:@"missing"]) {
+        return [[self.upcomingEpisodes objectForKey:@"missing"] count];
+    }
+    else if (section == 1 && [self.upcomingEpisodes objectForKey:@"today"]) {
+        return [[self.upcomingEpisodes objectForKey:@"today"] count];
+    }
+    else if (section == 2 && [self.upcomingEpisodes objectForKey:@"soon"]) {
+        return [[self.upcomingEpisodes objectForKey:@"soon"] count];
+    }
+    else if (section == 3 && [self.upcomingEpisodes objectForKey:@"later"]) {
+        return [[self.upcomingEpisodes objectForKey:@"later"] count];
+    }
+    else {
+        return 0;
+    }
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *CellIdentifier = @"ShowCell";
+    static NSString *CellIdentifier = @"EpisodeCell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     
-    SSBSickBeardShow *show = [self.shows objectAtIndex:indexPath.row];
-    cell.textLabel.text = show.show_name;
-    
-    if ([show.quality isEqualToString:@"HD"]) {
-        cell.imageView.image = [UIImage imageNamed:@"hd"];
+    if (indexPath.section == 0 && [self.upcomingEpisodes objectForKey:@"missing"]) {
+        SSBSickBeardEpisode *episode = [[self.upcomingEpisodes objectForKey:@"missing"] objectAtIndex:indexPath.row];
+        cell.textLabel.text = episode.show_name;
     }
-    else if ([show.quality isEqualToString:@"SD"]) {
-        cell.imageView.image = [UIImage imageNamed:@"sd"];
+    else if (indexPath.section == 1 && [self.upcomingEpisodes objectForKey:@"today"]) {
+        SSBSickBeardEpisode *episode = [[self.upcomingEpisodes objectForKey:@"today"] objectAtIndex:indexPath.row];
+        cell.textLabel.text = episode.show_name;
+    }
+    else if (indexPath.section == 2 && [self.upcomingEpisodes objectForKey:@"soon"]) {
+        SSBSickBeardEpisode *episode = [[self.upcomingEpisodes objectForKey:@"soon"] objectAtIndex:indexPath.row];
+        cell.textLabel.text = episode.show_name;
+    }
+    else if (indexPath.section == 3 && [self.upcomingEpisodes objectForKey:@"later"]) {
+        SSBSickBeardEpisode *episode = [[self.upcomingEpisodes objectForKey:@"later"] objectAtIndex:indexPath.row];
+        cell.textLabel.text = episode.show_name;
     }
     else {
-        cell.imageView.image = [UIImage imageNamed:@"cu"];
+        return nil;
     }
-    
-    cell.detailTextLabel.text = [NSString stringWithFormat:@"Next episode: %@", show.next_ep_airdate];
     
     return cell;
 }
