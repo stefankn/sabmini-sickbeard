@@ -63,9 +63,7 @@
             NSEnumerator *e = [[episodesData objectForKey:key] objectEnumerator];
             NSDictionary *episodeDict;
             while (episodeDict = [e nextObject]) {
-                NSLog(@"%@", episodeDict);
                 SSBSickBeardEpisode *episode = [[SSBSickBeardEpisode alloc] initWithAttributes:episodeDict];
-                NSLog(@"%@", episode);
                 [episodes addObject:episode];
             }
             
@@ -73,6 +71,17 @@
         }
 
         complete(mappedEpisodes);
+    }];
+}
+
++ (void)getShow:(NSString *)tvdbId onComplete:(SSBSickBeardShowCompleteBlock)complete onFailure:(SSBSickBeardRequestFailedBlock)failed
+{
+    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@show&tvdbid=%@", [[SSBSharedServer sharedServer].server urlString], tvdbId]];
+    
+    SSBSickBeardConnector *connector = [[SSBSickBeardConnector alloc] initWithURL:url];
+    [connector getData:^(NSDictionary *data) {
+        SSBSickBeardShow *show = [[SSBSickBeardShow alloc] initWithAttributes:[data objectForKey:@"data"] showIdentifier:tvdbId];
+        complete(show);
     }];
 }
 

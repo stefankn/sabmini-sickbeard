@@ -12,7 +12,7 @@
 
 @property (nonatomic, strong) NSString *message;
 @property (nonatomic, strong) NSDictionary *data;
-@property (nonatomic, strong) NSString *result;
+@property (nonatomic, assign) BOOL success;
 
 - (id)initWithAttributes:(NSDictionary *)attributes;
 

@@ -9,6 +9,9 @@
 #import <Foundation/Foundation.h>
 @class SSBSickBeardResult;
 
+typedef void (^SSBSickBeardShowRequestDataBlock) (NSDictionary *data);
+typedef void (^SSBSickBeardShowRequestResponseBlock) (SSBSickBeardResult *result);
+
 @interface SSBSickBeardShow : NSObject
 
 @property (nonatomic, strong) NSString *identifier;
@@ -16,7 +19,7 @@
 @property (nonatomic, strong) NSString *airs;
 @property (nonatomic, strong) NSDictionary *show_cache;
 @property (nonatomic, assign) BOOL flatten_folders;
-@property (nonatomic, strong) NSDictionary *genres;
+@property (nonatomic, strong) NSArray *genre;
 @property (nonatomic, strong) NSString *language;
 @property (nonatomic, strong) NSString *location;
 @property (nonatomic, strong) NSString *network;
@@ -31,17 +34,20 @@
 @property (nonatomic, strong) NSString *tvrage_name;
 
 - (id)initWithAttributes:(NSDictionary *)attributes showIdentifier:(NSString *)showIdentifier;
-- (SSBSickBeardResult *)cache;
-- (SSBSickBeardResult *)deleteShow;
-- (UIImage *)getBanner;
-- (UIImage *)getPoster;
-- (SSBSickBeardResult *)getQuality;
-- (SSBSickBeardResult *)pause;
-- (SSBSickBeardResult *)resume;
-- (SSBSickBeardResult *)refresh;
-- (SSBSickBeardResult *)getSeasonList:(NSString *)sort;
-- (SSBSickBeardResult *)getEpisodesForSeason:(int)season;
-- (SSBSickBeardResult *)setQuality:(NSArray *)initial archive:(NSArray *)archive;
-- (SSBSickBeardResult *)getStatistics;
-- (SSBSickBeardResult *)update;
+- (void)getFullDetails:(SSBSickBeardShowRequestResponseBlock)complete onFailure:(SSBSickBeardShowRequestResponseBlock)failed;
+- (void)deleteShow:(SSBSickBeardShowRequestResponseBlock)complete onFailure:(SSBSickBeardShowRequestResponseBlock)failed;
+- (void)getEpisodesForSeason:(int)season onComplete:(SSBSickBeardShowRequestDataBlock)complete onFailure:(SSBSickBeardShowRequestResponseBlock)failed;
+
+- (void)cache:(SSBSickBeardShowRequestResponseBlock)complete onFailure:(SSBSickBeardShowRequestResponseBlock)failed;
+//- (UIImage *)getBanner;
+//- (UIImage *)getPoster;
+- (void)getQuality:(SSBSickBeardShowRequestResponseBlock)complete onFailure:(SSBSickBeardShowRequestResponseBlock)failed;
+- (void)pause:(SSBSickBeardShowRequestResponseBlock)complete onFailure:(SSBSickBeardShowRequestResponseBlock)failed;
+- (void)resume:(SSBSickBeardShowRequestResponseBlock)complete onFailure:(SSBSickBeardShowRequestResponseBlock)failed;
+- (void)refresh:(SSBSickBeardShowRequestResponseBlock)complete onFailure:(SSBSickBeardShowRequestResponseBlock)failed;
+- (void)getSeasonList:(NSString *)sort onComplete:(SSBSickBeardShowRequestResponseBlock)complete onFailure:(SSBSickBeardShowRequestResponseBlock)failed;
+
+- (void)setQuality:(NSArray *)initial archive:(NSArray *)archive onComplete:(SSBSickBeardShowRequestResponseBlock)complete onFailure:(SSBSickBeardShowRequestResponseBlock)failed;
+- (void)getStatistics:(SSBSickBeardShowRequestResponseBlock)complete onFailure:(SSBSickBeardShowRequestResponseBlock)failed;
+- (void)update:(SSBSickBeardShowRequestResponseBlock)complete onFailure:(SSBSickBeardShowRequestResponseBlock)failed;
 @end

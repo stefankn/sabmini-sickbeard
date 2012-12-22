@@ -10,7 +10,7 @@
 
 @implementation SSBSickBeardResult
 
-@synthesize message, data, result;
+@synthesize message, data, success;
 
 - (id)initWithAttributes:(NSDictionary *)attributes
 {
@@ -18,7 +18,7 @@
     if (self) {
         self.message = [attributes objectForKey:@"message"];
         self.data = [attributes objectForKey:@"data"];
-        self.result = [attributes objectForKey:@"result"];
+        self.success = [[attributes objectForKey:@"result"] isEqualToString:@"success"];
     }
     
     return self;

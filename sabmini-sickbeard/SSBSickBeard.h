@@ -14,12 +14,14 @@
 
 typedef void (^SSBSickBeardRequestCompleteBlock) (NSDictionary *data);
 typedef void (^SSBSickBeardRequestFailedBlock) (SSBSickBeardResult *result);
+typedef void (^SSBSickBeardShowCompleteBlock) (SSBSickBeardShow *show);
 
 @interface SSBSickBeard : NSObject
 
 + (void)setActiveServer:(SSBSickBeardServer *)server;
 + (void)getShows:(NSString *)sort onlyPaused:(BOOL)paused onComplete:(SSBSickBeardRequestCompleteBlock)complete onFailure:(SSBSickBeardRequestFailedBlock)failed;
 + (void)getFutureEpisodesForType:(NSString *)type withPaused:(BOOL)paused sortOn:(NSString *)sort onComplete:(SSBSickBeardRequestCompleteBlock)complete onFailure:(SSBSickBeardRequestFailedBlock)failed;
++ (void)getShow:(NSString *)tvdbId onComplete:(SSBSickBeardShowCompleteBlock)show onFailure:(SSBSickBeardRequestFailedBlock)failed;
 
 - (NSArray *)getHistory:(int)limit forType:(NSString *)type;
 - (SSBSickBeardResult *)clearHistory;
@@ -27,7 +29,6 @@ typedef void (^SSBSickBeardRequestFailedBlock) (SSBSickBeardResult *result);
 - (NSArray *)getLogs:(NSString *)min_level;
 - (SSBSickBeardEpisode *)getEpisodeDetails:(NSString *)tvdbId forSeason:(int)season forEpisode:(int)episode showFullPath:(BOOL)showPath;
 - (SSBSickBeardResult *)episodeExists:(NSString *)tvdbId forSeason:(int)season forEpisode:(int)episode;
-- (SSBSickBeardShow *)getShowDetails:(NSString *)tvdbId;
 - (SSBSickBeardResult *)addExistingShow:(NSString *)tvdbId showLocation:(NSString *)location flattenFolders:(BOOL)flattenFolders initial:(NSArray *)initial archive:(NSArray *)archive;
 - (SSBSickBeardResult *)addNewShow:(NSString *)tvdbId showLocation:(NSString *)location flattenFolders:(BOOL)flattenFolders initial:(NSArray *)initial archive:(NSArray *)archive initialStatus:(NSString *)status language:(NSString *)lang;
 - (SSBSickBeardResult *)showCache:(NSString *)tvdbId;
