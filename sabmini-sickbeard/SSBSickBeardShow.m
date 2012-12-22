@@ -9,6 +9,8 @@
 #import "SSBSickBeardShow.h"
 #import "SSBSickBeardConnector.h"
 #import "SSBSickBeardResult.h"
+#import "SSBSharedServer.h"
+
 
 @implementation SSBSickBeardShow
 @synthesize identifier, air_by_date, airs, show_cache, flatten_folders, genres, language, location, network, next_ep_airdate, paused, quality, quality_details, season_list, show_name, status, tvrage_id, tvrage_name;
@@ -34,96 +36,96 @@
     return self;
 }
 
-// Checks if the poster/banner SickBeard's image cache is valid
-- (SSBSickBeardResult *)cache
-{
-    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@show.cache&tvdbid=%@", [self.server urlString], self.identifier]];
-    SSBSickBeardConnector *connector = [[SSBSickBeardConnector alloc] initWithURL:url];
-    [connector getData:^(NSDictionary *data) {
-        complete([[SSBSickBeardResult alloc] initWithAttributes:data]);
-    }];
-}
-
-// Delete the show from SickBeard
-- (SSBSickBeardResult *)deleteShow
-{
-    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@show.delete&tvdbid=%@", [self.server urlString], self.identifier]];
-    SSBSickBeardConnector *connector = [[SSBSickBeardConnector alloc] initWithURL:url];
-    [connector getData:^(NSDictionary *data) {
-        complete([[SSBSickBeardResult alloc] initWithAttributes:data]);
-    }];
-}
-
-// Retrieve the stored banner image from SickBeard's cache
-- (UIImage *)getBanner {
-    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@show.getbanner&tvdbid=%@", [self.server urlString], self.identifier]];
-    SSBSickBeardConnector *connector = [[SSBSickBeardConnector alloc] initWithURL:url];
-    [connector getData:^(NSDictionary *data) {
-        complete([[SSBSickBeardResult alloc] initWithAttributes:data]);
-    }];
-}
-
-// Retrieve the stored poster image from SickBeard's cache
-- (UIImage *)getPoster {
-    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@show.getposter&tvdbid=%@", [self.server urlString], self.identifier]];
-    SSBSickBeardConnector *connector = [[SSBSickBeardConnector alloc] initWithURL:url];
-    [connector getData:^(NSDictionary *data) {
-        complete([[SSBSickBeardResult alloc] initWithAttributes:data]);
-    }];
-}
-
-- (SSBSickBeardResult *)getQuality
-{
-    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@show.getquality&tvdbid=%@", [self.server urlString], self.identifier]];
-    SSBSickBeardConnector *connector = [[SSBSickBeardConnector alloc] initWithURL:url];
-    [connector getData:^(NSDictionary *data) {
-        complete([[SSBSickBeardResult alloc] initWithAttributes:data]);
-    }];
-}
-
-- (SSBSickBeardResult *)pause
-{
-    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@show.pause&tvdbid=%@&pause=1", [self.server urlString], self.identifier]];
-    SSBSickBeardConnector *connector = [[SSBSickBeardConnector alloc] initWithURL:url];
-    [connector getData:^(NSDictionary *data) {
-        complete([[SSBSickBeardResult alloc] initWithAttributes:data]);
-    }];
-}
-
-- (SSBSickBeardResult *)resume
-{
-    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@show.pause&tvdbid=%@&pause=0", [self.server urlString], self.identifier]];
-    SSBSickBeardConnector *connector = [[SSBSickBeardConnector alloc] initWithURL:url];
-    [connector getData:^(NSDictionary *data) {
-        complete([[SSBSickBeardResult alloc] initWithAttributes:data]);
-    }];
-}
-
-- (SSBSickBeardResult *)refresh
-{
-    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@show.refresh&tvdbid=%@", [self.server urlString], self.identifier]];
-    SSBSickBeardConnector *connector = [[SSBSickBeardConnector alloc] initWithURL:url];
-    [connector getData:^(NSDictionary *data) {
-        complete([[SSBSickBeardResult alloc] initWithAttributes:data]);
-    }];
-}
-
-- (SSBSickBeardResult *)getSeasonList:(NSString *)sort
-{
-    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@show.seasonlist&tvdbid=%@", [self.server urlString], self.identifier]];
-    SSBSickBeardConnector *connector = [[SSBSickBeardConnector alloc] initWithURL:url];
-    [connector getData:^(NSDictionary *data) {
-        complete([[SSBSickBeardResult alloc] initWithAttributes:data]);
-    }];
-}
-
-- (SSBSickBeardResult *)getEpisodesForSeason:(int)season
-{
-    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@show.seasons&tvdbid=%@&season=%i", [self.server urlString], self.identifier, season]];
-    SSBSickBeardConnector *connector = [[SSBSickBeardConnector alloc] initWithURL:url];
-    [connector getData:^(NSDictionary *data) {
-        complete([[SSBSickBeardResult alloc] initWithAttributes:data]);
-    }];
-}
+//// Checks if the poster/banner SickBeard's image cache is valid
+//- (SSBSickBeardResult *)cache
+//{
+//    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@show.cache&tvdbid=%@", [[SSBSharedServer sharedServer].server urlString], self.identifier]];
+//    SSBSickBeardConnector *connector = [[SSBSickBeardConnector alloc] initWithURL:url];
+//    [connector getData:^(NSDictionary *data) {
+//        complete([[SSBSickBeardResult alloc] initWithAttributes:data]);
+//    }];
+//}
+//
+//// Delete the show from SickBeard
+//- (SSBSickBeardResult *)deleteShow
+//{
+//    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@show.delete&tvdbid=%@", [[SSBSharedServer sharedServer].server urlString], self.identifier]];
+//    SSBSickBeardConnector *connector = [[SSBSickBeardConnector alloc] initWithURL:url];
+//    [connector getData:^(NSDictionary *data) {
+//        complete([[SSBSickBeardResult alloc] initWithAttributes:data]);
+//    }];
+//}
+//
+//// Retrieve the stored banner image from SickBeard's cache
+//- (UIImage *)getBanner {
+//    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@show.getbanner&tvdbid=%@", [[SSBSharedServer sharedServer].server urlString], self.identifier]];
+//    SSBSickBeardConnector *connector = [[SSBSickBeardConnector alloc] initWithURL:url];
+//    [connector getData:^(NSDictionary *data) {
+//        complete([[SSBSickBeardResult alloc] initWithAttributes:data]);
+//    }];
+//}
+//
+//// Retrieve the stored poster image from SickBeard's cache
+//- (UIImage *)getPoster {
+//    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@show.getposter&tvdbid=%@", [[SSBSharedServer sharedServer].server urlString], self.identifier]];
+//    SSBSickBeardConnector *connector = [[SSBSickBeardConnector alloc] initWithURL:url];
+//    [connector getData:^(NSDictionary *data) {
+//        complete([[SSBSickBeardResult alloc] initWithAttributes:data]);
+//    }];
+//}
+//
+//- (SSBSickBeardResult *)getQuality
+//{
+//    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@show.getquality&tvdbid=%@", [[SSBSharedServer sharedServer].server urlString], self.identifier]];
+//    SSBSickBeardConnector *connector = [[SSBSickBeardConnector alloc] initWithURL:url];
+//    [connector getData:^(NSDictionary *data) {
+//        complete([[SSBSickBeardResult alloc] initWithAttributes:data]);
+//    }];
+//}
+//
+//- (SSBSickBeardResult *)pause
+//{
+//    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@show.pause&tvdbid=%@&pause=1", [[SSBSharedServer sharedServer].server urlString], self.identifier]];
+//    SSBSickBeardConnector *connector = [[SSBSickBeardConnector alloc] initWithURL:url];
+//    [connector getData:^(NSDictionary *data) {
+//        complete([[SSBSickBeardResult alloc] initWithAttributes:data]);
+//    }];
+//}
+//
+//- (SSBSickBeardResult *)resume
+//{
+//    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@show.pause&tvdbid=%@&pause=0", [[SSBSharedServer sharedServer].server urlString], self.identifier]];
+//    SSBSickBeardConnector *connector = [[SSBSickBeardConnector alloc] initWithURL:url];
+//    [connector getData:^(NSDictionary *data) {
+//        complete([[SSBSickBeardResult alloc] initWithAttributes:data]);
+//    }];
+//}
+//
+//- (SSBSickBeardResult *)refresh
+//{
+//    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@show.refresh&tvdbid=%@", [[SSBSharedServer sharedServer].server urlString], self.identifier]];
+//    SSBSickBeardConnector *connector = [[SSBSickBeardConnector alloc] initWithURL:url];
+//    [connector getData:^(NSDictionary *data) {
+//        complete([[SSBSickBeardResult alloc] initWithAttributes:data]);
+//    }];
+//}
+//
+//- (SSBSickBeardResult *)getSeasonList:(NSString *)sort
+//{
+//    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@show.seasonlist&tvdbid=%@", [[SSBSharedServer sharedServer].server urlString], self.identifier]];
+//    SSBSickBeardConnector *connector = [[SSBSickBeardConnector alloc] initWithURL:url];
+//    [connector getData:^(NSDictionary *data) {
+//        complete([[SSBSickBeardResult alloc] initWithAttributes:data]);
+//    }];
+//}
+//
+//- (SSBSickBeardResult *)getEpisodesForSeason:(int)season
+//{
+//    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@show.seasons&tvdbid=%@&season=%i", [[SSBSharedServer sharedServer].server urlString], self.identifier, season]];
+//    SSBSickBeardConnector *connector = [[SSBSickBeardConnector alloc] initWithURL:url];
+//    [connector getData:^(NSDictionary *data) {
+//        complete([[SSBSickBeardResult alloc] initWithAttributes:data]);
+//    }];
+//}
 
 @end

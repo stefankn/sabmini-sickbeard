@@ -24,6 +24,7 @@
 		F820939E167E4BB800872A10 /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F820939D167E4BB800872A10 /* MainStoryboard.storyboard */; };
 		F861F3061683CD7200949811 /* SickBeardMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F861F3051683CD7200949811 /* SickBeardMainViewController.m */; };
 		F861F3091683CFA200949811 /* SickBeardAddServerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F861F3081683CFA200949811 /* SickBeardAddServerViewController.m */; };
+		F862D59C1684E20400AAFCD2 /* SSBSharedServer.m in Sources */ = {isa = PBXBuildFile; fileRef = F862D59B1684E20400AAFCD2 /* SSBSharedServer.m */; };
 		F89C47E2167E02AF007DB48C /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F89C47E1167E02AF007DB48C /* UIKit.framework */; };
 		F89C47E4167E02AF007DB48C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F89C47E3167E02AF007DB48C /* Foundation.framework */; };
 		F89C47E6167E02AF007DB48C /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F89C47E5167E02AF007DB48C /* CoreGraphics.framework */; };
@@ -46,6 +47,7 @@
 		F8BC519216848AE30053BBF9 /* cu.png in Resources */ = {isa = PBXBuildFile; fileRef = F8BC519016848AE30053BBF9 /* cu.png */; };
 		F8BC519316848AE30053BBF9 /* cu@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F8BC519116848AE30053BBF9 /* cu@2x.png */; };
 		F8BC519616848FE50053BBF9 /* SSBSickBeardResult.m in Sources */ = {isa = PBXBuildFile; fileRef = F8BC519516848FE50053BBF9 /* SSBSickBeardResult.m */; };
+		F8E638C21685029200BDB58C /* SSBSickBeardUpcomingEpisodesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F8E638C11685029200BDB58C /* SSBSickBeardUpcomingEpisodesViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -81,6 +83,8 @@
 		F861F3051683CD7200949811 /* SickBeardMainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SickBeardMainViewController.m; sourceTree = "<group>"; };
 		F861F3071683CFA200949811 /* SickBeardAddServerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SickBeardAddServerViewController.h; sourceTree = "<group>"; };
 		F861F3081683CFA200949811 /* SickBeardAddServerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SickBeardAddServerViewController.m; sourceTree = "<group>"; };
+		F862D59A1684E20400AAFCD2 /* SSBSharedServer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSBSharedServer.h; sourceTree = "<group>"; };
+		F862D59B1684E20400AAFCD2 /* SSBSharedServer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSBSharedServer.m; sourceTree = "<group>"; };
 		F89C47DD167E02AF007DB48C /* SickBeard Demo App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "SickBeard Demo App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		F89C47E1167E02AF007DB48C /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		F89C47E3167E02AF007DB48C /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -114,6 +118,8 @@
 		F8BC519116848AE30053BBF9 /* cu@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cu@2x.png"; sourceTree = "<group>"; };
 		F8BC519416848FE50053BBF9 /* SSBSickBeardResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSBSickBeardResult.h; sourceTree = "<group>"; };
 		F8BC519516848FE50053BBF9 /* SSBSickBeardResult.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSBSickBeardResult.m; sourceTree = "<group>"; };
+		F8E638C01685029200BDB58C /* SSBSickBeardUpcomingEpisodesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSBSickBeardUpcomingEpisodesViewController.h; sourceTree = "<group>"; };
+		F8E638C11685029200BDB58C /* SSBSickBeardUpcomingEpisodesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSBSickBeardUpcomingEpisodesViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -207,6 +213,8 @@
 				F861F3081683CFA200949811 /* SickBeardAddServerViewController.m */,
 				F8BC5184168481890053BBF9 /* SickBeardShowsViewController.h */,
 				F8BC5185168481890053BBF9 /* SickBeardShowsViewController.m */,
+				F8E638C01685029200BDB58C /* SSBSickBeardUpcomingEpisodesViewController.h */,
+				F8E638C11685029200BDB58C /* SSBSickBeardUpcomingEpisodesViewController.m */,
 			);
 			path = "SickBeard Demo App";
 			sourceTree = "<group>";
@@ -246,6 +254,8 @@
 				F8ADB912167FA88B00434FBD /* SSBSickBeardConnector.m */,
 				F8BC519416848FE50053BBF9 /* SSBSickBeardResult.h */,
 				F8BC519516848FE50053BBF9 /* SSBSickBeardResult.m */,
+				F862D59A1684E20400AAFCD2 /* SSBSharedServer.h */,
+				F862D59B1684E20400AAFCD2 /* SSBSharedServer.m */,
 			);
 			name = "sabmini-sickbeard";
 			path = "../sabmini-sickbeard";
@@ -349,6 +359,8 @@
 				F861F3091683CFA200949811 /* SickBeardAddServerViewController.m in Sources */,
 				F8BC5186168481890053BBF9 /* SickBeardShowsViewController.m in Sources */,
 				F8BC519616848FE50053BBF9 /* SSBSickBeardResult.m in Sources */,
+				F862D59C1684E20400AAFCD2 /* SSBSharedServer.m in Sources */,
+				F8E638C21685029200BDB58C /* SSBSickBeardUpcomingEpisodesViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

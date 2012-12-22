@@ -55,6 +55,8 @@
         NSString *msg = [[NSString alloc] initWithData:data encoding:NSASCIIStringEncoding];
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", @"Global - Error") message:msg delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
         [alert show];
+        
+        // TODO: return SSBSickBeardResult for failure
 	} else if (status == SBJsonStreamParserWaitingForData) {
 	}
 }
@@ -65,6 +67,7 @@
 	
 	UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", @"Global - Error") message:NSLocalizedString(@"Error connecting to the Sick Beard server!", @"Error connecting to the Sick Beard server message") delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
 	[alert show];
+    // TODO: return SSBSickBeardResult for failure
     
     self.connection = nil;
 }

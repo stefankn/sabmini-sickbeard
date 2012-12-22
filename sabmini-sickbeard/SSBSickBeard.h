@@ -15,16 +15,12 @@
 typedef void (^SSBSickBeardRequestCompleteBlock) (NSDictionary *data);
 typedef void (^SSBSickBeardRequestFailedBlock) (SSBSickBeardResult *result);
 
-@protocol SSBSickBeardDelegate
-
-- (void)sickBeardResponseWithData:(NSDictionary *)data;
-
-@end
-
 @interface SSBSickBeard : NSObject
 
-- (id)initWithServer:(SSBSickBeardServer *)srv;
-- (NSDictionary *)getFutureEpisodesForType:(NSString *)type withPaused:(BOOL)paused sortOn:(NSString *)sort;
++ (void)setActiveServer:(SSBSickBeardServer *)server;
++ (void)getShows:(NSString *)sort onlyPaused:(BOOL)paused onComplete:(SSBSickBeardRequestCompleteBlock)complete onFailure:(SSBSickBeardRequestFailedBlock)failed;
++ (void)getFutureEpisodesForType:(NSString *)type withPaused:(BOOL)paused sortOn:(NSString *)sort onComplete:(SSBSickBeardRequestCompleteBlock)complete onFailure:(SSBSickBeardRequestFailedBlock)failed;
+
 - (NSArray *)getHistory:(int)limit forType:(NSString *)type;
 - (SSBSickBeardResult *)clearHistory;
 - (SSBSickBeardResult *)trimHistory;
@@ -35,7 +31,6 @@ typedef void (^SSBSickBeardRequestFailedBlock) (SSBSickBeardResult *result);
 - (SSBSickBeardResult *)addExistingShow:(NSString *)tvdbId showLocation:(NSString *)location flattenFolders:(BOOL)flattenFolders initial:(NSArray *)initial archive:(NSArray *)archive;
 - (SSBSickBeardResult *)addNewShow:(NSString *)tvdbId showLocation:(NSString *)location flattenFolders:(BOOL)flattenFolders initial:(NSArray *)initial archive:(NSArray *)archive initialStatus:(NSString *)status language:(NSString *)lang;
 - (SSBSickBeardResult *)showCache:(NSString *)tvdbId;
-- (void)getShows:(NSString *)sort onlyPaused:(BOOL)paused onComplete:(SSBSickBeardRequestCompleteBlock)complete onFailure:(SSBSickBeardRequestFailedBlock)failed;
 - (NSDictionary *)getStatistics;
 - (NSDictionary *)getSickBeardInfo;
 - (SSBSickBeardResult *)addRootDir:(NSString *)location setDefault:(BOOL)default_dir;
