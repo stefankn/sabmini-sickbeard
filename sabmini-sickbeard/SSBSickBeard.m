@@ -197,5 +197,40 @@
     }];
 }
 
++ (void)restartActiveServer:(SSBSickBeardRequestCompleteBlock)complete onFailure:(SSBSickBeardRequestFailedBlock)failed
+{
+    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@sb.restart", [[SSBSharedServer sharedServer].server urlString]]];
+    
+    SSBSickBeardConnector *connector = [[SSBSickBeardConnector alloc] initWithURL:url];
+    [connector getData:^(NSDictionary *data) {
+        complete([[SSBSickBeardResult alloc] initWithAttributes:data]);
+    } onFailure:^(SSBSickBeardResult *result) {
+        failed(result);
+    }];
+}
+
++ (void)shutdownActiveServer:(SSBSickBeardRequestCompleteBlock)complete onFailure:(SSBSickBeardRequestFailedBlock)failed
+{
+    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@sb.shutdown", [[SSBSharedServer sharedServer].server urlString]]];
+    
+    SSBSickBeardConnector *connector = [[SSBSickBeardConnector alloc] initWithURL:url];
+    [connector getData:^(NSDictionary *data) {
+        complete([[SSBSickBeardResult alloc] initWithAttributes:data]);
+    } onFailure:^(SSBSickBeardResult *result) {
+        failed(result);
+    }];
+}
+
++ (void)forceSearch:(SSBSickBeardRequestCompleteBlock)complete onFailure:(SSBSickBeardRequestFailedBlock)failed
+{
+    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@sb.forcesearch", [[SSBSharedServer sharedServer].server urlString]]];
+    
+    SSBSickBeardConnector *connector = [[SSBSickBeardConnector alloc] initWithURL:url];
+    [connector getData:^(NSDictionary *data) {
+        complete([[SSBSickBeardResult alloc] initWithAttributes:data]);
+    } onFailure:^(SSBSickBeardResult *result) {
+        failed(result);
+    }];
+}
 
 @end

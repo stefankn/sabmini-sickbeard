@@ -7,9 +7,6 @@
 //
 
 #import <Foundation/Foundation.h>
-@class SSBSickBeardResult;
-
-typedef void (^SSBSickBeardServerRequestCompleteBlock) (SSBSickBeardResult *result);
 
 @interface SSBSickBeardServer : NSObject <NSCoding>
 

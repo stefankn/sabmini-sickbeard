@@ -25,6 +25,9 @@ typedef void (^SSBSickBeardShowCompleteBlock) (SSBSickBeardShow *show);
 + (SSBSickBeardServer *)getActiveServer;
 + (SSBSickBeardServer *)createServer:(NSString *)friendlyName withHost:(NSString *)host withPort:(NSString *)port withApikey:(NSString *)apikey enableHttps:(BOOL)https setAsDefault:(BOOL)setDefault;
 
++ (void)forceSearch:(SSBSickBeardRequestCompleteBlock)complete onFailure:(SSBSickBeardRequestFailedBlock)failed;
++ (void)restartActiveServer:(SSBSickBeardRequestCompleteBlock)complete onFailure:(SSBSickBeardRequestFailedBlock)failed;
++ (void)shutdownActiveServer:(SSBSickBeardRequestCompleteBlock)complete onFailure:(SSBSickBeardRequestFailedBlock)failed;
 + (void)getShows:(NSString *)sort onlyPaused:(BOOL)paused onComplete:(SSBSickBeardRequestDataBlock)complete onFailure:(SSBSickBeardRequestFailedBlock)failed;
 + (void)getFutureEpisodesForType:(NSString *)type withPaused:(BOOL)paused sortOn:(NSString *)sort onComplete:(SSBSickBeardRequestDataBlock)complete onFailure:(SSBSickBeardRequestFailedBlock)failed;
 + (void)getShow:(NSString *)tvdbId onComplete:(SSBSickBeardShowCompleteBlock)show onFailure:(SSBSickBeardRequestFailedBlock)failed;
@@ -51,9 +54,7 @@ typedef void (^SSBSickBeardShowCompleteBlock) (SSBSickBeardShow *show);
 - (NSArray *)getRootDirs;
 - (SSBSickBeardResult *)pauseBacklog:(BOOL)pause;
 - (SSBSickBeardResult *)ping;
-- (SSBSickBeardResult *)restart;
 - (NSArray *)searchTvdb:(NSString *)name tvdb:(NSString *)tvdbId language:(NSString *)lang;
 - (SSBSickBeardResult *)setDefaults:(BOOL)futureShowPaused status:(NSString *)status flattenFolders:(BOOL)flattenFolders initial:(NSArray *)initial archive:(NSArray *)archive;
-- (SSBSickBeardResult *)shutdown;
 
 @end

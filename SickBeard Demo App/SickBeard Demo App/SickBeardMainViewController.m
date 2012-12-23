@@ -9,6 +9,7 @@
 #import "SickBeardMainViewController.h"
 #import "SSBSickBeardServer.h"
 #import "SSBSickBeard.h"
+#import "SSBSickBeardResult.h"
 
 @interface SickBeardMainViewController ()
 
@@ -54,13 +55,46 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    // Navigation logic may go here. Create and push another view controller.
-    /*
-     <#DetailViewController#> *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:@"<#Nib name#>" bundle:nil];
-     // ...
-     // Pass the selected object to the new view controller.
-     [self.navigationController pushViewController:detailViewController animated:YES];
-     */
+    if (indexPath.section == 1) {
+        
+        if (indexPath.row == 0) {
+            [SSBSickBeard forceSearch:^(SSBSickBeardResult *result) {
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Result" message:result.message delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+                [alert show];
+                
+                [SSBSickBeard setActiveServer:nil];
+            } onFailure:^(SSBSickBeardResult *result) {
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"An error occurred" message:result.message delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+                [alert show];
+            }];
+        }
+        
+        if (indexPath.row == 1) {
+            [SSBSickBeard restartActiveServer:^(SSBSickBeardResult *result) {
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Result" message:result.message delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+                [alert show];
+                
+                [SSBSickBeard setActiveServer:nil];
+            } onFailure:^(SSBSickBeardResult *result) {
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"An error occurred" message:result.message delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+                [alert show];
+            }];
+        }
+        
+        if (indexPath.row == 2) {
+            [SSBSickBeard shutdownActiveServer:^(SSBSickBeardResult *result) {
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Result" message:result.message delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+                [alert show];
+                
+                [SSBSickBeard setActiveServer:nil];
+            } onFailure:^(SSBSickBeardResult *result) {
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"An error occurred" message:result.message delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+                [alert show];
+            }];
+        }
+        
+        [self.tableView deselectRowAtIndexPath:[self.tableView indexPathForSelectedRow] animated:YES];
+    }
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
