@@ -10,6 +10,7 @@
 #import "SSBSickBeardShow.h"
 #import "SSBSickBeardResult.h"
 #import "SickBeardEpisodesViewController.h"
+#import "SickBeardShowStatisticsViewController.h"
 
 @interface SickBeardShowViewController () <UIActionSheetDelegate>
 
@@ -82,9 +83,17 @@
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     UITableViewCell *cell = (UITableViewCell *)sender;
-    SickBeardEpisodesViewController *episodesViewController = (SickBeardEpisodesViewController *)segue.destinationViewController;
-    episodesViewController.show = show;
-    episodesViewController.season = cell.tag;
+    
+    if ([[segue identifier] isEqualToString:@"StatisticsSegue"])
+    {
+        SickBeardShowStatisticsViewController *statisticsViewController = (SickBeardShowStatisticsViewController *)segue.destinationViewController;
+        statisticsViewController.show = self.show;
+    } else {
+        
+        SickBeardEpisodesViewController *episodesViewController = (SickBeardEpisodesViewController *)segue.destinationViewController;
+        episodesViewController.show = self.show;
+        episodesViewController.season = cell.tag;
+    }
 }
 
 #pragma mark -

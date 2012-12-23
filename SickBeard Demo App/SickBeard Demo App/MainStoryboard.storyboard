@@ -566,6 +566,48 @@
             </objects>
             <point key="canvasLocation" x="842" y="1064"/>
         </scene>
+        <!--Sick Beard Show Statistics View Controller - Show statistics-->
+        <scene sceneID="Lti-8m-8vZ">
+            <objects>
+                <tableViewController id="0ak-Kw-8Cp" customClass="SickBeardShowStatisticsViewController" sceneMemberID="viewController">
+                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="singleLineEtched" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="ty8-d2-dNQ">
+                        <rect key="frame" x="0.0" y="64" width="320" height="504"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="StatisticCell" textLabel="Cc5-yX-xgV" detailTextLabel="8Aj-17-B1R" style="IBUITableViewCellStyleValue1" id="DfV-Xd-Y5x">
+                                <rect key="frame" x="0.0" y="46" width="320" height="46"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                    <rect key="frame" x="10" y="1" width="300" height="43"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Cc5-yX-xgV">
+                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        </label>
+                                        <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Detail" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8Aj-17-B1R">
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <color key="textColor" red="0.2196078431372549" green="0.32941176470588235" blue="0.52941176470588236" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        </label>
+                                    </subviews>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                </view>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="0ak-Kw-8Cp" id="g0Z-88-qdJ"/>
+                            <outlet property="delegate" destination="0ak-Kw-8Cp" id="hdc-PK-UXH"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Show statistics" id="fuS-DK-Ccn"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="nBx-Ol-fOQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1281" y="1064"/>
+        </scene>
         <!--Sick Beard Servers View Controller - Servers-->
         <scene sceneID="kcn-Ab-MYN">
             <objects>
@@ -745,6 +787,9 @@
                                     </subviews>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 </view>
+                                <connections>
+                                    <segue destination="0ak-Kw-8Cp" kind="push" identifier="StatisticsSegue" id="hva-1Q-8sq"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -948,6 +993,9 @@
         </class>
         <class className="SickBeardServersViewController" superclassName="UITableViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/SickBeardServersViewController.h"/>
+        </class>
+        <class className="SickBeardShowStatisticsViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/SickBeardShowStatisticsViewController.h"/>
         </class>
         <class className="SickBeardShowViewController" superclassName="UITableViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/SickBeardShowViewController.h"/>
