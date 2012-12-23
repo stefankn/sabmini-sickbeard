@@ -149,6 +149,24 @@
     }];
 }
 
+- (void)getBanner:(SSBSickBeardShowRequestImageBlock)complete onFailure:(SSBSickBeardShowRequestResponseBlock)failed
+{
+    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@show.getbanner&tvdbid=%@", [[SSBSharedServer sharedServer].server urlString], self.identifier]];
+    NSData *imageData = [NSData dataWithContentsOfURL:url];
+    UIImage *banner = [UIImage imageWithData:imageData];
+    
+    complete(banner);
+}
+
+- (void)getPoster:(SSBSickBeardShowRequestImageBlock)complete onFailure:(SSBSickBeardShowRequestResponseBlock)failed
+{
+    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@show.getposter&tvdbid=%@", [[SSBSharedServer sharedServer].server urlString], self.identifier]];
+    NSData *imageData = [NSData dataWithContentsOfURL:url];
+    UIImage *poster = [UIImage imageWithData:imageData];
+    
+    complete(poster);
+}
+
 
 
 
@@ -165,24 +183,6 @@
         failed(result);
     }];
 }
-
-//// Retrieve the stored banner image from SickBeard's cache
-//- (UIImage *)getBanner {
-//    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@show.getbanner&tvdbid=%@", [[SSBSharedServer sharedServer].server urlString], self.identifier]];
-//    SSBSickBeardConnector *connector = [[SSBSickBeardConnector alloc] initWithURL:url];
-//    [connector getData:^(NSDictionary *data) {
-//        complete([[SSBSickBeardResult alloc] initWithAttributes:data]);
-//    }];
-//}
-//
-//// Retrieve the stored poster image from SickBeard's cache
-//- (UIImage *)getPoster {
-//    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@show.getposter&tvdbid=%@", [[SSBSharedServer sharedServer].server urlString], self.identifier]];
-//    SSBSickBeardConnector *connector = [[SSBSickBeardConnector alloc] initWithURL:url];
-//    [connector getData:^(NSDictionary *data) {
-//        complete([[SSBSickBeardResult alloc] initWithAttributes:data]);
-//    }];
-//}
 
 - (void)getQuality:(SSBSickBeardShowRequestResponseBlock)complete onFailure:(SSBSickBeardShowRequestResponseBlock)failed
 {

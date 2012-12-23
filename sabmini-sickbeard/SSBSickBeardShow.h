@@ -11,6 +11,7 @@
 
 typedef void (^SSBSickBeardShowRequestDataBlock) (NSDictionary *data);
 typedef void (^SSBSickBeardShowRequestResponseBlock) (SSBSickBeardResult *result);
+typedef void (^SSBSickBeardShowRequestImageBlock) (UIImage *image);
 
 @interface SSBSickBeardShow : NSObject
 
@@ -41,10 +42,12 @@ typedef void (^SSBSickBeardShowRequestResponseBlock) (SSBSickBeardResult *result
 - (void)unpause:(SSBSickBeardShowRequestResponseBlock)complete onFailure:(SSBSickBeardShowRequestResponseBlock)failed;
 - (void)refresh:(SSBSickBeardShowRequestResponseBlock)complete onFailure:(SSBSickBeardShowRequestResponseBlock)failed;
 - (void)update:(SSBSickBeardShowRequestResponseBlock)complete onFailure:(SSBSickBeardShowRequestResponseBlock)failed;
+- (void)getBanner:(SSBSickBeardShowRequestImageBlock)complete onFailure:(SSBSickBeardShowRequestResponseBlock)failed;
+- (void)getPoster:(SSBSickBeardShowRequestImageBlock)complete onFailure:(SSBSickBeardShowRequestResponseBlock)failed;
+
+
 
 - (void)cache:(SSBSickBeardShowRequestResponseBlock)complete onFailure:(SSBSickBeardShowRequestResponseBlock)failed;
-//- (UIImage *)getBanner;
-//- (UIImage *)getPoster;
 - (void)getQuality:(SSBSickBeardShowRequestResponseBlock)complete onFailure:(SSBSickBeardShowRequestResponseBlock)failed;
 
 
