@@ -13,6 +13,7 @@
 #import "SSBSickBeardShow.h"
 #import "SSBSickBeardEpisode.h"
 #import "SSBSharedServer.h"
+#import "SSBSickBeardResult.h"
 
 @interface SSBSickBeard()
 
@@ -31,7 +32,7 @@
 // Retrieves the shows that are added to SickBeard
 // First param defines the sort type (id or name), second param defines if only paused shows should be retrieved
 
-+ (void)getShows:(NSString *)sort onlyPaused:(BOOL)paused onComplete:(SSBSickBeardRequestCompleteBlock)complete onFailure:(SSBSickBeardRequestFailedBlock)failed
++ (void)getShows:(NSString *)sort onlyPaused:(BOOL)paused onComplete:(SSBSickBeardRequestDataBlock)complete onFailure:(SSBSickBeardRequestFailedBlock)failed
 {
     NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@shows&sort=%@&paused=%i", [[SSBSharedServer sharedServer].server urlString], sort, paused]];
     SSBSickBeardConnector *connector = [[SSBSickBeardConnector alloc] initWithURL:url];
@@ -48,7 +49,7 @@
     }];
 }
 
-+ (void)getFutureEpisodesForType:(NSString *)type withPaused:(BOOL)paused sortOn:(NSString *)sort onComplete:(SSBSickBeardRequestCompleteBlock)complete onFailure:(SSBSickBeardRequestFailedBlock)failed
++ (void)getFutureEpisodesForType:(NSString *)type withPaused:(BOOL)paused sortOn:(NSString *)sort onComplete:(SSBSickBeardRequestDataBlock)complete onFailure:(SSBSickBeardRequestFailedBlock)failed
 {
     NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@future&sort=%@&type=%@&paused=%i", [[SSBSharedServer sharedServer].server urlString], sort, type, paused]];
 
@@ -85,6 +86,43 @@
     }];
 }
 
++ (void)getHistory:(int)limit forType:(NSString *)type onComplete:(SSBSickBeardRequestDataBlock)complete onFailure:(SSBSickBeardRequestFailedBlock)failed
+{
+    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@history&limit=%i&type=%@", [[SSBSharedServer sharedServer].server urlString], limit, type]];
+    
+    SSBSickBeardConnector *connector = [[SSBSickBeardConnector alloc] initWithURL:url];
+    [connector getData:^(NSDictionary *data) {
+        NSMutableArray *episodes = [NSMutableArray array];
+        NSEnumerator *e = [[data objectForKey:@"data"] objectEnumerator];
+        NSDictionary *episodeDict;
+        while (episodeDict = [e nextObject]) {
+            SSBSickBeardEpisode *episode = [[SSBSickBeardEpisode alloc] initWithAttributes:episodeDict];
+            [episodes addObject:episode];
+        }
+        
+        complete([NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:episodes, [data objectForKey:@"message"], [data objectForKey:@"result"], nil] forKeys:[NSArray arrayWithObjects:@"results", @"message", @"result", nil]]);
+    }];
+}
+
++ (void)clearHistory:(SSBSickBeardRequestCompleteBlock)complete onFailure:(SSBSickBeardRequestFailedBlock)failed
+{
+    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@history.clear", [[SSBSharedServer sharedServer].server urlString]]];
+    
+    SSBSickBeardConnector *connector = [[SSBSickBeardConnector alloc] initWithURL:url];
+    [connector getData:^(NSDictionary *data) {
+        complete([[SSBSickBeardResult alloc] initWithAttributes:data]);
+    }];
+}
+
++ (void)trimHistory:(SSBSickBeardRequestCompleteBlock)complete onFailure:(SSBSickBeardRequestFailedBlock)failed
+{
+    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@history.trim", [[SSBSharedServer sharedServer].server urlString]]];
+    
+    SSBSickBeardConnector *connector = [[SSBSickBeardConnector alloc] initWithURL:url];
+    [connector getData:^(NSDictionary *data) {
+        complete([[SSBSickBeardResult alloc] initWithAttributes:data]);
+    }];
+}
 
 
 @end

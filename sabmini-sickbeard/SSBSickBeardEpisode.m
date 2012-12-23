@@ -70,9 +70,9 @@
     }];
 }
 
-- (void)changeStatus:(NSString *)status onComplete:(SSBSickBeardEpisodeRequestResponseBlock)complete onFailure:(SSBSickBeardEpisodeRequestResponseBlock)failed
+- (void)changeStatus:(NSString *)newStatus onComplete:(SSBSickBeardEpisodeRequestResponseBlock)complete onFailure:(SSBSickBeardEpisodeRequestResponseBlock)failed
 {
-    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@episode.setstatus&tvdbid=%@&season=%@&episode=%@&status=%@", [[SSBSharedServer sharedServer].server urlString], self.tvdbid, self.season, self.episode, status]];
+    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@episode.setstatus&tvdbid=%@&season=%@&episode=%@&status=%@", [[SSBSharedServer sharedServer].server urlString], self.tvdbid, self.season, self.episode, newStatus]];
     
     SSBSickBeardConnector *connector = [[SSBSickBeardConnector alloc] initWithURL:url];
     [connector getData:^(NSDictionary *data) {

@@ -12,20 +12,23 @@
 @class SSBSickBeardEpisode;
 @class SSBSickBeardShow;
 
-typedef void (^SSBSickBeardRequestCompleteBlock) (NSDictionary *data);
+typedef void (^SSBSickBeardRequestCompleteBlock) (SSBSickBeardResult *result);
+typedef void (^SSBSickBeardRequestDataBlock) (NSDictionary *data);
 typedef void (^SSBSickBeardRequestFailedBlock) (SSBSickBeardResult *result);
 typedef void (^SSBSickBeardShowCompleteBlock) (SSBSickBeardShow *show);
 
 @interface SSBSickBeard : NSObject
 
 + (void)setActiveServer:(SSBSickBeardServer *)server;
-+ (void)getShows:(NSString *)sort onlyPaused:(BOOL)paused onComplete:(SSBSickBeardRequestCompleteBlock)complete onFailure:(SSBSickBeardRequestFailedBlock)failed;
-+ (void)getFutureEpisodesForType:(NSString *)type withPaused:(BOOL)paused sortOn:(NSString *)sort onComplete:(SSBSickBeardRequestCompleteBlock)complete onFailure:(SSBSickBeardRequestFailedBlock)failed;
++ (void)getShows:(NSString *)sort onlyPaused:(BOOL)paused onComplete:(SSBSickBeardRequestDataBlock)complete onFailure:(SSBSickBeardRequestFailedBlock)failed;
++ (void)getFutureEpisodesForType:(NSString *)type withPaused:(BOOL)paused sortOn:(NSString *)sort onComplete:(SSBSickBeardRequestDataBlock)complete onFailure:(SSBSickBeardRequestFailedBlock)failed;
 + (void)getShow:(NSString *)tvdbId onComplete:(SSBSickBeardShowCompleteBlock)show onFailure:(SSBSickBeardRequestFailedBlock)failed;
++ (void)getHistory:(int)limit forType:(NSString *)type onComplete:(SSBSickBeardRequestDataBlock)complete onFailure:(SSBSickBeardRequestFailedBlock)failed;
++ (void)clearHistory:(SSBSickBeardRequestCompleteBlock)complete onFailure:(SSBSickBeardRequestFailedBlock)failed;
++ (void)trimHistory:(SSBSickBeardRequestCompleteBlock)complete onFailure:(SSBSickBeardRequestFailedBlock)failed;
 
-- (NSArray *)getHistory:(int)limit forType:(NSString *)type;
-- (SSBSickBeardResult *)clearHistory;
-- (SSBSickBeardResult *)trimHistory;
+
+
 - (NSArray *)getLogs:(NSString *)min_level;
 - (SSBSickBeardEpisode *)getEpisodeDetails:(NSString *)tvdbId forSeason:(int)season forEpisode:(int)episode showFullPath:(BOOL)showPath;
 - (SSBSickBeardResult *)episodeExists:(NSString *)tvdbId forSeason:(int)season forEpisode:(int)episode;

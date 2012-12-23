@@ -40,6 +40,6 @@ typedef void (^SSBSickBeardEpisodeRequestResponseBlock) (SSBSickBeardResult *res
 
 - (id)initWithAttributes:(NSDictionary *)attributes;
 - (void)getFullDetails:(SSBSickBeardEpisodeRequestResponseBlock)complete onFailure:(SSBSickBeardEpisodeRequestResponseBlock)failed;
-- (void)changeStatus:(NSString *)status onComplete:(SSBSickBeardEpisodeRequestResponseBlock)complete onFailure:(SSBSickBeardEpisodeRequestResponseBlock)failed;
+- (void)changeStatus:(NSString *)newStatus onComplete:(SSBSickBeardEpisodeRequestResponseBlock)complete onFailure:(SSBSickBeardEpisodeRequestResponseBlock)failed;
 
 @end
