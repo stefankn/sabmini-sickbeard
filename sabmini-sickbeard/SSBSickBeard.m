@@ -23,9 +23,70 @@
 
 @implementation SSBSickBeard
 
++ (NSArray *)getServers
+{
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSData *serverData = [defaults objectForKey:@"sickbeard_servers"];
+    NSMutableArray *servers = [NSMutableArray array];
+    
+    if (serverData != NULL) {
+        [servers addObjectsFromArray:[NSKeyedUnarchiver unarchiveObjectWithData:serverData]];
+    }
+    
+    return [NSArray arrayWithArray:servers];
+}
+
++ (SSBSickBeardServer *)createServer:(NSString *)friendlyName withHost:(NSString *)host withPort:(NSString *)port withApikey:(NSString *)apikey enableHttps:(BOOL)https setAsDefault:(BOOL)setDefault
+{
+    SSBSickBeardServer *server = [[SSBSickBeardServer alloc] init];
+    server.friendlyName = friendlyName;
+    server.host = host;
+    server.port = port;
+    server.apikey = apikey;
+    server.https = https;
+    server.isDefault = setDefault;
+    
+    NSMutableArray *servers = [NSMutableArray arrayWithArray:[SSBSickBeard getServers]];
+    
+    if (setDefault) {
+        NSEnumerator *e = [servers objectEnumerator];
+        SSBSickBeardServer *server;
+        while (server = [e nextObject]) {
+            server.isDefault = NO;
+        }
+    }
+    
+    [servers addObject:server];
+    NSData *data = [NSKeyedArchiver archivedDataWithRootObject:servers];
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    [defaults setObject:data forKey:@"sickbeard_servers"];
+    [defaults synchronize];
+    
+    return server;
+}
+
 + (void)setActiveServer:(SSBSickBeardServer *)server
 {
     [SSBSharedServer sharedServer].server = server;
+}
+
++ (SSBSickBeardServer *)getActiveServer
+{
+    return [SSBSharedServer sharedServer].server;
+}
+
++ (SSBSickBeardServer *)getDefaultServer
+{
+    NSMutableArray *servers = [NSMutableArray arrayWithArray:[SSBSickBeard getServers]];
+    NSEnumerator *e = [servers objectEnumerator];
+    SSBSickBeardServer *server;
+    while (server = [e nextObject]) {
+        if (server.isDefault) {
+            return server;
+        }
+    }
+    
+    return nil;
 }
 
 

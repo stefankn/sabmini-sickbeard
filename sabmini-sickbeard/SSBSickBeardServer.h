@@ -7,26 +7,22 @@
 //
 
 #import <Foundation/Foundation.h>
+@class SSBSickBeardResult;
 
-@protocol SSBSickBeardServerDelegate <NSObject>
+typedef void (^SSBSickBeardServerRequestCompleteBlock) (SSBSickBeardResult *result);
 
-@optional
-- (void)shutdownResponse;
-- (void)restartResponse;
+@interface SSBSickBeardServer : NSObject <NSCoding>
 
-@end
-
-@interface SSBSickBeardServer : NSObject
+@property (nonatomic, strong) NSString *identifier;
+@property (nonatomic, strong) NSString *friendlyName;
+@property (nonatomic, strong) NSString *host;
+@property (nonatomic, strong) NSString *port;
+@property (nonatomic, strong) NSString *apikey;
+@property (nonatomic, assign) BOOL https;
+@property (nonatomic, assign) BOOL isDefault;
 
 - (NSString *)urlString;
-- (void)restartSickBeard;
-- (void)shutdownSickBeard;
-
-@end
-
-@interface SSBSickBeardServers : NSObject
-
-+ (NSArray *)getServers;
-+ (SSBSickBeardServer *)createServer:(NSString *)friendlyName withHost:(NSString *)host withPort:(NSString *)port withApikey:(NSString *)apikey enableHttps:(BOOL)https store:(BOOL)store;
+- (void)setAsDefault;
+- (void)remove;
 
 @end

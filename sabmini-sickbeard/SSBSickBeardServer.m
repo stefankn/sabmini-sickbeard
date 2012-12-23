@@ -7,30 +7,32 @@
 //
 
 #import "SSBSickBeardServer.h"
-@class SSBSickBeardServers;
-
-@interface SSBSickBeardServer()
-
-@property (nonatomic, strong) NSString *friendlyName;
-@property (nonatomic, strong) NSString *host;
-@property (nonatomic, strong) NSString *port;
-@property (nonatomic, strong) NSString *apikey;
-@property (nonatomic, assign) BOOL https;
-
-@end
+#import "SSBSickBeard.h"
 
 @implementation SSBSickBeardServer
-@synthesize friendlyName, host, port, apikey, https;
+@synthesize identifier, friendlyName, host, port, apikey, https, isDefault;
+
+- (id)init
+{
+    self = [super init];
+    if (self) {
+        self.identifier = [NSMutableString stringWithFormat:@"%d", arc4random() % 100000000];
+    }
+    
+    return self;
+}
 
 - (id)initWithCoder:(NSCoder *)coder;
 {
     if (self = [super init])
     {
+        self.identifier = [coder decodeObjectForKey:@"identifier"];
         self.friendlyName = [coder decodeObjectForKey:@"friendlyName"];
 		self.host = [coder decodeObjectForKey:@"host"];
 		self.port = [coder decodeObjectForKey:@"port"];
         self.apikey = [coder decodeObjectForKey:@"apikey"];
         self.https = [coder decodeBoolForKey:@"https"];
+        self.isDefault = [coder decodeBoolForKey:@"isDefault"];
     }
 	
     return self;
@@ -38,11 +40,13 @@
 
 - (void)encodeWithCoder:(NSCoder *)coder;
 {
+    [coder encodeObject:self.identifier forKey:@"identifier"];
     [coder encodeObject:self.friendlyName forKey:@"friendlyName"];
 	[coder encodeObject:self.host forKey:@"host"];
 	[coder encodeObject:self.port forKey:@"port"];
 	[coder encodeObject:self.apikey forKey:@"apikey"];
 	[coder encodeBool:self.https forKey:@"https"];
+    [coder encodeBool:self.isDefault forKey:@"isDefault"];
 }
 
 - (NSString *)urlString
@@ -55,43 +59,46 @@
     }
 }
 
-@end
-
-@implementation SSBSickBeardServers
-
-+ (NSArray *)getServers
+- (void)setAsDefault
 {
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    NSData *serverData = [defaults objectForKey:@"sickbeard_servers"];
-    NSMutableArray *servers = [NSMutableArray array];
+    self.isDefault = YES;
     
-    if (serverData != NULL) {
-        [servers addObjectsFromArray:[NSKeyedUnarchiver unarchiveObjectWithData:serverData]];
+    // We need to unset other default servers if there are any
+    NSMutableArray *servers = [NSMutableArray arrayWithArray:[SSBSickBeard getServers]];
+    
+    NSEnumerator *e = [servers objectEnumerator];
+    SSBSickBeardServer *server;
+    while (server = [e nextObject]) {
+        if ([self.identifier isEqualToString:server.identifier]) {
+            server.isDefault = YES;
+        }
+        else {
+            server.isDefault = NO;
+        }
     }
-    
-    return [NSArray arrayWithArray:servers];
+
+    NSData *data = [NSKeyedArchiver archivedDataWithRootObject:servers];
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    [defaults setObject:data forKey:@"sickbeard_servers"];
+    [defaults synchronize];
 }
 
-+ (SSBSickBeardServer *)createServer:(NSString *)friendlyName withHost:(NSString *)host withPort:(NSString *)port withApikey:(NSString *)apikey enableHttps:(BOOL)https store:(BOOL)store
+- (void)remove
 {
-    SSBSickBeardServer *server = [[SSBSickBeardServer alloc] init];
-    server.friendlyName = friendlyName;
-    server.host = host;
-    server.port = port;
-    server.apikey = apikey;
-    server.https = https;
-    
-    if (store) {
-        NSMutableArray *servers = [NSMutableArray arrayWithArray:[SSBSickBeardServers getServers]];
-        
-        [servers addObject:self];
-        NSData *data = [NSKeyedArchiver archivedDataWithRootObject:servers];
-        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-        [defaults setObject:data forKey:@"sickbeard_servers"];
-        [defaults synchronize];
+    NSMutableArray *servers = [NSMutableArray arrayWithArray:[SSBSickBeard getServers]];
+    NSMutableArray *newServers = [NSMutableArray array];
+    NSEnumerator *e = [servers objectEnumerator];
+    SSBSickBeardServer *server;
+    while (server = [e nextObject]) {
+        if (![self.identifier isEqualToString:server.identifier]) {
+            [newServers addObject:server];
+        }
     }
-    
-    return server;
+
+    NSData *data = [NSKeyedArchiver archivedDataWithRootObject:newServers];
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    [defaults setObject:data forKey:@"sickbeard_servers"];
+    [defaults synchronize];
 }
 
 

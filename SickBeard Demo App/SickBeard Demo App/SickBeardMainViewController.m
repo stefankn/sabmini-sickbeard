@@ -29,8 +29,19 @@
 {
     [super viewDidLoad];
     
-    SSBSickBeardServer *server = [SSBSickBeardServers createServer:@"Test server" withHost:@"10.0.1.110" withPort:@"8081" withApikey:@"8b1a4a7850815520f2c06cf1ebc9586c" enableHttps:YES store:NO];
-    [SSBSickBeard setActiveServer:server];
+    //SSBSickBeardServer *server = [SSBSickBeard createServer:@"Test server" withHost:@"10.0.1.110" withPort:@"8081" withApikey:@"8b1a4a7850815520f2c06cf1ebc9586c" enableHttps:YES store:NO];
+    
+    SSBSickBeardServer *server = [SSBSickBeard getDefaultServer];
+    if (server) {
+        [SSBSickBeard setActiveServer:server];
+    }
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
+    [self.tableView reloadData];
 }
 
 - (void)didReceiveMemoryWarning
@@ -50,6 +61,21 @@
      // Pass the selected object to the new view controller.
      [self.navigationController pushViewController:detailViewController animated:YES];
      */
+}
+
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
+{
+    if (section == 0) {
+        if ([SSBSickBeard getActiveServer]) {
+            return [NSString stringWithFormat:@"Active server: %@", [SSBSickBeard getActiveServer].friendlyName];
+        }
+        else {
+            return @"No server active";
+        }
+    }
+    else {
+        return nil;
+    }
 }
 
 @end

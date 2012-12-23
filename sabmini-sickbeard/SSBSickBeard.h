@@ -19,7 +19,12 @@ typedef void (^SSBSickBeardShowCompleteBlock) (SSBSickBeardShow *show);
 
 @interface SSBSickBeard : NSObject
 
++ (NSArray *)getServers;
++ (SSBSickBeardServer *)getDefaultServer;
 + (void)setActiveServer:(SSBSickBeardServer *)server;
++ (SSBSickBeardServer *)getActiveServer;
++ (SSBSickBeardServer *)createServer:(NSString *)friendlyName withHost:(NSString *)host withPort:(NSString *)port withApikey:(NSString *)apikey enableHttps:(BOOL)https setAsDefault:(BOOL)setDefault;
+
 + (void)getShows:(NSString *)sort onlyPaused:(BOOL)paused onComplete:(SSBSickBeardRequestDataBlock)complete onFailure:(SSBSickBeardRequestFailedBlock)failed;
 + (void)getFutureEpisodesForType:(NSString *)type withPaused:(BOOL)paused sortOn:(NSString *)sort onComplete:(SSBSickBeardRequestDataBlock)complete onFailure:(SSBSickBeardRequestFailedBlock)failed;
 + (void)getShow:(NSString *)tvdbId onComplete:(SSBSickBeardShowCompleteBlock)show onFailure:(SSBSickBeardRequestFailedBlock)failed;
