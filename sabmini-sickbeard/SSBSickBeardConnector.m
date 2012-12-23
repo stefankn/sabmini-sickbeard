@@ -93,7 +93,14 @@
 }
 
 - (void)parser:(SBJsonStreamParser *)parser foundObject:(NSDictionary *)dict {
-    self.clb(dict);
+    
+    if ([[dict objectForKey:@"result"] isEqualToString:@"success"]) {
+        self.clb(dict);
+    }
+    else {
+        self.clbFailed([[SSBSickBeardResult alloc] initWithAttributes:dict]);
+    }
+    
 }
 
 

@@ -34,6 +34,7 @@ typedef void (^SSBSickBeardShowCompleteBlock) (SSBSickBeardShow *show);
 + (void)getHistory:(int)limit forType:(NSString *)type onComplete:(SSBSickBeardRequestDataBlock)complete onFailure:(SSBSickBeardRequestFailedBlock)failed;
 + (void)clearHistory:(SSBSickBeardRequestCompleteBlock)complete onFailure:(SSBSickBeardRequestFailedBlock)failed;
 + (void)trimHistory:(SSBSickBeardRequestCompleteBlock)complete onFailure:(SSBSickBeardRequestFailedBlock)failed;
++ (void)searchTvdb:(NSString *)name tvdb:(NSString *)tvdbId language:(NSString *)lang onComplete:(SSBSickBeardRequestDataBlock)complete onFailure:(SSBSickBeardRequestFailedBlock)failed;
 
 
 
@@ -54,7 +55,7 @@ typedef void (^SSBSickBeardShowCompleteBlock) (SSBSickBeardShow *show);
 - (NSArray *)getRootDirs;
 - (SSBSickBeardResult *)pauseBacklog:(BOOL)pause;
 - (SSBSickBeardResult *)ping;
-- (NSArray *)searchTvdb:(NSString *)name tvdb:(NSString *)tvdbId language:(NSString *)lang;
+
 - (SSBSickBeardResult *)setDefaults:(BOOL)futureShowPaused status:(NSString *)status flattenFolders:(BOOL)flattenFolders initial:(NSArray *)initial archive:(NSArray *)archive;
 
 @end

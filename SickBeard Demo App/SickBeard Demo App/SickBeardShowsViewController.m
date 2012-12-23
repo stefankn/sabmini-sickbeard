@@ -59,12 +59,15 @@
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    UITableViewCell *cell = (UITableViewCell *) sender;
-    NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
-    
-    SSBSickBeardShow *show = [self.shows objectAtIndex:indexPath.row];
-    SickBeardShowViewController *showViewController = (SickBeardShowViewController *)segue.destinationViewController;
-    showViewController.show = show;
+    if ([[segue identifier] isEqualToString:@"ShowDetailsSegue"])
+    {
+        UITableViewCell *cell = (UITableViewCell *) sender;
+        NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
+        
+        SSBSickBeardShow *show = [self.shows objectAtIndex:indexPath.row];
+        SickBeardShowViewController *showViewController = (SickBeardShowViewController *)segue.destinationViewController;
+        showViewController.show = show;
+    }
 }
 
 #pragma mark - Table view data source

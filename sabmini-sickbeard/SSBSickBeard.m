@@ -233,4 +233,19 @@
     }];
 }
 
++ (void)searchTvdb:(NSString *)name tvdb:(NSString *)tvdbId language:(NSString *)lang onComplete:(SSBSickBeardRequestDataBlock)complete onFailure:(SSBSickBeardRequestFailedBlock)failed;
+{
+    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@sb.searchtvdb&name=%@&tvdbid=%@&lang=%@", [[SSBSharedServer sharedServer].server urlString], [name stringByReplacingOccurrencesOfString:@" " withString:@"+"], tvdbId, lang]];
+    
+    NSLog(@"%@", [url absoluteString]);
+    
+    SSBSickBeardConnector *connector = [[SSBSickBeardConnector alloc] initWithURL:url];
+    [connector getData:^(NSDictionary *data) {
+        NSLog(@"%@", data);
+        complete([data objectForKey:@"data"]);
+    } onFailure:^(SSBSickBeardResult *result) {
+        failed(result);
+    }];
+}
+
 @end

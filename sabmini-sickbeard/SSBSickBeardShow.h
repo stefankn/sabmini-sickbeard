@@ -44,7 +44,7 @@ typedef void (^SSBSickBeardShowRequestImageBlock) (UIImage *image);
 - (void)update:(SSBSickBeardShowRequestResponseBlock)complete onFailure:(SSBSickBeardShowRequestResponseBlock)failed;
 - (void)getBanner:(SSBSickBeardShowRequestImageBlock)complete onFailure:(SSBSickBeardShowRequestResponseBlock)failed;
 - (void)getPoster:(SSBSickBeardShowRequestImageBlock)complete onFailure:(SSBSickBeardShowRequestResponseBlock)failed;
-
+- (void)changeStatus:(NSString *)newStatus forSeason:(int)season onComplete:(SSBSickBeardShowRequestResponseBlock)complete onFailure:(SSBSickBeardShowRequestResponseBlock)failed;
 
 
 - (void)cache:(SSBSickBeardShowRequestResponseBlock)complete onFailure:(SSBSickBeardShowRequestResponseBlock)failed;

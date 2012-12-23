@@ -167,7 +167,16 @@
     complete(poster);
 }
 
-
+- (void)changeStatus:(NSString *)newStatus forSeason:(int)season onComplete:(SSBSickBeardShowRequestResponseBlock)complete onFailure:(SSBSickBeardShowRequestResponseBlock)failed
+{
+    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@episode.setstatus&tvdbid=%@&season=%i&status=%@", [[SSBSharedServer sharedServer].server urlString], self.identifier, season, newStatus]];
+    SSBSickBeardConnector *connector = [[SSBSickBeardConnector alloc] initWithURL:url];
+    [connector getData:^(NSDictionary *data) {
+        complete([[SSBSickBeardResult alloc] initWithAttributes:data]);
+    } onFailure:^(SSBSickBeardResult *result) {
+        failed(result);
+    }];
+}
 
 
 

@@ -161,7 +161,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GAw-Cc-oxW" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="402" y="552"/>
+            <point key="canvasLocation" x="-208" y="296"/>
         </scene>
         <!--Sick Beard History View Controller - History-->
         <scene sceneID="Zo4-Bl-8wp">
@@ -212,7 +212,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="URz-I4-CEK" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="915" y="-353"/>
+            <point key="canvasLocation" x="394" y="-1213"/>
         </scene>
         <!--Sick Beard Upcoming Episodes View Controller - Upcoming episodes-->
         <scene sceneID="SPQ-ms-IBI">
@@ -257,7 +257,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9tE-I3-8We" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="962" y="325"/>
+            <point key="canvasLocation" x="394" y="-479"/>
         </scene>
         <!--Sick Beard Add Server View Controller - Configure-->
         <scene sceneID="auR-nL-XuT">
@@ -492,7 +492,79 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Pj6-KN-b0x" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="38" y="-176"/>
+            <point key="canvasLocation" x="658" y="1888"/>
+        </scene>
+        <!--Sick Beard Add Show View Controller-->
+        <scene sceneID="lyA-GE-ZVh">
+            <objects>
+                <viewController id="466-id-wl6" customClass="SickBeardAddShowViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="3ty-7Y-H8P">
+                        <rect key="frame" x="0.0" y="20" width="320" height="548"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wWw-IA-PoL">
+                                <items>
+                                    <navigationItem title="Add show" id="Dat-DL-Rg6">
+                                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="fzE-Uo-WSo">
+                                            <connections>
+                                                <action selector="cancelAddShow:" destination="466-id-wl6" id="1Fj-M3-dWr"/>
+                                            </connections>
+                                        </barButtonItem>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
+                            <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="061-O0-cqe">
+                                <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <outlet property="delegate" destination="466-id-wl6" id="yGc-KJ-V5B"/>
+                                </connections>
+                            </searchBar>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="Pus-QN-L8D">
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" indentationWidth="10" reuseIdentifier="SearchResultCell" textLabel="h5U-xT-frD" detailTextLabel="cCa-eP-YNm" style="IBUITableViewCellStyleSubtitle" id="2SB-Kj-Piu">
+                                        <rect key="frame" x="0.0" y="22" width="320" height="44"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="h5U-xT-frD">
+                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                </label>
+                                                <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Subtitle" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cCa-eP-YNm">
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <color key="textColor" red="0.50196078431372548" green="0.50196078431372548" blue="0.50196078431372548" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                </label>
+                                            </subviews>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        </view>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="061-O0-cqe" firstAttribute="top" secondItem="wWw-IA-PoL" secondAttribute="bottom" type="default" id="9mZ-wM-DKK"/>
+                            <constraint firstItem="wWw-IA-PoL" firstAttribute="top" secondItem="3ty-7Y-H8P" secondAttribute="top" type="default" id="9oP-OV-MfP"/>
+                            <constraint firstItem="061-O0-cqe" firstAttribute="leading" secondItem="3ty-7Y-H8P" secondAttribute="leading" type="default" id="Mf1-fx-lKh"/>
+                            <constraint firstItem="Pus-QN-L8D" firstAttribute="leading" secondItem="3ty-7Y-H8P" secondAttribute="leading" type="default" id="d9F-I2-UNW"/>
+                            <constraint firstItem="wWw-IA-PoL" firstAttribute="leading" secondItem="3ty-7Y-H8P" secondAttribute="leading" type="default" id="dCc-zF-eQT"/>
+                            <constraint firstItem="Pus-QN-L8D" firstAttribute="trailing" secondItem="3ty-7Y-H8P" secondAttribute="trailing" type="default" id="fP2-We-DsF"/>
+                            <constraint firstItem="Pus-QN-L8D" firstAttribute="bottom" secondItem="3ty-7Y-H8P" secondAttribute="bottom" type="default" id="hMl-qg-xRb"/>
+                            <constraint firstItem="061-O0-cqe" firstAttribute="trailing" secondItem="3ty-7Y-H8P" secondAttribute="trailing" type="default" id="jw9-Ii-49n"/>
+                            <constraint firstItem="wWw-IA-PoL" firstAttribute="trailing" secondItem="3ty-7Y-H8P" secondAttribute="trailing" type="default" id="qRl-7m-CEj"/>
+                            <constraint firstItem="Pus-QN-L8D" firstAttribute="top" secondItem="061-O0-cqe" secondAttribute="bottom" type="default" id="xho-dN-ECO"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="96W-ur-Z3z"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="kvd-oo-89o" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="842" y="1064"/>
         </scene>
         <!--Sick Beard Servers View Controller - Servers-->
         <scene sceneID="kcn-Ab-MYN">
@@ -540,7 +612,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="TO1-5c-c4V" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="420" y="-166"/>
+            <point key="canvasLocation" x="108" y="1074"/>
         </scene>
         <!--Sick Beard Shows View Controller - Shows-->
         <scene sceneID="685-kb-rqH">
@@ -572,7 +644,7 @@
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 </view>
                                 <connections>
-                                    <segue destination="Zyh-Ew-Plh" kind="push" id="veW-pw-UcO"/>
+                                    <segue destination="Zyh-Ew-Plh" kind="push" identifier="ShowDetailsSegue" id="veW-pw-UcO"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -581,11 +653,17 @@
                             <outlet property="delegate" destination="8pH-Vf-FWz" id="JYv-wn-aNx"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Shows" id="bwf-CO-ghL"/>
+                    <navigationItem key="navigationItem" title="Shows" id="bwf-CO-ghL">
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="MmM-sf-vt0">
+                            <connections>
+                                <segue destination="466-id-wl6" kind="modal" id="BRQ-zm-bjc"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qyx-vT-grd" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="896" y="1051"/>
+            <point key="canvasLocation" x="394" y="296"/>
         </scene>
         <!--Sick Beard Show View Controller - Show details-->
         <scene sceneID="c7S-Dv-r5d">
@@ -684,7 +762,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Z3Q-Im-9Cj" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1312" y="1051"/>
+            <point key="canvasLocation" x="842" y="296"/>
         </scene>
         <!--Sick Beard Episode View Controller - Episode details-->
         <scene sceneID="euH-jv-kBk">
@@ -748,7 +826,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6xY-nW-efR" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1775" y="-103"/>
+            <point key="canvasLocation" x="1817" y="-479"/>
         </scene>
         <!--Sick Beard Episodes View Controller-->
         <scene sceneID="sTh-83-Bhk">
@@ -789,11 +867,17 @@
                             <outlet property="delegate" destination="t26-FZ-PHz" id="QRm-vQ-Ss4"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="E1Q-c3-8qH"/>
+                    <navigationItem key="navigationItem" id="E1Q-c3-8qH">
+                        <barButtonItem key="rightBarButtonItem" title="Status" id="9Kx-MC-4sW">
+                            <connections>
+                                <action selector="seasonActions:" destination="t26-FZ-PHz" id="7cf-6N-hx6"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bi9-ZA-fSY" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1721" y="1057"/>
+            <point key="canvasLocation" x="1281" y="296"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="ECP-7M-nHr">
@@ -811,7 +895,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lOq-pv-DbA" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="38" y="552"/>
+            <point key="canvasLocation" x="-599" y="296"/>
         </scene>
     </scenes>
     <classes>
@@ -834,6 +918,13 @@
                 <relationship kind="outlet" name="portField" candidateClass="UITextField"/>
             </relationships>
         </class>
+        <class className="SickBeardAddShowViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/SickBeardAddShowViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="cancelAddShow:"/>
+                <relationship kind="outlet" name="tableView" candidateClass="UITableView"/>
+            </relationships>
+        </class>
         <class className="SickBeardEpisodeViewController" superclassName="UITableViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/SickBeardEpisodeViewController.h"/>
             <relationships>
@@ -842,6 +933,9 @@
         </class>
         <class className="SickBeardEpisodesViewController" superclassName="UITableViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/SickBeardEpisodesViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="seasonActions:"/>
+            </relationships>
         </class>
         <class className="SickBeardHistoryViewController" superclassName="UITableViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/SickBeardHistoryViewController.h"/>
@@ -871,6 +965,6 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="Jgt-Zo-qyA"/>
+        <segue reference="rxK-cI-mja"/>
     </inferredMetricsTieBreakers>
 </document>
