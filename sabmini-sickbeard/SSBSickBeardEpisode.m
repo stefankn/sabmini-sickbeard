@@ -67,6 +67,8 @@
     [connector getData:^(NSDictionary *data) {
         [self setAttributes:[data objectForKey:@"data"]];
         complete([[SSBSickBeardResult alloc] initWithAttributes:data]);
+    } onFailure:^(SSBSickBeardResult *result) {
+        failed(result);
     }];
 }
 
@@ -78,6 +80,8 @@
     [connector getData:^(NSDictionary *data) {
         [self setAttributes:[data objectForKey:@"data"]];
         complete([[SSBSickBeardResult alloc] initWithAttributes:data]);
+    } onFailure:^(SSBSickBeardResult *result) {
+        failed(result);
     }];
 }
 

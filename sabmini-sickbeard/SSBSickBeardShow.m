@@ -62,6 +62,8 @@
     [connector getData:^(NSDictionary *data) {
         [self setAttributes:[data objectForKey:@"data"]];
         complete([[SSBSickBeardResult alloc] initWithAttributes:data]);
+    } onFailure:^(SSBSickBeardResult *result) {
+        failed(result);
     }];
 }
 
@@ -72,6 +74,8 @@
     SSBSickBeardConnector *connector = [[SSBSickBeardConnector alloc] initWithURL:url];
     [connector getData:^(NSDictionary *data) {
         complete([[SSBSickBeardResult alloc] initWithAttributes:data]);
+    } onFailure:^(SSBSickBeardResult *result) {
+        failed(result);
     }];
 }
 
@@ -96,6 +100,8 @@
         }
         
         complete([NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:episodes, [data objectForKey:@"message"], [data objectForKey:@"result"], nil] forKeys:[NSArray arrayWithObjects:@"results", @"message", @"result", nil]]);
+    } onFailure:^(SSBSickBeardResult *result) {
+        failed(result);
     }];
 }
 
@@ -105,6 +111,8 @@
     SSBSickBeardConnector *connector = [[SSBSickBeardConnector alloc] initWithURL:url];
     [connector getData:^(NSDictionary *data) {
         complete([[SSBSickBeardResult alloc] initWithAttributes:data]);
+    } onFailure:^(SSBSickBeardResult *result) {
+        failed(result);
     }];
 }
 
@@ -114,6 +122,8 @@
     SSBSickBeardConnector *connector = [[SSBSickBeardConnector alloc] initWithURL:url];
     [connector getData:^(NSDictionary *data) {
         complete([[SSBSickBeardResult alloc] initWithAttributes:data]);
+    } onFailure:^(SSBSickBeardResult *result) {
+        failed(result);
     }];
 }
 
@@ -123,6 +133,8 @@
     SSBSickBeardConnector *connector = [[SSBSickBeardConnector alloc] initWithURL:url];
     [connector getData:^(NSDictionary *data) {
         complete([[SSBSickBeardResult alloc] initWithAttributes:data]);
+    } onFailure:^(SSBSickBeardResult *result) {
+        failed(result);
     }];
 }
 
@@ -132,6 +144,8 @@
     SSBSickBeardConnector *connector = [[SSBSickBeardConnector alloc] initWithURL:url];
     [connector getData:^(NSDictionary *data) {
         complete([[SSBSickBeardResult alloc] initWithAttributes:data]);
+    } onFailure:^(SSBSickBeardResult *result) {
+        failed(result);
     }];
 }
 
@@ -147,6 +161,8 @@
     SSBSickBeardConnector *connector = [[SSBSickBeardConnector alloc] initWithURL:url];
     [connector getData:^(NSDictionary *data) {
         complete([[SSBSickBeardResult alloc] initWithAttributes:data]);
+    } onFailure:^(SSBSickBeardResult *result) {
+        failed(result);
     }];
 }
 
@@ -174,6 +190,8 @@
     SSBSickBeardConnector *connector = [[SSBSickBeardConnector alloc] initWithURL:url];
     [connector getData:^(NSDictionary *data) {
         complete([[SSBSickBeardResult alloc] initWithAttributes:data]);
+    } onFailure:^(SSBSickBeardResult *result) {
+        failed(result);
     }];
 }
 
@@ -189,6 +207,8 @@
     SSBSickBeardConnector *connector = [[SSBSickBeardConnector alloc] initWithURL:url];
     [connector getData:^(NSDictionary *data) {
         complete([[SSBSickBeardResult alloc] initWithAttributes:data]);
+    } onFailure:^(SSBSickBeardResult *result) {
+        failed(result);
     }];
 }
 

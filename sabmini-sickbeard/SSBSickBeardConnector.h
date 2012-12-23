@@ -7,12 +7,14 @@
 //
 
 #import <Foundation/Foundation.h>
+@class SSBSickBeardResult;
 
 typedef void (^SSBSickBeardConnectorFinishedBlock) (NSDictionary *data);
+typedef void (^SSBSickBeardConnectorFailedBlock) (SSBSickBeardResult *result);
 
 @interface SSBSickBeardConnector : NSObject
 
 - (id)initWithURL:(NSURL *)url;
-- (void)getData:(SSBSickBeardConnectorFinishedBlock)callback;
+- (void)getData:(SSBSickBeardConnectorFinishedBlock)callback onFailure:(SSBSickBeardConnectorFailedBlock)failure;
 
 @end

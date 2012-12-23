@@ -107,6 +107,8 @@
         }
         
         complete([NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:shows, [data objectForKey:@"message"], [data objectForKey:@"result"], nil] forKeys:[NSArray arrayWithObjects:@"results", @"message", @"result", nil]]);
+    } onFailure:^(SSBSickBeardResult *result) {
+        failed(result);
     }];
 }
 
@@ -133,6 +135,8 @@
         }
 
         complete(mappedEpisodes);
+    } onFailure:^(SSBSickBeardResult *result) {
+        failed(result);
     }];
 }
 
@@ -144,6 +148,8 @@
     [connector getData:^(NSDictionary *data) {
         SSBSickBeardShow *show = [[SSBSickBeardShow alloc] initWithAttributes:[data objectForKey:@"data"] showIdentifier:tvdbId];
         complete(show);
+    } onFailure:^(SSBSickBeardResult *result) {
+        failed(result);
     }];
 }
 
@@ -162,6 +168,8 @@
         }
         
         complete([NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:episodes, [data objectForKey:@"message"], [data objectForKey:@"result"], nil] forKeys:[NSArray arrayWithObjects:@"results", @"message", @"result", nil]]);
+    } onFailure:^(SSBSickBeardResult *result) {
+        failed(result);
     }];
 }
 
@@ -172,6 +180,8 @@
     SSBSickBeardConnector *connector = [[SSBSickBeardConnector alloc] initWithURL:url];
     [connector getData:^(NSDictionary *data) {
         complete([[SSBSickBeardResult alloc] initWithAttributes:data]);
+    } onFailure:^(SSBSickBeardResult *result) {
+        failed(result);
     }];
 }
 
@@ -182,6 +192,8 @@
     SSBSickBeardConnector *connector = [[SSBSickBeardConnector alloc] initWithURL:url];
     [connector getData:^(NSDictionary *data) {
         complete([[SSBSickBeardResult alloc] initWithAttributes:data]);
+    } onFailure:^(SSBSickBeardResult *result) {
+        failed(result);
     }];
 }
 

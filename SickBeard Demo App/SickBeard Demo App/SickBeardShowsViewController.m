@@ -44,7 +44,7 @@
         
     } onFailure:^(SSBSickBeardResult *result) {
         
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"An Error occurred" message:result.message delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"An error occurred" message:result.message delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
         [alert show];
         [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
 
@@ -131,6 +131,8 @@
             
             [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
         } onFailure:^(SSBSickBeardResult *result) {
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"An error occurred" message:result.message delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+            [alert show];
             [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
         }];
         

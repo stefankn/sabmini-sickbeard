@@ -8,6 +8,7 @@
 
 #import "SSBSickBeardConnector.h"
 #import "SBJson.h"
+#import "SSBSickBeardResult.h"
 
 @interface SSBSickBeardConnector() <SBJsonStreamParserAdapterDelegate>
 
@@ -16,11 +17,12 @@
 @property (nonatomic, strong) NSURLConnection *connection;
 @property (nonatomic, strong) NSURL *connectionUrl;
 @property (nonatomic, strong) SSBSickBeardConnectorFinishedBlock clb;
+@property (nonatomic, strong) SSBSickBeardConnectorFailedBlock clbFailed;
 
 @end
 
 @implementation SSBSickBeardConnector
-@synthesize adapter, parser, connection, connectionUrl, clb;
+@synthesize adapter, parser, connection, connectionUrl, clb, clbFailed;
 
 - (id)initWithURL:(NSURL *)url
 {
@@ -37,9 +39,10 @@
     return self;
 }
 
-- (void)getData:(SSBSickBeardConnectorFinishedBlock)callback
+- (void)getData:(SSBSickBeardConnectorFinishedBlock)callback onFailure:(SSBSickBeardConnectorFailedBlock)failure
 {
     self.clb = callback;
+    self.clbFailed = failure;
     NSURLRequest *request = [NSURLRequest requestWithURL:self.connectionUrl];
     self.connection = [[NSURLConnection alloc] initWithRequest:request delegate:self];
 }
@@ -53,10 +56,7 @@
 	
 	if (status == SBJsonStreamParserError) {
         NSString *msg = [[NSString alloc] initWithData:data encoding:NSASCIIStringEncoding];
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", @"Global - Error") message:msg delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
-        [alert show];
-        
-        // TODO: return SSBSickBeardResult for failure
+        self.clbFailed([[SSBSickBeardResult alloc] initWithAttributes:[NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:msg, NO, nil] forKeys:[NSArray arrayWithObjects:@"message", @"result", nil]]]);
 	} else if (status == SBJsonStreamParserWaitingForData) {
 	}
 }
@@ -64,10 +64,8 @@
 - (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error
 {
     [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
-	
-	UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Error", @"Global - Error") message:NSLocalizedString(@"Error connecting to the Sick Beard server!", @"Error connecting to the Sick Beard server message") delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
-	[alert show];
-    // TODO: return SSBSickBeardResult for failure
+    
+    self.clbFailed([[SSBSickBeardResult alloc] initWithAttributes:[NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:@"Error connecting to the Sick Beard server!", @"Error connecting to the Sick Beard server message", NO, nil] forKeys:[NSArray arrayWithObjects:@"message", @"result", nil]]]);
     
     self.connection = nil;
 }
