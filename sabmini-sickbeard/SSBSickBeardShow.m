@@ -189,6 +189,30 @@
     }];
 }
 
+- (void)setQuality:(NSArray *)initial archive:(NSArray *)archive onComplete:(SSBSickBeardShowRequestResponseBlock)complete onFailure:(SSBSickBeardShowRequestResponseBlock)failed
+{
+    NSString *initialQualityParameter = [initial componentsJoinedByString:@"|"];
+    NSString *archivedQualityParameter;
+    NSString *urlString;
+    
+    if ([archive count] != 0) {
+        archivedQualityParameter = [archive componentsJoinedByString:@"|"];
+        urlString = [NSString stringWithFormat:@"%@show.setquality&tvdbid=%@&initial=%@&archive=%@", [[SSBSharedServer sharedServer].server urlString], self.identifier, initialQualityParameter, archivedQualityParameter];
+    }
+    else {
+        urlString = [NSString stringWithFormat:@"%@show.setquality&tvdbid=%@&initial=%@", [[SSBSharedServer sharedServer].server urlString], self.identifier, initialQualityParameter];
+    }
+    
+    NSURL *url = [NSURL URLWithString:[urlString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+    
+    SSBSickBeardConnector *connector = [[SSBSickBeardConnector alloc] initWithURL:url];
+    [connector getData:^(NSDictionary *data) {
+        complete([[SSBSickBeardResult alloc] initWithAttributes:data]);
+    } onFailure:^(SSBSickBeardResult *result) {
+        failed(result);
+    }];
+}
+
 
 
 
@@ -230,11 +254,6 @@
     } onFailure:^(SSBSickBeardResult *result) {
         failed(result);
     }];
-}
-
-- (void)setQuality:(NSArray *)initial archive:(NSArray *)archive onComplete:(SSBSickBeardShowRequestResponseBlock)complete onFailure:(SSBSickBeardShowRequestResponseBlock)failed
-{
-    
 }
 
 

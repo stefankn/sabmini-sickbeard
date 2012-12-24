@@ -11,8 +11,9 @@
 #import "SSBSickBeardResult.h"
 #import "SickBeardEpisodesViewController.h"
 #import "SickBeardShowStatisticsViewController.h"
+#import "SickBeardShowQualityViewController.h"
 
-@interface SickBeardShowViewController () <UIActionSheetDelegate>
+@interface SickBeardShowViewController () <UIActionSheetDelegate, SickBeardShowQualityDelegate>
 
 - (void)refreshShowDetails;
 - (IBAction)showActions:(id)sender;
@@ -88,12 +89,27 @@
     {
         SickBeardShowStatisticsViewController *statisticsViewController = (SickBeardShowStatisticsViewController *)segue.destinationViewController;
         statisticsViewController.show = self.show;
+        
+    }
+    else if ([[segue identifier] isEqualToString:@"QualitySegue"])
+    {
+        SickBeardShowQualityViewController *showQualityViewController = (SickBeardShowQualityViewController *)segue.destinationViewController;
+        showQualityViewController.show = self.show;
+        showQualityViewController.delegate = self;
     } else {
         
         SickBeardEpisodesViewController *episodesViewController = (SickBeardEpisodesViewController *)segue.destinationViewController;
         episodesViewController.show = self.show;
         episodesViewController.season = cell.tag;
     }
+}
+
+#pragma mark -
+#pragma mark SickBeardShowQuality Delegate Methods
+
+- (void)qualitySettingsChanged
+{
+    [self refreshShowDetails];
 }
 
 #pragma mark -
@@ -181,11 +197,14 @@
     static NSString *GenreCellIdentifier = @"GenreCell";
     static NSString *SeasonCellIdentifier = @"SeasonCell";
     static NSString *StatisticsCellIdentifier = @"StatisticsCell";
+    static NSString *QualityCellIdentifier = @"QualityCell";
     
     UITableViewCell *cell;
     
     if (indexPath.section == 0) {
-        cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
+        if (indexPath.row != 5) {
+            cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
+        }
         
         if (indexPath.row == 0) {
             
@@ -226,6 +245,7 @@
         }
         
         if (indexPath.row == 5) {
+            cell = [tableView dequeueReusableCellWithIdentifier:QualityCellIdentifier forIndexPath:indexPath];
             cell.textLabel.text = @"Quality";
             cell.detailTextLabel.text = self.show.quality;
         }

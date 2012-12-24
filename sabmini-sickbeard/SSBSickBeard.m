@@ -236,13 +236,58 @@
 + (void)searchTvdb:(NSString *)name tvdb:(NSString *)tvdbId language:(NSString *)lang onComplete:(SSBSickBeardRequestDataBlock)complete onFailure:(SSBSickBeardRequestFailedBlock)failed;
 {
     NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@sb.searchtvdb&name=%@&tvdbid=%@&lang=%@", [[SSBSharedServer sharedServer].server urlString], [name stringByReplacingOccurrencesOfString:@" " withString:@"+"], tvdbId, lang]];
-    
-    NSLog(@"%@", [url absoluteString]);
+
+    SSBSickBeardConnector *connector = [[SSBSickBeardConnector alloc] initWithURL:url];
+    [connector getData:^(NSDictionary *data) {
+        complete([data objectForKey:@"data"]);
+    } onFailure:^(SSBSickBeardResult *result) {
+        failed(result);
+    }];
+}
+
++ (void)getRootDirs:(SSBSickBeardRequestDataBlock)complete onFailure:(SSBSickBeardRequestFailedBlock)failed
+{
+    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@sb.getrootdirs", [[SSBSharedServer sharedServer].server urlString]]];
     
     SSBSickBeardConnector *connector = [[SSBSickBeardConnector alloc] initWithURL:url];
     [connector getData:^(NSDictionary *data) {
-        NSLog(@"%@", data);
-        complete([data objectForKey:@"data"]);
+        complete(data);
+    } onFailure:^(SSBSickBeardResult *result) {
+        failed(result);
+    }];
+}
+
++ (void)getDefaults:(SSBSickBeardRequestDataBlock)complete onFailure:(SSBSickBeardRequestFailedBlock)failed
+{
+    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@sb.getdefaults", [[SSBSharedServer sharedServer].server urlString]]];
+    
+    SSBSickBeardConnector *connector = [[SSBSickBeardConnector alloc] initWithURL:url];
+    [connector getData:^(NSDictionary *data) {
+        complete(data);
+    } onFailure:^(SSBSickBeardResult *result) {
+        failed(result);
+    }];
+}
+
++ (void)addNewShow:(NSString *)tvdbId showLocation:(NSString *)location flattenFolders:(BOOL)flattenFolders initial:(NSArray *)initial archive:(NSArray *)archive initialStatus:(NSString *)status language:(NSString *)lang onComplete:(SSBSickBeardRequestCompleteBlock)complete onFailure:(SSBSickBeardRequestFailedBlock)failed
+{
+    NSString *initialQualityParameter = [initial componentsJoinedByString:@"|"];
+    NSString *archivedQualityParameter;
+
+    NSString *urlString;
+    if ([archive count] != 0) {
+        archivedQualityParameter = [archive componentsJoinedByString:@"|"];
+        urlString = [NSString stringWithFormat:@"%@show.addnew&tvdbid=%@&location=%@&status=%@&lang=%@&initial=%@&archive=%@&flatten_folders=%i", [[SSBSharedServer sharedServer].server urlString], tvdbId, location, status, lang, initialQualityParameter, archivedQualityParameter, flattenFolders];
+    }
+    else {
+        urlString = [NSString stringWithFormat:@"%@show.addnew&tvdbid=%@&location=%@&status=%@&lang=%@&initial=%@&flatten_folders=%i", [[SSBSharedServer sharedServer].server urlString], tvdbId, location, status, lang, initialQualityParameter, flattenFolders];
+    }
+    
+    NSURL *url = [NSURL URLWithString:[urlString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+    
+    SSBSickBeardConnector *connector = [[SSBSickBeardConnector alloc] initWithURL:url];
+    [connector getData:^(NSDictionary *data) {
+        complete([[SSBSickBeardResult alloc] initWithAttributes:data]);
     } onFailure:^(SSBSickBeardResult *result) {
         failed(result);
     }];

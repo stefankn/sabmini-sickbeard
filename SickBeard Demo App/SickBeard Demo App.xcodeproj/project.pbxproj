@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F810A356168869B400F6FA06 /* SickBeardAddShowFinishViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F810A355168869B400F6FA06 /* SickBeardAddShowFinishViewController.m */; };
 		F820935D167E42F700872A10 /* .gitattributes in Resources */ = {isa = PBXBuildFile; fileRef = F8209342167E42F700872A10 /* .gitattributes */; };
 		F820935E167E42F700872A10 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = F8209343167E42F700872A10 /* .gitignore */; };
 		F820935F167E42F700872A10 /* NSObject+SBJson.m in Sources */ = {isa = PBXBuildFile; fileRef = F8209345167E42F700872A10 /* NSObject+SBJson.m */; };
@@ -46,6 +47,7 @@
 		F89C47F8167E02AF007DB48C /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F89C47F7167E02AF007DB48C /* Default-568h@2x.png */; };
 		F89C4801167E02F2007DB48C /* SSBSickBeardServer.m in Sources */ = {isa = PBXBuildFile; fileRef = F89C4800167E02F2007DB48C /* SSBSickBeardServer.m */; };
 		F8ADB913167FA88B00434FBD /* SSBSickBeardConnector.m in Sources */ = {isa = PBXBuildFile; fileRef = F8ADB912167FA88B00434FBD /* SSBSickBeardConnector.m */; };
+		F8B2E0BE168893A200CB88D6 /* SickBeardShowQualityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F8B2E0BD168893A200CB88D6 /* SickBeardShowQualityViewController.m */; };
 		F8BB0AFE167E336B0014977C /* SSBSickBeard.m in Sources */ = {isa = PBXBuildFile; fileRef = F8BB0AFD167E336B0014977C /* SSBSickBeard.m */; };
 		F8BB0B02167E355B0014977C /* SSBSickBeardEpisode.m in Sources */ = {isa = PBXBuildFile; fileRef = F8BB0B01167E355B0014977C /* SSBSickBeardEpisode.m */; };
 		F8BB0B05167E363E0014977C /* SSBSickBeardShow.m in Sources */ = {isa = PBXBuildFile; fileRef = F8BB0B04167E363E0014977C /* SSBSickBeardShow.m */; };
@@ -62,6 +64,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		F810A354168869B400F6FA06 /* SickBeardAddShowFinishViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SickBeardAddShowFinishViewController.h; sourceTree = "<group>"; };
+		F810A355168869B400F6FA06 /* SickBeardAddShowFinishViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SickBeardAddShowFinishViewController.m; sourceTree = "<group>"; };
 		F8209342167E42F700872A10 /* .gitattributes */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitattributes; sourceTree = "<group>"; };
 		F8209343167E42F700872A10 /* .gitignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		F8209344167E42F700872A10 /* NSObject+SBJson.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+SBJson.h"; sourceTree = "<group>"; };
@@ -129,6 +133,8 @@
 		F89C4800167E02F2007DB48C /* SSBSickBeardServer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSBSickBeardServer.m; sourceTree = "<group>"; };
 		F8ADB911167FA88B00434FBD /* SSBSickBeardConnector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSBSickBeardConnector.h; sourceTree = "<group>"; };
 		F8ADB912167FA88B00434FBD /* SSBSickBeardConnector.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSBSickBeardConnector.m; sourceTree = "<group>"; };
+		F8B2E0BC168893A200CB88D6 /* SickBeardShowQualityViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SickBeardShowQualityViewController.h; sourceTree = "<group>"; };
+		F8B2E0BD168893A200CB88D6 /* SickBeardShowQualityViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SickBeardShowQualityViewController.m; sourceTree = "<group>"; };
 		F8BB0AFC167E336B0014977C /* SSBSickBeard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSBSickBeard.h; sourceTree = "<group>"; };
 		F8BB0AFD167E336B0014977C /* SSBSickBeard.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSBSickBeard.m; sourceTree = "<group>"; };
 		F8BB0B00167E355B0014977C /* SSBSickBeardEpisode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSBSickBeardEpisode.h; sourceTree = "<group>"; };
@@ -258,6 +264,10 @@
 				F88296251687595100B88858 /* SickBeardAddShowViewController.m */,
 				F86E763016878A3800047756 /* SickBeardShowStatisticsViewController.h */,
 				F86E763116878A3800047756 /* SickBeardShowStatisticsViewController.m */,
+				F810A354168869B400F6FA06 /* SickBeardAddShowFinishViewController.h */,
+				F810A355168869B400F6FA06 /* SickBeardAddShowFinishViewController.m */,
+				F8B2E0BC168893A200CB88D6 /* SickBeardShowQualityViewController.h */,
+				F8B2E0BD168893A200CB88D6 /* SickBeardShowQualityViewController.m */,
 			);
 			path = "SickBeard Demo App";
 			sourceTree = "<group>";
@@ -419,6 +429,8 @@
 				F820E4B816872D1000E73795 /* SickBeardServersViewController.m in Sources */,
 				F88296261687595100B88858 /* SickBeardAddShowViewController.m in Sources */,
 				F86E763216878A3800047756 /* SickBeardShowStatisticsViewController.m in Sources */,
+				F810A356168869B400F6FA06 /* SickBeardAddShowFinishViewController.m in Sources */,
+				F8B2E0BE168893A200CB88D6 /* SickBeardShowQualityViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

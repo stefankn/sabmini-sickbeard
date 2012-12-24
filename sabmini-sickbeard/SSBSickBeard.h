@@ -35,7 +35,9 @@ typedef void (^SSBSickBeardShowCompleteBlock) (SSBSickBeardShow *show);
 + (void)clearHistory:(SSBSickBeardRequestCompleteBlock)complete onFailure:(SSBSickBeardRequestFailedBlock)failed;
 + (void)trimHistory:(SSBSickBeardRequestCompleteBlock)complete onFailure:(SSBSickBeardRequestFailedBlock)failed;
 + (void)searchTvdb:(NSString *)name tvdb:(NSString *)tvdbId language:(NSString *)lang onComplete:(SSBSickBeardRequestDataBlock)complete onFailure:(SSBSickBeardRequestFailedBlock)failed;
-
++ (void)getRootDirs:(SSBSickBeardRequestDataBlock)complete onFailure:(SSBSickBeardRequestFailedBlock)failed;
++ (void)getDefaults:(SSBSickBeardRequestDataBlock)complete onFailure:(SSBSickBeardRequestFailedBlock)failed;
++ (void)addNewShow:(NSString *)tvdbId showLocation:(NSString *)location flattenFolders:(BOOL)flattenFolders initial:(NSArray *)initial archive:(NSArray *)archive initialStatus:(NSString *)status language:(NSString *)lang onComplete:(SSBSickBeardRequestCompleteBlock)complete onFailure:(SSBSickBeardRequestFailedBlock)failed;
 
 
 - (NSArray *)getLogs:(NSString *)min_level;

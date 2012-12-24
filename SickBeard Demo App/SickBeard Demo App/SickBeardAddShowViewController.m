@@ -9,10 +9,12 @@
 #import "SickBeardAddShowViewController.h"
 #import "SSBSickBeard.h"
 #import "SSBSickBeardResult.h"
+#import "SickBeardAddShowFinishViewController.h"
 
 @interface SickBeardAddShowViewController () <UISearchBarDelegate>
 
-@property (nonatomic, weak) IBOutlet UITableView *tableView;
+@property (nonatomic, weak) IBOutlet UITableView *searchResultsTableView;
+@property (nonatomic, weak) IBOutlet UISearchBar *showSearchBar;
 @property (nonatomic, strong) NSMutableArray *searchResults;
 
 - (IBAction)cancelAddShow:(id)sender;
@@ -20,7 +22,7 @@
 @end
 
 @implementation SickBeardAddShowViewController
-@synthesize tableView, searchResults;
+@synthesize searchResultsTableView, searchResults, showSearchBar;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -37,6 +39,14 @@
 	// Do any additional setup after loading the view.
     
     self.searchResults = [NSMutableArray array];
+    [self.showSearchBar becomeFirstResponder];
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
+    [self.searchResultsTableView deselectRowAtIndexPath:[self.searchResultsTableView indexPathForSelectedRow] animated:YES];
 }
 
 - (void)didReceiveMemoryWarning
@@ -50,14 +60,22 @@
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    UITableViewCell *cell = (UITableViewCell *) sender;
+    NSIndexPath *indexPath = [self.searchResultsTableView indexPathForCell:cell];
+    
+    NSDictionary *searchResult = [self.searchResults objectAtIndex:indexPath.row];
+    SickBeardAddShowFinishViewController *addShowFinishViewController = (SickBeardAddShowFinishViewController *)segue.destinationViewController;
+    addShowFinishViewController.searchResult = searchResult;
+}
+
 #pragma mark -
 #pragma mark UISearchBar Delegate Methods
 
 - (void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar
 {
     [searchBar setShowsCancelButton:YES animated:YES];
-    self.tableView.allowsSelection = NO;
-    self.tableView.scrollEnabled = NO;
 }
 
 - (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar
@@ -66,33 +84,56 @@
     
     [searchBar setShowsCancelButton:NO animated:YES];
     [searchBar resignFirstResponder];
-    self.tableView.allowsSelection = YES;
-    self.tableView.scrollEnabled = YES;
 }
 
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar
 {
     [self.searchResults removeAllObjects];
-	[self.tableView reloadData];
+	[self.searchResultsTableView reloadData];
 	
     [searchBar setShowsCancelButton:NO animated:YES];
     [searchBar resignFirstResponder];
-    self.tableView.allowsSelection = YES;
-    self.tableView.scrollEnabled = YES;
-    self.tableView.hidden = YES;
     
     [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
     
     [SSBSickBeard searchTvdb:searchBar.text tvdb:@"" language:@"en" onComplete:^(NSDictionary *data) {
         [self.searchResults removeAllObjects];
         [self.searchResults addObjectsFromArray:[data objectForKey:@"results"]];
-        NSLog(@"%@", self.searchResults);
+        [self.searchResultsTableView reloadData];
+        [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
     } onFailure:^(SSBSickBeardResult *result) {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"An error occurred" message:result.message delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
         [alert show];
         [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
     }];
     
+}
+
+#pragma mark - Table view data source
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+    // Return the number of sections.
+    return 1;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    // Return the number of rows in the section.
+    return [self.searchResults count];
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    static NSString *CellIdentifier = @"SearchResultCell";
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
+    NSDictionary *searchResult = [self.searchResults objectAtIndex:indexPath.row];
+    
+    cell.textLabel.text = [searchResult objectForKey:@"name"];
+
+    cell.detailTextLabel.text = [NSString stringWithFormat:@"First aired: %@", [searchResult objectForKey:@"first_aired"]];
+    
+    return cell;
 }
 
 @end
