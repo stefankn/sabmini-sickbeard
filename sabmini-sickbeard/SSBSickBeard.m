@@ -293,4 +293,16 @@
     }];
 }
 
++ (void)getLogs:(NSString *)min_level onComplete:(SSBSickBeardRequestDataBlock)complete onFailure:(SSBSickBeardRequestFailedBlock)failed
+{
+    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@logs&min_level=%@", [[SSBSharedServer sharedServer].server urlString], min_level]];
+    
+    SSBSickBeardConnector *connector = [[SSBSickBeardConnector alloc] initWithURL:url];
+    [connector getData:^(NSDictionary *data) {
+        complete(data);
+    } onFailure:^(SSBSickBeardResult *result) {
+        failed(result);
+    }];
+}
+
 @end

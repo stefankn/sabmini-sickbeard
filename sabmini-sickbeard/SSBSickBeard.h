@@ -38,9 +38,10 @@ typedef void (^SSBSickBeardShowCompleteBlock) (SSBSickBeardShow *show);
 + (void)getRootDirs:(SSBSickBeardRequestDataBlock)complete onFailure:(SSBSickBeardRequestFailedBlock)failed;
 + (void)getDefaults:(SSBSickBeardRequestDataBlock)complete onFailure:(SSBSickBeardRequestFailedBlock)failed;
 + (void)addNewShow:(NSString *)tvdbId showLocation:(NSString *)location flattenFolders:(BOOL)flattenFolders initial:(NSArray *)initial archive:(NSArray *)archive initialStatus:(NSString *)status language:(NSString *)lang onComplete:(SSBSickBeardRequestCompleteBlock)complete onFailure:(SSBSickBeardRequestFailedBlock)failed;
++ (void)getLogs:(NSString *)min_level onComplete:(SSBSickBeardRequestDataBlock)complete onFailure:(SSBSickBeardRequestFailedBlock)failed;
 
 
-- (NSArray *)getLogs:(NSString *)min_level;
+
 - (SSBSickBeardEpisode *)getEpisodeDetails:(NSString *)tvdbId forSeason:(int)season forEpisode:(int)episode showFullPath:(BOOL)showPath;
 - (SSBSickBeardResult *)episodeExists:(NSString *)tvdbId forSeason:(int)season forEpisode:(int)episode;
 - (SSBSickBeardResult *)addExistingShow:(NSString *)tvdbId showLocation:(NSString *)location flattenFolders:(BOOL)flattenFolders initial:(NSArray *)initial archive:(NSArray *)archive;
