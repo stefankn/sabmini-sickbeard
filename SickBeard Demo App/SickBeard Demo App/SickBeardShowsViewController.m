@@ -20,7 +20,6 @@
 @end
 
 @implementation SickBeardShowsViewController
-@synthesize shows;
 
 - (id)initWithStyle:(UITableViewStyle)style
 {

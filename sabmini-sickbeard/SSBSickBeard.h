@@ -1,6 +1,5 @@
 //
 //  SSBSickBeard.h
-//  SickBeard Demo App
 //
 //  Created by Stefan Klein Nulent on 16-12-12.
 //  Copyright (c) 2012 Stefan Klein Nulent. All rights reserved.
@@ -39,26 +38,5 @@ typedef void (^SSBSickBeardShowCompleteBlock) (SSBSickBeardShow *show);
 + (void)getDefaults:(SSBSickBeardRequestDataBlock)complete onFailure:(SSBSickBeardRequestFailedBlock)failed;
 + (void)addNewShow:(NSString *)tvdbId showLocation:(NSString *)location flattenFolders:(BOOL)flattenFolders initial:(NSArray *)initial archive:(NSArray *)archive initialStatus:(NSString *)status language:(NSString *)lang onComplete:(SSBSickBeardRequestCompleteBlock)complete onFailure:(SSBSickBeardRequestFailedBlock)failed;
 + (void)getLogs:(NSString *)min_level onComplete:(SSBSickBeardRequestDataBlock)complete onFailure:(SSBSickBeardRequestFailedBlock)failed;
-
-
-
-- (SSBSickBeardEpisode *)getEpisodeDetails:(NSString *)tvdbId forSeason:(int)season forEpisode:(int)episode showFullPath:(BOOL)showPath;
-- (SSBSickBeardResult *)episodeExists:(NSString *)tvdbId forSeason:(int)season forEpisode:(int)episode;
-- (SSBSickBeardResult *)addExistingShow:(NSString *)tvdbId showLocation:(NSString *)location flattenFolders:(BOOL)flattenFolders initial:(NSArray *)initial archive:(NSArray *)archive;
-- (SSBSickBeardResult *)addNewShow:(NSString *)tvdbId showLocation:(NSString *)location flattenFolders:(BOOL)flattenFolders initial:(NSArray *)initial archive:(NSArray *)archive initialStatus:(NSString *)status language:(NSString *)lang;
-- (SSBSickBeardResult *)showCache:(NSString *)tvdbId;
-- (NSDictionary *)getStatistics;
-- (NSDictionary *)getSickBeardInfo;
-- (SSBSickBeardResult *)addRootDir:(NSString *)location setDefault:(BOOL)default_dir;
-- (NSDictionary *)checkScheduler;
-- (SSBSickBeardResult *)deleteRootDir:(NSString *)location;
-- (SSBSickBeardResult *)forceSearch;
-- (NSDictionary *)getDefaults;
-- (NSArray *)getMessages;
-- (NSArray *)getRootDirs;
-- (SSBSickBeardResult *)pauseBacklog:(BOOL)pause;
-- (SSBSickBeardResult *)ping;
-
-- (SSBSickBeardResult *)setDefaults:(BOOL)futureShowPaused status:(NSString *)status flattenFolders:(BOOL)flattenFolders initial:(NSArray *)initial archive:(NSArray *)archive;
 
 @end

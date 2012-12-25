@@ -18,7 +18,6 @@
 @end
 
 @implementation SickBeardShowStatisticsViewController
-@synthesize statistics, show;
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -35,7 +34,6 @@
 
     [self.show getStatistics:^(SSBSickBeardResult *result) {
         self.statistics = [NSDictionary dictionaryWithDictionary:result.data];
-        NSLog(@"%@", self.statistics);
         [self.tableView reloadData];
     } onFailure:^(SSBSickBeardResult *result) {
         [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
@@ -185,9 +183,8 @@
     else if (section == 2) {
         return @"Snatched";
     }
-    else {
-        return nil;
-    }
+
+    return nil;
 }
 
 /*

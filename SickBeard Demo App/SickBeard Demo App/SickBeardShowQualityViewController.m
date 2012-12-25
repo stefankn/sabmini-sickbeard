@@ -21,7 +21,6 @@
 @end
 
 @implementation SickBeardShowQualityViewController
-@synthesize show, archive, initial, qualityEntries, qualityEntriesFullNames, delegate;
 
 - (id)initWithStyle:(UITableViewStyle)style
 {

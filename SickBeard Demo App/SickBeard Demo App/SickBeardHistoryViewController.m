@@ -22,7 +22,6 @@
 @end
 
 @implementation SickBeardHistoryViewController
-@synthesize episodes;
 
 - (id)initWithStyle:(UITableViewStyle)style
 {

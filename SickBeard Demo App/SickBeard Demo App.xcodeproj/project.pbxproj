@@ -119,7 +119,7 @@
 		F86E763116878A3800047756 /* SickBeardShowStatisticsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SickBeardShowStatisticsViewController.m; sourceTree = "<group>"; };
 		F88296241687595100B88858 /* SickBeardAddShowViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SickBeardAddShowViewController.h; sourceTree = "<group>"; };
 		F88296251687595100B88858 /* SickBeardAddShowViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SickBeardAddShowViewController.m; sourceTree = "<group>"; };
-		F89C47DD167E02AF007DB48C /* SickBeard Demo App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "SickBeard Demo App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		F89C47DD167E02AF007DB48C /* SickBeard.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SickBeard.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F89C47E1167E02AF007DB48C /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		F89C47E3167E02AF007DB48C /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		F89C47E5167E02AF007DB48C /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -223,7 +223,7 @@
 		F89C47DE167E02AF007DB48C /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				F89C47DD167E02AF007DB48C /* SickBeard Demo App.app */,
+				F89C47DD167E02AF007DB48C /* SickBeard.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -340,7 +340,7 @@
 			);
 			name = "SickBeard Demo App";
 			productName = "SickBeard Demo App";
-			productReference = F89C47DD167E02AF007DB48C /* SickBeard Demo App.app */;
+			productReference = F89C47DD167E02AF007DB48C /* SickBeard.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -510,7 +510,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "SickBeard Demo App/SickBeard Demo App-Prefix.pch";
 				INFOPLIST_FILE = "SickBeard Demo App/SickBeard Demo App-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = SickBeard;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -521,7 +521,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "SickBeard Demo App/SickBeard Demo App-Prefix.pch";
 				INFOPLIST_FILE = "SickBeard Demo App/SickBeard Demo App-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = SickBeard;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

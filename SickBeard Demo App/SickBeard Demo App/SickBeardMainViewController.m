@@ -29,9 +29,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
-    //SSBSickBeardServer *server = [SSBSickBeard createServer:@"Test server" withHost:@"10.0.1.110" withPort:@"8081" withApikey:@"8b1a4a7850815520f2c06cf1ebc9586c" enableHttps:YES store:NO];
-    
+
+    // Set the active server to the default server if there is one
     SSBSickBeardServer *server = [SSBSickBeard getDefaultServer];
     if (server) {
         [SSBSickBeard setActiveServer:server];
@@ -107,9 +106,8 @@
             return @"No server active";
         }
     }
-    else {
-        return nil;
-    }
+
+    return nil;
 }
 
 @end

@@ -18,7 +18,6 @@
 @end
 
 @implementation SickBeardEpisodeViewController
-@synthesize episode;
 
 - (id)initWithStyle:(UITableViewStyle)style
 {

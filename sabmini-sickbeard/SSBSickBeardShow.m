@@ -20,7 +20,6 @@
 @end
 
 @implementation SSBSickBeardShow
-@synthesize identifier, air_by_date, airs, show_cache, flatten_folders, genre, language, location, network, next_ep_airdate, paused, quality, quality_details, season_list, show_name, status, tvrage_id, tvrage_name;
 
 - (id)initWithAttributes:(NSDictionary *)attributes showIdentifier:(NSString *)showIdentifier
 {
@@ -212,50 +211,5 @@
         failed(result);
     }];
 }
-
-
-
-
-// Checks if the poster/banner SickBeard's image cache is valid
-- (void)cache:(SSBSickBeardShowRequestResponseBlock)complete onFailure:(SSBSickBeardShowRequestResponseBlock)failed
-{
-    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@show.cache&tvdbid=%@", [[SSBSharedServer sharedServer].server urlString], self.identifier]];
-    SSBSickBeardConnector *connector = [[SSBSickBeardConnector alloc] initWithURL:url];
-    [connector getData:^(NSDictionary *data) {
-        complete([[SSBSickBeardResult alloc] initWithAttributes:data]);
-    } onFailure:^(SSBSickBeardResult *result) {
-        failed(result);
-    }];
-}
-
-- (void)getQuality:(SSBSickBeardShowRequestResponseBlock)complete onFailure:(SSBSickBeardShowRequestResponseBlock)failed
-{
-    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@show.getquality&tvdbid=%@", [[SSBSharedServer sharedServer].server urlString], self.identifier]];
-    SSBSickBeardConnector *connector = [[SSBSickBeardConnector alloc] initWithURL:url];
-    [connector getData:^(NSDictionary *data) {
-        complete([[SSBSickBeardResult alloc] initWithAttributes:data]);
-    } onFailure:^(SSBSickBeardResult *result) {
-        failed(result);
-    }];
-}
-
-
-
-
-
-
-
-- (void)getSeasonList:(NSString *)sort onComplete:(SSBSickBeardShowRequestResponseBlock)complete onFailure:(SSBSickBeardShowRequestResponseBlock)failed
-{
-    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@show.seasonlist&tvdbid=%@", [[SSBSharedServer sharedServer].server urlString], self.identifier]];
-    SSBSickBeardConnector *connector = [[SSBSickBeardConnector alloc] initWithURL:url];
-    [connector getData:^(NSDictionary *data) {
-        complete([[SSBSickBeardResult alloc] initWithAttributes:data]);
-    } onFailure:^(SSBSickBeardResult *result) {
-        failed(result);
-    }];
-}
-
-
 
 @end

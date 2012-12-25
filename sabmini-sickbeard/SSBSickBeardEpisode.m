@@ -1,6 +1,5 @@
 //
 //  SSBSickBeardEpisode.m
-//  SickBeard Demo App
 //
 //  Created by Stefan Klein Nulent on 16-12-12.
 //  Copyright (c) 2012 Stefan Klein Nulent. All rights reserved.
@@ -19,7 +18,6 @@
 @end
 
 @implementation SSBSickBeardEpisode
-@synthesize airdate, file_size, file_size_human, location, name, quality, release_name, status, airs, ep_name, ep_plot, episode, network, paused, season, show_name, show_status, tvdbid, weekday, date, provider, resource, resource_path;
 
 - (id)initWithAttributes:(NSDictionary *)attributes
 {

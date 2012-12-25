@@ -30,7 +30,6 @@
 @end
 
 @implementation SickBeardAddShowFinishViewController
-@synthesize searchResult, rootDirs, selectedRootDir, useDefaultRootDir, qualityEntries, qualityEntriesFullNames, defaults, useDefaultStatus, selectedStatus, defaultsArchive, defaultsInitial, flattenFolders;
 
 - (id)initWithStyle:(UITableViewStyle)style
 {

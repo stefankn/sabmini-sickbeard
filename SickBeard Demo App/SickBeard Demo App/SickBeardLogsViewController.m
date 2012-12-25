@@ -19,7 +19,6 @@
 @end
 
 @implementation SickBeardLogsViewController
-@synthesize logs;
 
 - (id)initWithStyle:(UITableViewStyle)style
 {

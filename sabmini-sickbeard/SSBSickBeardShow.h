@@ -1,6 +1,5 @@
 //
 //  SSBSickBeardShow.h
-//  SickBeard Demo App
 //
 //  Created by Stefan Klein Nulent on 16-12-12.
 //  Copyright (c) 2012 Stefan Klein Nulent. All rights reserved.
@@ -47,17 +46,5 @@ typedef void (^SSBSickBeardShowRequestImageBlock) (UIImage *image);
 - (void)changeStatus:(NSString *)newStatus forSeason:(int)season onComplete:(SSBSickBeardShowRequestResponseBlock)complete onFailure:(SSBSickBeardShowRequestResponseBlock)failed;
 - (void)getStatistics:(SSBSickBeardShowRequestResponseBlock)complete onFailure:(SSBSickBeardShowRequestResponseBlock)failed;
 - (void)setQuality:(NSArray *)initial archive:(NSArray *)archive onComplete:(SSBSickBeardShowRequestResponseBlock)complete onFailure:(SSBSickBeardShowRequestResponseBlock)failed;
-
-
-
-- (void)cache:(SSBSickBeardShowRequestResponseBlock)complete onFailure:(SSBSickBeardShowRequestResponseBlock)failed;
-- (void)getQuality:(SSBSickBeardShowRequestResponseBlock)complete onFailure:(SSBSickBeardShowRequestResponseBlock)failed;
-
-
-
-- (void)getSeasonList:(NSString *)sort onComplete:(SSBSickBeardShowRequestResponseBlock)complete onFailure:(SSBSickBeardShowRequestResponseBlock)failed;
-
-
-
 
 @end

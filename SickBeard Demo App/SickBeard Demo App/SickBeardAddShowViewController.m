@@ -22,7 +22,6 @@
 @end
 
 @implementation SickBeardAddShowViewController
-@synthesize searchResultsTableView, searchResults, showSearchBar;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {

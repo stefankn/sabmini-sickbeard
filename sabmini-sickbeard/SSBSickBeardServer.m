@@ -1,6 +1,5 @@
 //
 //  SSBSickBeardServer.m
-//  SickBeard Demo App
 //
 //  Created by Stefan Klein Nulent on 16-12-12.
 //  Copyright (c) 2012 Stefan Klein Nulent. All rights reserved.
@@ -10,7 +9,6 @@
 #import "SSBSickBeard.h"
 
 @implementation SSBSickBeardServer
-@synthesize identifier, friendlyName, host, port, apikey, https, isDefault;
 
 - (id)init
 {

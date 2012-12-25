@@ -19,7 +19,6 @@
 @end
 
 @implementation SSBSickBeardUpcomingEpisodesViewController
-@synthesize upcomingEpisodes;
 
 - (id)initWithStyle:(UITableViewStyle)style
 {

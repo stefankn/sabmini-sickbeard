@@ -24,7 +24,6 @@
 @end
 
 @implementation SickBeardAddServerViewController
-@synthesize friendlyNameField, hostField, portField, apikeyField, httpsSwitch, defaultSwitch;
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -55,6 +54,7 @@
 
 - (IBAction)saveServer:(id)sender
 {
+    // Needs validation
     [SSBSickBeard createServer:self.friendlyNameField.text withHost:self.hostField.text withPort:self.portField.text withApikey:self.apikeyField.text enableHttps:[self.httpsSwitch isOn] setAsDefault:[self.defaultSwitch isOn]];
     [self dismissViewControllerAnimated:YES completion:nil];
 }

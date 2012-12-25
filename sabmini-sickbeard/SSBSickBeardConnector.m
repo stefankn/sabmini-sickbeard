@@ -1,6 +1,5 @@
 //
 //  SSBSickBeardConnector.m
-//  SickBeard Demo App
 //
 //  Created by Stefan Klein Nulent on 17-12-12.
 //  Copyright (c) 2012 Stefan Klein Nulent. All rights reserved.
@@ -22,7 +21,6 @@
 @end
 
 @implementation SSBSickBeardConnector
-@synthesize adapter, parser, connection, connectionUrl, clb, clbFailed;
 
 - (id)initWithURL:(NSURL *)url
 {
@@ -30,9 +28,9 @@
     if (self) {
         self.connectionUrl = url;
         self.adapter = [[SBJsonStreamParserAdapter alloc] init];
-        adapter.delegate = self;
+        self.adapter.delegate = self;
         self.parser = [[SBJsonStreamParser alloc] init];
-        parser.delegate = adapter;
+        self.parser.delegate = self.adapter;
         self.parser.supportMultipleDocuments = YES;
     }
     
@@ -102,7 +100,5 @@
     }
     
 }
-
-
 
 @end

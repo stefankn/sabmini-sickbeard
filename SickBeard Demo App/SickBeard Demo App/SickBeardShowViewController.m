@@ -21,7 +21,6 @@
 @end
 
 @implementation SickBeardShowViewController
-@synthesize show;
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -96,8 +95,8 @@
         SickBeardShowQualityViewController *showQualityViewController = (SickBeardShowQualityViewController *)segue.destinationViewController;
         showQualityViewController.show = self.show;
         showQualityViewController.delegate = self;
-    } else {
-        
+    } else
+    {
         SickBeardEpisodesViewController *episodesViewController = (SickBeardEpisodesViewController *)segue.destinationViewController;
         episodesViewController.show = self.show;
         episodesViewController.season = cell.tag;
@@ -278,9 +277,8 @@
     else if (section == 2) {
         return @"Seasons";
     }
-    else {
-        return nil;
-    }
+
+    return nil;
 }
 
 /*

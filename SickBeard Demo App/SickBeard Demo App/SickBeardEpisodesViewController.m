@@ -22,7 +22,6 @@
 @end
 
 @implementation SickBeardEpisodesViewController
-@synthesize show, season, episodes;
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
