@@ -14,24 +14,24 @@ typedef void (^SSBSickBeardShowRequestImageBlock) (UIImage *image);
 
 @interface SSBSickBeardShow : NSObject
 
-@property (nonatomic, strong) NSString *identifier;
+@property (nonatomic, copy) NSString *identifier;
 @property (nonatomic, assign) BOOL air_by_date;
-@property (nonatomic, strong) NSString *airs;
-@property (nonatomic, strong) NSDictionary *show_cache;
+@property (nonatomic, copy) NSString *airs;
+@property (nonatomic, copy) NSDictionary *show_cache;
 @property (nonatomic, assign) BOOL flatten_folders;
-@property (nonatomic, strong) NSArray *genre;
-@property (nonatomic, strong) NSString *language;
-@property (nonatomic, strong) NSString *location;
-@property (nonatomic, strong) NSString *network;
-@property (nonatomic, strong) NSString *next_ep_airdate;
+@property (nonatomic, copy) NSArray *genre;
+@property (nonatomic, copy) NSString *language;
+@property (nonatomic, copy) NSString *location;
+@property (nonatomic, copy) NSString *network;
+@property (nonatomic, copy) NSString *next_ep_airdate;
 @property (nonatomic, assign) BOOL paused;
-@property (nonatomic, strong) NSString *quality;
-@property (nonatomic, strong) NSDictionary *quality_details;
-@property (nonatomic, strong) NSArray *season_list;
-@property (nonatomic, strong) NSString *show_name;
-@property (nonatomic, strong) NSString *status;
-@property (nonatomic, strong) NSString *tvrage_id;
-@property (nonatomic, strong) NSString *tvrage_name;
+@property (nonatomic, copy) NSString *quality;
+@property (nonatomic, copy) NSDictionary *quality_details;
+@property (nonatomic, copy) NSArray *season_list;
+@property (nonatomic, copy) NSString *show_name;
+@property (nonatomic, copy) NSString *status;
+@property (nonatomic, copy) NSString *tvrage_id;
+@property (nonatomic, copy) NSString *tvrage_name;
 
 - (id)initWithAttributes:(NSDictionary *)attributes showIdentifier:(NSString *)showIdentifier;
 - (void)getFullDetails:(SSBSickBeardShowRequestResponseBlock)complete onFailure:(SSBSickBeardShowRequestResponseBlock)failed;

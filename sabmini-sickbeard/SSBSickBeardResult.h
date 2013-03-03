@@ -9,8 +9,8 @@
 
 @interface SSBSickBeardResult : NSObject
 
-@property (nonatomic, strong) NSString *message;
-@property (nonatomic, strong) NSDictionary *data;
+@property (nonatomic, copy) NSString *message;
+@property (nonatomic, copy) NSDictionary *data;
 @property (nonatomic, assign) BOOL success;
 
 - (id)initWithAttributes:(NSDictionary *)attributes;

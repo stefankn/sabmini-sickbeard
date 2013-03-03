@@ -15,8 +15,8 @@
 @property (nonatomic, strong) SBJsonStreamParserAdapter *adapter;
 @property (nonatomic, strong) NSURLConnection *connection;
 @property (nonatomic, strong) NSURL *connectionUrl;
-@property (nonatomic, strong) SSBSickBeardConnectorFinishedBlock clb;
-@property (nonatomic, strong) SSBSickBeardConnectorFailedBlock clbFailed;
+@property (nonatomic, copy) SSBSickBeardConnectorFinishedBlock clb;
+@property (nonatomic, copy) SSBSickBeardConnectorFailedBlock clbFailed;
 
 @end
 

@@ -9,11 +9,11 @@
 
 @interface SSBSickBeardServer : NSObject <NSCoding>
 
-@property (nonatomic, strong) NSString *identifier;
-@property (nonatomic, strong) NSString *friendlyName;
-@property (nonatomic, strong) NSString *host;
-@property (nonatomic, strong) NSString *port;
-@property (nonatomic, strong) NSString *apikey;
+@property (nonatomic, copy) NSString *identifier;
+@property (nonatomic, copy) NSString *friendlyName;
+@property (nonatomic, copy) NSString *host;
+@property (nonatomic, copy) NSString *port;
+@property (nonatomic, copy) NSString *apikey;
 @property (nonatomic, assign) BOOL https;
 @property (nonatomic, assign) BOOL isDefault;
 

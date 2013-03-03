@@ -46,8 +46,9 @@
 {    
     [super viewWillDisappear:animated];
     
+    __block SickBeardShowQualityViewController *ssqvc = self;
     [_show setQuality:_initial archive:_archive onComplete:^(SSBSickBeardResult *result) {
-        [_delegate qualitySettingsChanged];
+        [ssqvc.delegate qualitySettingsChanged];
     } onFailure:^(SSBSickBeardResult *result) {
         [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"An error occurred" message:result.message delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
