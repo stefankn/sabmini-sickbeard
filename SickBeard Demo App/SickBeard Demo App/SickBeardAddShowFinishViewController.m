@@ -10,19 +10,19 @@
 #import "SSBSickBeard.h"
 #import "SSBSickBeardResult.h"
 
-@interface SickBeardAddShowFinishViewController ()
-
-@property (nonatomic, strong) NSArray *rootDirs;
-@property (nonatomic, strong) NSString *selectedRootDir;
-@property (nonatomic, assign) BOOL useDefaultRootDir;
-@property (nonatomic, strong) NSArray *qualityEntries;
-@property (nonatomic, strong) NSDictionary *qualityEntriesFullNames;
-@property (nonatomic, strong) NSDictionary *defaults;
-@property (nonatomic, assign) BOOL useDefaultStatus;
-@property (nonatomic, strong) NSString *selectedStatus;
-@property (nonatomic, strong) NSMutableArray *defaultsInitial;
-@property (nonatomic, strong) NSMutableArray *defaultsArchive;
-@property (nonatomic, assign) BOOL flattenFolders;
+@interface SickBeardAddShowFinishViewController () {
+    NSArray *_rootDirs;
+    NSString *_selectedRootDir;
+    BOOL _useDefaultRootDir;
+    NSArray *_qualityEntries;
+    NSDictionary *_qualityEntriesFullNames;
+    NSDictionary *_defaults;
+    BOOL _useDefaultStatus;
+    NSString *_selectedStatus;
+    NSMutableArray *_defaultsInitial;
+    NSMutableArray *_defaultsArchive;
+    BOOL _flattenFolders;
+}
 
 - (IBAction)addShow:(id)sender;
 - (void)flattenFoldersSwitchToggled:(UISwitch *)sw;
@@ -44,15 +44,15 @@
 {
     [super viewDidLoad];
     
-    self.title = [self.searchResult objectForKey:@"name"];
-    self.useDefaultRootDir = YES;
-    self.useDefaultStatus = YES;
-    self.qualityEntries = [NSArray arrayWithObjects:@"fullhdbluray", @"hdbluray", @"hdwebdl", @"hdtv", @"sddvd", @"sdtv", @"unknown", nil];
-    self.qualityEntriesFullNames = [NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:@"1080p BluRay", @"720p BluRay", @"720p WEB-DL", @"HD TV", @"SD DVD", @"SD TV", @"Unknown", nil] forKeys:self.qualityEntries];
+    self.title = [_searchResult objectForKey:@"name"];
+    _useDefaultRootDir = YES;
+    _useDefaultStatus = YES;
+    _qualityEntries = [NSArray arrayWithObjects:@"fullhdbluray", @"hdbluray", @"hdwebdl", @"hdtv", @"sddvd", @"sdtv", @"unknown", nil];
+    _qualityEntriesFullNames = [NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:@"1080p BluRay", @"720p BluRay", @"720p WEB-DL", @"HD TV", @"SD DVD", @"SD TV", @"Unknown", nil] forKeys:_qualityEntries];
     
     [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
     [SSBSickBeard getRootDirs:^(NSDictionary *data) {
-        self.rootDirs = [NSMutableArray arrayWithArray:[data objectForKey:@"data"]];
+        _rootDirs = [NSMutableArray arrayWithArray:[data objectForKey:@"data"]];
         [self.tableView reloadData];
         [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
     } onFailure:^(SSBSickBeardResult *result) {
@@ -62,10 +62,10 @@
     }];
     
     [SSBSickBeard getDefaults:^(NSDictionary *data) {
-        self.defaults = [NSDictionary dictionaryWithDictionary:[data objectForKey:@"data"]];
-        self.defaultsInitial = [NSMutableArray arrayWithArray:[self.defaults objectForKey:@"initial"]];
-        self.defaultsArchive = [NSMutableArray arrayWithArray:[self.defaults objectForKey:@"archive"]];
-        self.flattenFolders = [[self.defaults objectForKey:@"flatten_folders"] boolValue];
+        _defaults = [NSDictionary dictionaryWithDictionary:[data objectForKey:@"data"]];
+        _defaultsInitial = [NSMutableArray arrayWithArray:[_defaults objectForKey:@"initial"]];
+        _defaultsArchive = [NSMutableArray arrayWithArray:[_defaults objectForKey:@"archive"]];
+        _flattenFolders = [[_defaults objectForKey:@"flatten_folders"] boolValue];
         [self.tableView reloadData];
         [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
     } onFailure:^(SSBSickBeardResult *result) {
@@ -83,12 +83,12 @@
 
 - (IBAction)addShow:(id)sender
 {
-    if ([self.defaultsInitial count] == 0)
+    if ([_defaultsInitial count] == 0)
     {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"An error occurred" message:@"Please check at least one quality in the initial section!" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
         [alert show];
     }
-    else if ([self.rootDirs count] == 0)
+    else if ([_rootDirs count] == 0)
     {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"An error occurred" message:@"No root path defined!" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
         [alert show];
@@ -96,7 +96,7 @@
     else
     {
         [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
-        [SSBSickBeard addNewShow:[self.searchResult objectForKey:@"tvdbid"] showLocation:self.selectedRootDir flattenFolders:self.flattenFolders initial:self.defaultsInitial archive:self.defaultsArchive initialStatus:self.selectedStatus language:@"en" onComplete:^(SSBSickBeardResult *result) {
+        [SSBSickBeard addNewShow:[_searchResult objectForKey:@"tvdbid"] showLocation:_selectedRootDir flattenFolders:_flattenFolders initial:_defaultsInitial archive:_defaultsArchive initialStatus:_selectedStatus language:@"en" onComplete:^(SSBSickBeardResult *result) {
             [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
             [self dismissViewControllerAnimated:YES completion:nil];
         } onFailure:^(SSBSickBeardResult *result) {
@@ -110,10 +110,10 @@
 - (void)flattenFoldersSwitchToggled:(UISwitch *)sw
 {
     if (sw.on) {
-        self.flattenFolders = YES;
+        _flattenFolders = YES;
     }
     else {
-        self.flattenFolders = NO;
+        _flattenFolders = NO;
     }
 }
 
@@ -129,16 +129,16 @@
 {
     // Return the number of rows in the section.
     if (section == 0) {
-        return [self.rootDirs count];
+        return [_rootDirs count];
     }
     else if (section == 1) {
         return 4;
     }
     else if (section == 2) {
-        return [self.qualityEntries count];
+        return [_qualityEntries count];
     }
     else if (section == 3) {
-        return [self.qualityEntries count];
+        return [_qualityEntries count];
     }
     else if (section == 4) {
         return 1;
@@ -155,15 +155,15 @@
     
     if (indexPath.section == 0) {
         cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
-        NSDictionary *rootDir = [self.rootDirs objectAtIndex:indexPath.row];
+        NSDictionary *rootDir = [_rootDirs objectAtIndex:indexPath.row];
         cell.textLabel.text = [rootDir objectForKey:@"location"];
         
-        if ([[rootDir objectForKey:@"default"] boolValue] && self.useDefaultRootDir) {
+        if ([[rootDir objectForKey:@"default"] boolValue] && _useDefaultRootDir) {
             cell.accessoryType = UITableViewCellAccessoryCheckmark;
-            self.selectedRootDir = [rootDir objectForKey:@"location"];
+            _selectedRootDir = [rootDir objectForKey:@"location"];
         }
         else {
-            if ([self.selectedRootDir isEqualToString:[rootDir objectForKey:@"location"]]) {
+            if ([_selectedRootDir isEqualToString:[rootDir objectForKey:@"location"]]) {
                 cell.accessoryType = UITableViewCellAccessoryCheckmark;
             }
             else {
@@ -177,11 +177,11 @@
         if (indexPath.row == 0) {
             cell.textLabel.text = @"Skipped";
             
-            if (self.useDefaultStatus)
+            if (_useDefaultStatus)
             {
-                if ([[self.defaults objectForKey:@"status"] isEqualToString:@"skipped"]) {
+                if ([[_defaults objectForKey:@"status"] isEqualToString:@"skipped"]) {
                     cell.accessoryType = UITableViewCellAccessoryCheckmark;
-                    self.selectedStatus = @"skipped";
+                    _selectedStatus = @"skipped";
                 }
                 else {
                     cell.accessoryType = UITableViewCellAccessoryNone;
@@ -189,7 +189,7 @@
             }
             else
             {
-                if ([self.selectedStatus isEqualToString:@"skipped"])
+                if ([_selectedStatus isEqualToString:@"skipped"])
                 {
                     cell.accessoryType = UITableViewCellAccessoryCheckmark;
                 }
@@ -203,11 +203,11 @@
         if (indexPath.row == 1) {
             cell.textLabel.text = @"Wanted";
             
-            if (self.useDefaultStatus)
+            if (_useDefaultStatus)
             {
-                if ([[self.defaults objectForKey:@"status"] isEqualToString:@"wanted"]) {
+                if ([[_defaults objectForKey:@"status"] isEqualToString:@"wanted"]) {
                     cell.accessoryType = UITableViewCellAccessoryCheckmark;
-                    self.selectedStatus = @"wanted";
+                    _selectedStatus = @"wanted";
                 }
                 else {
                     cell.accessoryType = UITableViewCellAccessoryNone;
@@ -215,7 +215,7 @@
             }
             else
             {
-                if ([self.selectedStatus isEqualToString:@"wanted"])
+                if ([_selectedStatus isEqualToString:@"wanted"])
                 {
                     cell.accessoryType = UITableViewCellAccessoryCheckmark;
                 }
@@ -229,11 +229,11 @@
         if (indexPath.row == 2) {
             cell.textLabel.text = @"Archived";
             
-            if (self.useDefaultStatus)
+            if (_useDefaultStatus)
             {
-                if ([[self.defaults objectForKey:@"status"] isEqualToString:@"archived"]) {
+                if ([[_defaults objectForKey:@"status"] isEqualToString:@"archived"]) {
                     cell.accessoryType = UITableViewCellAccessoryCheckmark;
-                    self.selectedStatus = @"archived";
+                    _selectedStatus = @"archived";
                 }
                 else {
                     cell.accessoryType = UITableViewCellAccessoryNone;
@@ -241,7 +241,7 @@
             }
             else
             {
-                if ([self.selectedStatus isEqualToString:@"archived"])
+                if ([_selectedStatus isEqualToString:@"archived"])
                 {
                     cell.accessoryType = UITableViewCellAccessoryCheckmark;
                 }
@@ -255,11 +255,11 @@
         if (indexPath.row == 3) {
             cell.textLabel.text = @"Ignored";
             
-            if (self.useDefaultStatus)
+            if (_useDefaultStatus)
             {
-                if ([[self.defaults objectForKey:@"status"] isEqualToString:@"ignored"]) {
+                if ([[_defaults objectForKey:@"status"] isEqualToString:@"ignored"]) {
                     cell.accessoryType = UITableViewCellAccessoryCheckmark;
-                    self.selectedStatus = @"ignored";
+                    _selectedStatus = @"ignored";
                 }
                 else {
                     cell.accessoryType = UITableViewCellAccessoryNone;
@@ -267,7 +267,7 @@
             }
             else
             {
-                if ([self.selectedStatus isEqualToString:@"ignored"])
+                if ([_selectedStatus isEqualToString:@"ignored"])
                 {
                     cell.accessoryType = UITableViewCellAccessoryCheckmark;
                 }
@@ -281,10 +281,10 @@
     
     if (indexPath.section == 2) {
         cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
-        NSString *qualityEntry = [self.qualityEntries objectAtIndex:indexPath.row];
-        cell.textLabel.text = [self.qualityEntriesFullNames objectForKey:qualityEntry];
+        NSString *qualityEntry = [_qualityEntries objectAtIndex:indexPath.row];
+        cell.textLabel.text = [_qualityEntriesFullNames objectForKey:qualityEntry];
         cell.accessoryType = UITableViewCellAccessoryNone;
-        NSEnumerator *e = [self.defaultsInitial objectEnumerator];
+        NSEnumerator *e = [_defaultsInitial objectEnumerator];
         NSString *object;
         while (object = [e nextObject])
         {
@@ -297,10 +297,10 @@
     
     if (indexPath.section == 3) {
         cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
-        NSString *qualityEntry = [self.qualityEntries objectAtIndex:indexPath.row];
-        cell.textLabel.text = [self.qualityEntriesFullNames objectForKey:qualityEntry];
+        NSString *qualityEntry = [_qualityEntries objectAtIndex:indexPath.row];
+        cell.textLabel.text = [_qualityEntriesFullNames objectForKey:qualityEntry];
         cell.accessoryType = UITableViewCellAccessoryNone;
-        NSEnumerator *e = [self.defaultsArchive objectEnumerator];
+        NSEnumerator *e = [_defaultsArchive objectEnumerator];
         NSString *object;
         while (object = [e nextObject])
         {
@@ -316,7 +316,7 @@
         
         UISwitch *flattenFoldersSwitch = [[UISwitch alloc] initWithFrame:CGRectZero];
         [flattenFoldersSwitch addTarget:self action:@selector(flattenFoldersSwitchToggled:) forControlEvents:UIControlEventTouchUpInside];
-        flattenFoldersSwitch.on = self.flattenFolders;
+        flattenFoldersSwitch.on = _flattenFolders;
         cell.accessoryView = flattenFoldersSwitch;
     }
     
@@ -341,83 +341,44 @@
     return nil;
 }
 
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
-}
-*/
-
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    }   
-    else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
-}
-*/
-
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
-{
-}
-*/
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
-
 #pragma mark - Table view delegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (indexPath.section == 0) {
-        self.useDefaultRootDir = NO;
-        NSDictionary *rootDir = [self.rootDirs objectAtIndex:indexPath.row];
-        self.selectedRootDir = [rootDir objectForKey:@"location"];
+        _useDefaultRootDir = NO;
+        NSDictionary *rootDir = [_rootDirs objectAtIndex:indexPath.row];
+        _selectedRootDir = [rootDir objectForKey:@"location"];
         [self.tableView reloadData];
     }
     
     if (indexPath.section == 1) {
-        self.useDefaultStatus = NO;
+        _useDefaultStatus = NO;
         
         if (indexPath.row == 0) {
-            self.selectedStatus = @"skipped";
+            _selectedStatus = @"skipped";
         }
         
         if (indexPath.row == 1) {
-            self.selectedStatus = @"wanted";
+            _selectedStatus = @"wanted";
         }
         
         if (indexPath.row == 2) {
-            self.selectedStatus = @"archived";
+            _selectedStatus = @"archived";
         }
         
         if (indexPath.row == 3) {
-            self.selectedStatus = @"ignored";
+            _selectedStatus = @"ignored";
         }
         
         [self.tableView reloadData];
     }
     
     if (indexPath.section == 2) {
-        NSString *qualityEntry = [self.qualityEntries objectAtIndex:indexPath.row];
+        NSString *qualityEntry = [_qualityEntries objectAtIndex:indexPath.row];
         
-        NSMutableArray *defaultsInitialTemp = [NSMutableArray arrayWithArray:self.defaultsInitial];
-        NSEnumerator *e = [self.defaultsInitial objectEnumerator];
+        NSMutableArray *defaultsInitialTemp = [NSMutableArray arrayWithArray:_defaultsInitial];
+        NSEnumerator *e = [_defaultsInitial objectEnumerator];
         NSString *object;
 
         int i = 0;
@@ -434,21 +395,21 @@
             i++;
         }
         
-        [self.defaultsInitial removeAllObjects];
-        [self.defaultsInitial addObjectsFromArray:defaultsInitialTemp];
+        [_defaultsInitial removeAllObjects];
+        [_defaultsInitial addObjectsFromArray:defaultsInitialTemp];
         
         if (!exist) {
-            [self.defaultsInitial addObject:qualityEntry];
+            [_defaultsInitial addObject:qualityEntry];
         }
         
         [self.tableView reloadData];
     }
     
     if (indexPath.section == 3) {
-        NSString *qualityEntry = [self.qualityEntries objectAtIndex:indexPath.row];
+        NSString *qualityEntry = [_qualityEntries objectAtIndex:indexPath.row];
         
-        NSMutableArray *defaultsArchiveTemp = [NSMutableArray arrayWithArray:self.defaultsArchive];
-        NSEnumerator *e = [self.defaultsArchive objectEnumerator];
+        NSMutableArray *defaultsArchiveTemp = [NSMutableArray arrayWithArray:_defaultsArchive];
+        NSEnumerator *e = [_defaultsArchive objectEnumerator];
         NSString *object;
         
         int i = 0;
@@ -465,11 +426,11 @@
             i++;
         }
         
-        [self.defaultsArchive removeAllObjects];
-        [self.defaultsArchive addObjectsFromArray:defaultsArchiveTemp];
+        [_defaultsArchive removeAllObjects];
+        [_defaultsArchive addObjectsFromArray:defaultsArchiveTemp];
         
         if (!exist) {
-            [self.defaultsArchive addObject:qualityEntry];
+            [_defaultsArchive addObject:qualityEntry];
         }
         
         [self.tableView reloadData];

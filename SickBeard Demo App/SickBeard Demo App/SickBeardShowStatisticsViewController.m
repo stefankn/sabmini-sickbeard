@@ -11,9 +11,9 @@
 #import "SSBSickBeardResult.h"
 #import "SSBSickBeardShow.h"
 
-@interface SickBeardShowStatisticsViewController ()
-
-@property (nonatomic, strong) NSDictionary *statistics;
+@interface SickBeardShowStatisticsViewController () {
+    NSDictionary *_statistics;
+}
 
 @end
 
@@ -32,8 +32,8 @@
 {
     [super viewDidLoad];
 
-    [self.show getStatistics:^(SSBSickBeardResult *result) {
-        self.statistics = [NSDictionary dictionaryWithDictionary:result.data];
+    [_show getStatistics:^(SSBSickBeardResult *result) {
+        _statistics = [NSDictionary dictionaryWithDictionary:result.data];
         [self.tableView reloadData];
     } onFailure:^(SSBSickBeardResult *result) {
         [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
@@ -63,10 +63,10 @@
         return 6;
     }
     else if (section == 1) {
-        return [[self.statistics objectForKey:@"downloaded"] count];
+        return [[_statistics objectForKey:@"downloaded"] count];
     }
     else {
-        return [[self.statistics objectForKey:@"snatched"] count];
+        return [[_statistics objectForKey:@"snatched"] count];
     }
 }
 
@@ -78,32 +78,32 @@
     if (indexPath.section == 0) {
         if (indexPath.row == 0) {
             cell.textLabel.text = @"Archived";
-            cell.detailTextLabel.text = [[self.statistics objectForKey:@"archived"] stringValue];
+            cell.detailTextLabel.text = [[_statistics objectForKey:@"archived"] stringValue];
         }
         
         if (indexPath.row == 1) {
             cell.textLabel.text = @"Ignored";
-            cell.detailTextLabel.text = [[self.statistics objectForKey:@"ignored"] stringValue];
+            cell.detailTextLabel.text = [[_statistics objectForKey:@"ignored"] stringValue];
         }
         
         if (indexPath.row == 2) {
             cell.textLabel.text = @"Skipped";
-            cell.detailTextLabel.text = [[self.statistics objectForKey:@"skipped"] stringValue];
+            cell.detailTextLabel.text = [[_statistics objectForKey:@"skipped"] stringValue];
         }
         
         if (indexPath.row == 3) {
             cell.textLabel.text = @"Unaired";
-            cell.detailTextLabel.text = [[self.statistics objectForKey:@"unaired"] stringValue];
+            cell.detailTextLabel.text = [[_statistics objectForKey:@"unaired"] stringValue];
         }
         
         if (indexPath.row == 4) {
             cell.textLabel.text = @"Wanted";
-            cell.detailTextLabel.text = [[self.statistics objectForKey:@"wanted"] stringValue];
+            cell.detailTextLabel.text = [[_statistics objectForKey:@"wanted"] stringValue];
         }
         
         if (indexPath.row == 5) {
             cell.textLabel.text = @"Total";
-            cell.detailTextLabel.text = [[self.statistics objectForKey:@"total"] stringValue];
+            cell.detailTextLabel.text = [[_statistics objectForKey:@"total"] stringValue];
         }
     }
     
@@ -111,64 +111,64 @@
         
         if (indexPath.row == 0) {
             cell.textLabel.text = @"1080p Bluray";
-            cell.detailTextLabel.text = [[[self.statistics objectForKey:@"downloaded"] objectForKey:@"1080p_bluray"] stringValue];
+            cell.detailTextLabel.text = [[[_statistics objectForKey:@"downloaded"] objectForKey:@"1080p_bluray"] stringValue];
         }
         
         if (indexPath.row == 1) {
             cell.textLabel.text = @"720p Bluray";
-            cell.detailTextLabel.text = [[[self.statistics objectForKey:@"downloaded"] objectForKey:@"720p_bluray"] stringValue];
+            cell.detailTextLabel.text = [[[_statistics objectForKey:@"downloaded"] objectForKey:@"720p_bluray"] stringValue];
         }
         
         if (indexPath.row == 2) {
             cell.textLabel.text = @"720 WEB-DL";
-            cell.detailTextLabel.text = [[[self.statistics objectForKey:@"downloaded"] objectForKey:@"720p_web-dl"] stringValue];
+            cell.detailTextLabel.text = [[[_statistics objectForKey:@"downloaded"] objectForKey:@"720p_web-dl"] stringValue];
         }
         
         if (indexPath.row == 3) {
             cell.textLabel.text = @"HD TV";
-            cell.detailTextLabel.text = [[[self.statistics objectForKey:@"downloaded"] objectForKey:@"hd_tv"] stringValue];
+            cell.detailTextLabel.text = [[[_statistics objectForKey:@"downloaded"] objectForKey:@"hd_tv"] stringValue];
         }
         
         if (indexPath.row == 4) {
             cell.textLabel.text = @"SD DVD";
-            cell.detailTextLabel.text = [[[self.statistics objectForKey:@"downloaded"] objectForKey:@"sd_dvd"] stringValue];
+            cell.detailTextLabel.text = [[[_statistics objectForKey:@"downloaded"] objectForKey:@"sd_dvd"] stringValue];
         }
         
         if (indexPath.row == 5) {
             cell.textLabel.text = @"SD TV";
-            cell.detailTextLabel.text = [[[self.statistics objectForKey:@"downloaded"] objectForKey:@"sd_tv"] stringValue];
+            cell.detailTextLabel.text = [[[_statistics objectForKey:@"downloaded"] objectForKey:@"sd_tv"] stringValue];
         }
     }
     
     if (indexPath.section == 2) {
         if (indexPath.row == 0) {
             cell.textLabel.text = @"1080p Bluray";
-            cell.detailTextLabel.text = [[[self.statistics objectForKey:@"snatched"] objectForKey:@"1080p_bluray"] stringValue];
+            cell.detailTextLabel.text = [[[_statistics objectForKey:@"snatched"] objectForKey:@"1080p_bluray"] stringValue];
         }
         
         if (indexPath.row == 1) {
             cell.textLabel.text = @"720p Bluray";
-            cell.detailTextLabel.text = [[[self.statistics objectForKey:@"snatched"] objectForKey:@"720p_bluray"] stringValue];
+            cell.detailTextLabel.text = [[[_statistics objectForKey:@"snatched"] objectForKey:@"720p_bluray"] stringValue];
         }
         
         if (indexPath.row == 2) {
             cell.textLabel.text = @"720 WEB-DL";
-            cell.detailTextLabel.text = [[[self.statistics objectForKey:@"snatched"] objectForKey:@"720p_web-dl"] stringValue];
+            cell.detailTextLabel.text = [[[_statistics objectForKey:@"snatched"] objectForKey:@"720p_web-dl"] stringValue];
         }
         
         if (indexPath.row == 3) {
             cell.textLabel.text = @"HD TV";
-            cell.detailTextLabel.text = [[[self.statistics objectForKey:@"snatched"] objectForKey:@"hd_tv"] stringValue];
+            cell.detailTextLabel.text = [[[_statistics objectForKey:@"snatched"] objectForKey:@"hd_tv"] stringValue];
         }
         
         if (indexPath.row == 4) {
             cell.textLabel.text = @"SD DVD";
-            cell.detailTextLabel.text = [[[self.statistics objectForKey:@"snatched"] objectForKey:@"sd_dvd"] stringValue];
+            cell.detailTextLabel.text = [[[_statistics objectForKey:@"snatched"] objectForKey:@"sd_dvd"] stringValue];
         }
         
         if (indexPath.row == 5) {
             cell.textLabel.text = @"SD TV";
-            cell.detailTextLabel.text = [[[self.statistics objectForKey:@"snatched"] objectForKey:@"sd_tv"] stringValue];
+            cell.detailTextLabel.text = [[[_statistics objectForKey:@"snatched"] objectForKey:@"sd_tv"] stringValue];
         }
     }
     

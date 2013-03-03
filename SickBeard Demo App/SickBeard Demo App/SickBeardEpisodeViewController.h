@@ -9,7 +9,9 @@
 #import <UIKit/UIKit.h>
 @class SSBSickBeardEpisode;
 
-@interface SickBeardEpisodeViewController : UITableViewController
+@interface SickBeardEpisodeViewController : UITableViewController {
+    SSBSickBeardEpisode *_episode;
+}
 
 @property (nonatomic, strong) SSBSickBeardEpisode *episode;
 

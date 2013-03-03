@@ -13,9 +13,9 @@
 #import "SSBSickBeardResult.h"
 #import "SickBeardShowViewController.h"
 
-@interface SickBeardShowsViewController ()
-
-@property (nonatomic, strong) NSMutableArray *shows;
+@interface SickBeardShowsViewController () {
+    NSMutableArray *_shows;
+}
 
 @end
 
@@ -37,7 +37,7 @@
     [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
     [SSBSickBeard getShows:@"id" onlyPaused:NO onComplete:^(NSDictionary *data) {
 
-        self.shows = [NSMutableArray arrayWithArray:[data objectForKey:@"results"]];
+        _shows = [NSMutableArray arrayWithArray:[data objectForKey:@"results"]];
         [self.tableView reloadData];
         [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
         
@@ -63,7 +63,7 @@
         UITableViewCell *cell = (UITableViewCell *) sender;
         NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
         
-        SSBSickBeardShow *show = [self.shows objectAtIndex:indexPath.row];
+        SSBSickBeardShow *show = [_shows objectAtIndex:indexPath.row];
         SickBeardShowViewController *showViewController = (SickBeardShowViewController *)segue.destinationViewController;
         showViewController.show = show;
     }
@@ -80,7 +80,7 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     // Return the number of rows in the section.
-    return [self.shows count];
+    return [_shows count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -88,7 +88,7 @@
     static NSString *CellIdentifier = @"ShowCell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     
-    SSBSickBeardShow *show = [self.shows objectAtIndex:indexPath.row];
+    SSBSickBeardShow *show = [_shows objectAtIndex:indexPath.row];
     cell.textLabel.text = show.show_name;
     
     if ([show.quality isEqualToString:@"HD"]) {
@@ -120,10 +120,10 @@
 {
     [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
     if (editingStyle == UITableViewCellEditingStyleDelete) {
-        SSBSickBeardShow *show = [self.shows objectAtIndex:indexPath.row];
+        SSBSickBeardShow *show = [_shows objectAtIndex:indexPath.row];
         [show deleteShow:^(SSBSickBeardResult *result) {
             if (result.success) {
-                [self.shows removeObjectAtIndex:indexPath.row];
+                [_shows removeObjectAtIndex:indexPath.row];
                 [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationRight];
             }
             else {
@@ -139,49 +139,6 @@
         }];
         
     }
-}
-
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    }   
-    else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
-}
-*/
-
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
-{
-}
-*/
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
-
-#pragma mark - Table view delegate
-
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Navigation logic may go here. Create and push another view controller.
-    /*
-     <#DetailViewController#> *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:@"<#Nib name#>" bundle:nil];
-     // ...
-     // Pass the selected object to the new view controller.
-     [self.navigationController pushViewController:detailViewController animated:YES];
-     */
 }
 
 @end

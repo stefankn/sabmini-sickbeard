@@ -12,9 +12,9 @@
 #import "SickBeardEpisodeViewController.h"
 #import "SSBSickBeardResult.h"
 
-@interface SickBeardEpisodesViewController () <UIActionSheetDelegate>
-
-@property (nonatomic, strong) NSArray *episodes;
+@interface SickBeardEpisodesViewController () <UIActionSheetDelegate> {
+    NSArray *_episodes;
+}
 
 - (IBAction)seasonActions:(id)sender;
 - (void)refreshEpisodes;
@@ -36,7 +36,7 @@
 {
     [super viewDidLoad];
     
-    self.title = [NSString stringWithFormat:@"Season %i", self.season];
+    self.title = [NSString stringWithFormat:@"Season %lu", (unsigned long)_season];
     [self refreshEpisodes];
 }
 
@@ -44,8 +44,8 @@
 {
     [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
     
-    [self.show getEpisodesForSeason:self.season onComplete:^(NSDictionary *data) {
-        self.episodes = [NSArray arrayWithArray:[data objectForKey:@"results"]];
+    [_show getEpisodesForSeason:_season onComplete:^(NSDictionary *data) {
+        _episodes = [NSArray arrayWithArray:[data objectForKey:@"results"]];
         
         [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
         [self.tableView reloadData];
@@ -68,8 +68,8 @@
     UITableViewCell *cell = (UITableViewCell *) sender;
     NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
     
-    SSBSickBeardEpisode *episode = [self.episodes objectAtIndex:indexPath.row];
-    episode.season = [NSString stringWithFormat:@"%i", self.season];
+    SSBSickBeardEpisode *episode = [_episodes objectAtIndex:indexPath.row];
+    episode.season = [NSString stringWithFormat:@"%lu", (unsigned long)_season];
     SickBeardEpisodeViewController *episodeViewController = (SickBeardEpisodeViewController *)segue.destinationViewController;
     episodeViewController.episode = episode;
 }
@@ -97,7 +97,7 @@
         
         [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
         
-        [self.show changeStatus:status forSeason:self.season onComplete:^(SSBSickBeardResult *result) {
+        [_show changeStatus:status forSeason:_season onComplete:^(SSBSickBeardResult *result) {
             [self refreshEpisodes];
         } onFailure:^(SSBSickBeardResult *result) {
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"An error occurred" message:result.message delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
@@ -118,7 +118,7 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     // Return the number of rows in the section.
-    return [self.episodes count];
+    return [_episodes count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -126,7 +126,7 @@
     static NSString *CellIdentifier = @"EpisodeCell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     
-    SSBSickBeardEpisode *episode = [self.episodes objectAtIndex:indexPath.row];
+    SSBSickBeardEpisode *episode = [_episodes objectAtIndex:indexPath.row];
     
     cell.textLabel.text = [NSString stringWithFormat:@"%@ - %@", episode.episode, episode.name];
     cell.detailTextLabel.text = [NSString stringWithFormat:@"%@ - %@", episode.status, episode.airdate];

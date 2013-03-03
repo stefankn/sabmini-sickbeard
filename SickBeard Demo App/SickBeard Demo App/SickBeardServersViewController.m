@@ -13,9 +13,9 @@
 #pragma mark -
 #pragma mark Server Quick Menu Item
 
-@interface ServerMenuItem : UIMenuItem
-{
-	
+@interface ServerMenuItem : UIMenuItem {
+	NSIndexPath *_indexPath;
+    NSMutableString *_category;
 }
 
 @property (nonatomic, strong) NSIndexPath *indexPath;
@@ -24,14 +24,13 @@
 @end
 
 @implementation ServerMenuItem
-@synthesize indexPath, category;
-
+@synthesize indexPath = _indexPath, category = _category;
 
 @end
 
-@interface SickBeardServersViewController ()
-
-@property (nonatomic, strong) NSMutableArray *servers;
+@interface SickBeardServersViewController () {
+    NSMutableArray *_servers;
+}
 
 @end
 
@@ -50,7 +49,7 @@
 {
     [super viewDidLoad];
 
-    self.servers = [NSMutableArray array];
+    _servers = [NSMutableArray array];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -62,8 +61,8 @@
 
 - (void)refreshServers
 {
-    [self.servers removeAllObjects];
-    [self.servers addObjectsFromArray:[SSBSickBeard getServers]];
+    [_servers removeAllObjects];
+    [_servers addObjectsFromArray:[SSBSickBeard getServers]];
     [self.tableView reloadData];
 }
 
@@ -102,7 +101,7 @@
 - (void)setDefaultServer:(UIMenuController *)menuController
 {
     ServerMenuItem *setDefaultMenuItem = [[[UIMenuController sharedMenuController] menuItems] objectAtIndex:0];
-    SSBSickBeardServer *server = [self.servers objectAtIndex:setDefaultMenuItem.indexPath.row];
+    SSBSickBeardServer *server = [_servers objectAtIndex:setDefaultMenuItem.indexPath.row];
     [server setAsDefault];
     
     [self refreshServers];
@@ -119,7 +118,7 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     // Return the number of rows in the section.
-    return [self.servers count];
+    return [_servers count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -130,7 +129,7 @@
     UILongPressGestureRecognizer *longPress = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(handleLongItemPress:)];
     [cell addGestureRecognizer:longPress];
     
-    SSBSickBeardServer *server = [self.servers objectAtIndex:indexPath.row];
+    SSBSickBeardServer *server = [_servers objectAtIndex:indexPath.row];
     cell.textLabel.text = server.friendlyName;
     
     if (server.isDefault) {
@@ -170,39 +169,23 @@
 -(void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
-        SSBSickBeardServer *server = [self.servers objectAtIndex:indexPath.row];
+        SSBSickBeardServer *server = [_servers objectAtIndex:indexPath.row];
         
         if ([server.identifier isEqualToString:[SSBSickBeard getActiveServer].identifier]) {
             [SSBSickBeard setActiveServer:nil];
         }
         
         [server remove];
-        [self.servers removeObjectAtIndex:indexPath.row];
+        [_servers removeObjectAtIndex:indexPath.row];
         [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationRight];
     }
 }
-
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
-{
-}
-*/
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
 
 #pragma mark - Table view delegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    SSBSickBeardServer *server = [self.servers objectAtIndex:indexPath.row];
+    SSBSickBeardServer *server = [_servers objectAtIndex:indexPath.row];
     [self.tableView deselectRowAtIndexPath:[self.tableView indexPathForSelectedRow] animated:YES];
     [SSBSickBeard setActiveServer:server];
     [self refreshServers];

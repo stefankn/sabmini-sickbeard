@@ -8,7 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
-@interface SickBeardAddShowFinishViewController : UITableViewController
+@interface SickBeardAddShowFinishViewController : UITableViewController {
+    NSDictionary *_searchResult;
+}
 
 @property (nonatomic, strong) NSDictionary *searchResult;
 

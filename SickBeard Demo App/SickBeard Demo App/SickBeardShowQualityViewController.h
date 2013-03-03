@@ -15,7 +15,9 @@
 
 @end
 
-@interface SickBeardShowQualityViewController : UITableViewController
+@interface SickBeardShowQualityViewController : UITableViewController {
+    SSBSickBeardShow *_show;
+}
 
 @property (nonatomic, assign) id<SickBeardShowQualityDelegate> delegate;
 @property (nonatomic, strong) SSBSickBeardShow *show;

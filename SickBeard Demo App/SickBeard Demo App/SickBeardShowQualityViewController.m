@@ -11,12 +11,12 @@
 #import "SSBSickBeard.h"
 #import "SSBSickBeardResult.h"
 
-@interface SickBeardShowQualityViewController ()
-
-@property (nonatomic, strong) NSMutableArray *archive;
-@property (nonatomic, strong) NSMutableArray *initial;
-@property (nonatomic, strong) NSArray *qualityEntries;
-@property (nonatomic, strong) NSDictionary *qualityEntriesFullNames;
+@interface SickBeardShowQualityViewController () {
+    NSMutableArray *_archive;
+    NSMutableArray *_initial;
+    NSArray *_qualityEntries;
+    NSDictionary *_qualityEntriesFullNames;
+}
 
 @end
 
@@ -35,19 +35,19 @@
 {
     [super viewDidLoad];
 
-    self.qualityEntries = [NSArray arrayWithObjects:@"fullhdbluray", @"hdbluray", @"hdwebdl", @"hdtv", @"sddvd", @"sdtv", @"any", nil];
-    self.qualityEntriesFullNames = [NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:@"1080p BluRay", @"720p BluRay", @"720p WEB-DL", @"HD TV", @"SD DVD", @"SD TV", @"Any", nil] forKeys:self.qualityEntries];
+    _qualityEntries = [NSArray arrayWithObjects:@"fullhdbluray", @"hdbluray", @"hdwebdl", @"hdtv", @"sddvd", @"sdtv", @"any", nil];
+    _qualityEntriesFullNames = [NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:@"1080p BluRay", @"720p BluRay", @"720p WEB-DL", @"HD TV", @"SD DVD", @"SD TV", @"Any", nil] forKeys:_qualityEntries];
     
-    self.initial = [NSMutableArray arrayWithArray:[self.show.quality_details objectForKey:@"initial"]];
-    self.archive = [NSMutableArray arrayWithArray:[self.show.quality_details objectForKey:@"archive"]];
+    _initial = [NSMutableArray arrayWithArray:[_show.quality_details objectForKey:@"initial"]];
+    _archive = [NSMutableArray arrayWithArray:[_show.quality_details objectForKey:@"archive"]];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
 {    
     [super viewWillDisappear:animated];
     
-    [self.show setQuality:self.initial archive:self.archive onComplete:^(SSBSickBeardResult *result) {
-        [self.delegate qualitySettingsChanged];
+    [_show setQuality:_initial archive:_archive onComplete:^(SSBSickBeardResult *result) {
+        [_delegate qualitySettingsChanged];
     } onFailure:^(SSBSickBeardResult *result) {
         [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"An error occurred" message:result.message delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
@@ -72,7 +72,7 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     // Return the number of rows in the section.
-    return [self.qualityEntries count];
+    return [_qualityEntries count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -80,13 +80,13 @@
     static NSString *CellIdentifier = @"QualityCell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     
-    NSString *qualityEntry = [self.qualityEntries objectAtIndex:indexPath.row];
-    cell.textLabel.text = [self.qualityEntriesFullNames objectForKey:qualityEntry];
+    NSString *qualityEntry = [_qualityEntries objectAtIndex:indexPath.row];
+    cell.textLabel.text = [_qualityEntriesFullNames objectForKey:qualityEntry];
     cell.accessoryType = UITableViewCellAccessoryNone;
     
     if (indexPath.section == 0)
     {
-        NSEnumerator *e = [self.initial objectEnumerator];
+        NSEnumerator *e = [_initial objectEnumerator];
         NSString *object;
         while (object = [e nextObject])
         {
@@ -98,7 +98,7 @@
     }
     else
     {
-        NSEnumerator *e = [self.archive objectEnumerator];
+        NSEnumerator *e = [_archive objectEnumerator];
         NSString *object;
         while (object = [e nextObject])
         {
@@ -122,55 +122,16 @@
     }
 }
 
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
-}
-*/
-
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    }   
-    else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
-}
-*/
-
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
-{
-}
-*/
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
-
 #pragma mark - Table view delegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (indexPath.section == 0)
     {
-        NSString *qualityEntry = [self.qualityEntries objectAtIndex:indexPath.row];
+        NSString *qualityEntry = [_qualityEntries objectAtIndex:indexPath.row];
         
-        NSMutableArray *defaultsInitialTemp = [NSMutableArray arrayWithArray:self.initial];
-        NSEnumerator *e = [self.initial objectEnumerator];
+        NSMutableArray *defaultsInitialTemp = [NSMutableArray arrayWithArray:_initial];
+        NSEnumerator *e = [_initial objectEnumerator];
         NSString *object;
         
         int i = 0;
@@ -187,21 +148,21 @@
             i++;
         }
         
-        [self.initial removeAllObjects];
-        [self.initial addObjectsFromArray:defaultsInitialTemp];
+        [_initial removeAllObjects];
+        [_initial addObjectsFromArray:defaultsInitialTemp];
         
         if (!exist) {
-            [self.initial addObject:qualityEntry];
+            [_initial addObject:qualityEntry];
         }
         
         [self.tableView reloadData];
     }
     else
     {
-        NSString *qualityEntry = [self.qualityEntries objectAtIndex:indexPath.row];
+        NSString *qualityEntry = [_qualityEntries objectAtIndex:indexPath.row];
         
-        NSMutableArray *defaultsArchiveTemp = [NSMutableArray arrayWithArray:self.archive];
-        NSEnumerator *e = [self.archive objectEnumerator];
+        NSMutableArray *defaultsArchiveTemp = [NSMutableArray arrayWithArray:_archive];
+        NSEnumerator *e = [_archive objectEnumerator];
         NSString *object;
         
         int i = 0;
@@ -218,11 +179,11 @@
             i++;
         }
         
-        [self.archive removeAllObjects];
-        [self.archive addObjectsFromArray:defaultsArchiveTemp];
+        [_archive removeAllObjects];
+        [_archive addObjectsFromArray:defaultsArchiveTemp];
         
         if (!exist) {
-            [self.archive addObject:qualityEntry];
+            [_archive addObject:qualityEntry];
         }
         
         [self.tableView reloadData];

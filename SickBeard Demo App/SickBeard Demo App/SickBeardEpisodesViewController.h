@@ -9,9 +9,12 @@
 #import <UIKit/UIKit.h>
 @class SSBSickBeardShow;
 
-@interface SickBeardEpisodesViewController : UITableViewController
+@interface SickBeardEpisodesViewController : UITableViewController {
+    SSBSickBeardShow *_show;
+    NSUInteger *_season;
+}
 
 @property (nonatomic, strong) SSBSickBeardShow *show;
-@property (nonatomic, assign) int season;
+@property (nonatomic, assign) NSUInteger *season;
 
 @end

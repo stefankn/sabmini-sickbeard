@@ -11,11 +11,11 @@
 #import "SSBSickBeardResult.h"
 #import "SickBeardAddShowFinishViewController.h"
 
-@interface SickBeardAddShowViewController () <UISearchBarDelegate>
-
-@property (nonatomic, weak) IBOutlet UITableView *searchResultsTableView;
-@property (nonatomic, weak) IBOutlet UISearchBar *showSearchBar;
-@property (nonatomic, strong) NSMutableArray *searchResults;
+@interface SickBeardAddShowViewController () <UISearchBarDelegate> {
+    IBOutlet UITableView *_searchResultsTableView;
+    IBOutlet UISearchBar *_showSearchBar;
+    NSMutableArray *_searchResults;
+}
 
 - (IBAction)cancelAddShow:(id)sender;
 
@@ -37,15 +37,15 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
     
-    self.searchResults = [NSMutableArray array];
-    [self.showSearchBar becomeFirstResponder];
+    _searchResults = [NSMutableArray array];
+    [_showSearchBar becomeFirstResponder];
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
     
-    [self.searchResultsTableView deselectRowAtIndexPath:[self.searchResultsTableView indexPathForSelectedRow] animated:YES];
+    [_searchResultsTableView deselectRowAtIndexPath:[_searchResultsTableView indexPathForSelectedRow] animated:YES];
 }
 
 - (void)didReceiveMemoryWarning
@@ -62,9 +62,9 @@
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     UITableViewCell *cell = (UITableViewCell *) sender;
-    NSIndexPath *indexPath = [self.searchResultsTableView indexPathForCell:cell];
+    NSIndexPath *indexPath = [_searchResultsTableView indexPathForCell:cell];
     
-    NSDictionary *searchResult = [self.searchResults objectAtIndex:indexPath.row];
+    NSDictionary *searchResult = [_searchResults objectAtIndex:indexPath.row];
     SickBeardAddShowFinishViewController *addShowFinishViewController = (SickBeardAddShowFinishViewController *)segue.destinationViewController;
     addShowFinishViewController.searchResult = searchResult;
 }
@@ -87,8 +87,8 @@
 
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar
 {
-    [self.searchResults removeAllObjects];
-	[self.searchResultsTableView reloadData];
+    [_searchResults removeAllObjects];
+	[_searchResultsTableView reloadData];
 	
     [searchBar setShowsCancelButton:NO animated:YES];
     [searchBar resignFirstResponder];
@@ -96,9 +96,9 @@
     [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
     
     [SSBSickBeard searchTvdb:searchBar.text tvdb:@"" language:@"en" onComplete:^(NSDictionary *data) {
-        [self.searchResults removeAllObjects];
-        [self.searchResults addObjectsFromArray:[data objectForKey:@"results"]];
-        [self.searchResultsTableView reloadData];
+        [_searchResults removeAllObjects];
+        [_searchResults addObjectsFromArray:[data objectForKey:@"results"]];
+        [_searchResultsTableView reloadData];
         [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
     } onFailure:^(SSBSickBeardResult *result) {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"An error occurred" message:result.message delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
@@ -119,14 +119,14 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     // Return the number of rows in the section.
-    return [self.searchResults count];
+    return [_searchResults count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *CellIdentifier = @"SearchResultCell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
-    NSDictionary *searchResult = [self.searchResults objectAtIndex:indexPath.row];
+    NSDictionary *searchResult = [_searchResults objectAtIndex:indexPath.row];
     
     cell.textLabel.text = [searchResult objectForKey:@"name"];
 

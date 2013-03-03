@@ -9,14 +9,14 @@
 #import "SickBeardAddServerViewController.h"
 #import "SSBSickBeard.h"
 
-@interface SickBeardAddServerViewController ()
-
-@property (nonatomic, weak) IBOutlet UITextField *friendlyNameField;
-@property (nonatomic, weak) IBOutlet UITextField *hostField;
-@property (nonatomic, weak) IBOutlet UITextField *portField;
-@property (nonatomic, weak) IBOutlet UITextField *apikeyField;
-@property (nonatomic, weak) IBOutlet UISwitch *httpsSwitch;
-@property (nonatomic, weak) IBOutlet UISwitch *defaultSwitch;
+@interface SickBeardAddServerViewController () {
+    IBOutlet UITextField *_friendlyNameField;
+    IBOutlet UITextField *_hostField;
+    IBOutlet UITextField *_portField;
+    IBOutlet UITextField *_apikeyField;
+    IBOutlet UISwitch *_httpsSwitch;
+    IBOutlet UISwitch *_defaultSwitch;
+}
 
 - (IBAction)cancelAddingServer:(id)sender;
 - (IBAction)saveServer:(id)sender;
@@ -38,7 +38,7 @@
 {
     [super viewDidLoad];
     
-    [self.friendlyNameField becomeFirstResponder];
+    [_friendlyNameField becomeFirstResponder];
 }
 
 - (void)didReceiveMemoryWarning
@@ -55,21 +55,8 @@
 - (IBAction)saveServer:(id)sender
 {
     // Needs validation
-    [SSBSickBeard createServer:self.friendlyNameField.text withHost:self.hostField.text withPort:self.portField.text withApikey:self.apikeyField.text enableHttps:[self.httpsSwitch isOn] setAsDefault:[self.defaultSwitch isOn]];
+    [SSBSickBeard createServer:_friendlyNameField.text withHost:_hostField.text withPort:_portField.text withApikey:_apikeyField.text enableHttps:[_httpsSwitch isOn] setAsDefault:[_defaultSwitch isOn]];
     [self dismissViewControllerAnimated:YES completion:nil];
-}
-
-#pragma mark - Table view delegate
-
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Navigation logic may go here. Create and push another view controller.
-    /*
-     <#DetailViewController#> *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:@"<#Nib name#>" bundle:nil];
-     // ...
-     // Pass the selected object to the new view controller.
-     [self.navigationController pushViewController:detailViewController animated:YES];
-     */
 }
 
 @end

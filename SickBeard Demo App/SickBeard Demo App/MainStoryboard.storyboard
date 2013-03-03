@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="2844" systemVersion="12C2034" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="8cl-OC-UGX">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="3084" systemVersion="12C2034" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="8cl-OC-UGX">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="1930"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="2083"/>
     </dependencies>
     <scenes>
         <!--Sick Beard Main View Controller - SickBeard Demo App-->
@@ -501,12 +501,12 @@
                     </tableView>
                     <navigationItem key="navigationItem" title="Configure" id="TiP-y0-ktt"/>
                     <connections>
-                        <outlet property="apikeyField" destination="tG5-6I-rUA" id="q6Q-Tb-bSe"/>
-                        <outlet property="defaultSwitch" destination="AV9-qO-N5Q" id="0JV-k6-dPD"/>
-                        <outlet property="friendlyNameField" destination="rZO-fc-lO3" id="vjA-yT-5GP"/>
-                        <outlet property="hostField" destination="dZc-rO-ulz" id="FpO-IK-F3c"/>
-                        <outlet property="httpsSwitch" destination="kxK-Q7-aLa" id="qkL-sd-Tld"/>
-                        <outlet property="portField" destination="wy0-2k-xIU" id="UUi-Qm-UKf"/>
+                        <outlet property="_apikeyField" destination="tG5-6I-rUA" id="WxD-Xm-jMj"/>
+                        <outlet property="_defaultSwitch" destination="AV9-qO-N5Q" id="ttC-gU-Jyi"/>
+                        <outlet property="_friendlyNameField" destination="rZO-fc-lO3" id="opK-TE-mWB"/>
+                        <outlet property="_hostField" destination="dZc-rO-ulz" id="4cu-mt-kbm"/>
+                        <outlet property="_httpsSwitch" destination="kxK-Q7-aLa" id="IeS-6O-MvX"/>
+                        <outlet property="_portField" destination="wy0-2k-xIU" id="Ajy-sa-MCp"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Pj6-KN-b0x" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1166,12 +1166,12 @@
             <relationships>
                 <relationship kind="action" name="cancelAddingServer:"/>
                 <relationship kind="action" name="saveServer:"/>
-                <relationship kind="outlet" name="apikeyField" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="defaultSwitch" candidateClass="UISwitch"/>
-                <relationship kind="outlet" name="friendlyNameField" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="hostField" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="httpsSwitch" candidateClass="UISwitch"/>
-                <relationship kind="outlet" name="portField" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="_apikeyField" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="_defaultSwitch" candidateClass="UISwitch"/>
+                <relationship kind="outlet" name="_friendlyNameField" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="_hostField" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="_httpsSwitch" candidateClass="UISwitch"/>
+                <relationship kind="outlet" name="_portField" candidateClass="UITextField"/>
             </relationships>
         </class>
         <class className="SickBeardAddShowFinishViewController" superclassName="UITableViewController">
