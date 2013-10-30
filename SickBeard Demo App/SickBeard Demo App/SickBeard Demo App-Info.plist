@@ -22,7 +22,7 @@
 		</dict>
 	</dict>
 	<key>CFBundleIdentifier</key>
-	<string>nl.codesurface.${PRODUCT_NAME:rfc1034identifier}</string>
+	<string>nl.codesurface.sickbeard</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
