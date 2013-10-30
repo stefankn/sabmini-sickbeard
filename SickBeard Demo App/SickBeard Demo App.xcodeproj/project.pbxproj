@@ -25,12 +25,21 @@
 		F820939E167E4BB800872A10 /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F820939D167E4BB800872A10 /* MainStoryboard.storyboard */; };
 		F820E4B41687198D00E73795 /* SickBeardHistoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F820E4B31687198D00E73795 /* SickBeardHistoryViewController.m */; };
 		F820E4B816872D1000E73795 /* SickBeardServersViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F820E4B716872D1000E73795 /* SickBeardServersViewController.m */; };
-		F820E4BD1687382700E73795 /* server_secure.png in Resources */ = {isa = PBXBuildFile; fileRef = F820E4B91687382700E73795 /* server_secure.png */; };
-		F820E4BE1687382700E73795 /* server_secure@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F820E4BA1687382700E73795 /* server_secure@2x.png */; };
-		F820E4BF1687382700E73795 /* server.png in Resources */ = {isa = PBXBuildFile; fileRef = F820E4BB1687382700E73795 /* server.png */; };
-		F820E4C01687382700E73795 /* server@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F820E4BC1687382700E73795 /* server@2x.png */; };
 		F8233B951685D35D00E0AAAA /* SickBeardShowViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F8233B941685D35D00E0AAAA /* SickBeardShowViewController.m */; };
 		F8233B991685F17000E0AAAA /* SickBeardEpisodesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F8233B981685F17000E0AAAA /* SickBeardEpisodesViewController.m */; };
+		F826F9631821A78300F74FEF /* 792-tv.png in Resources */ = {isa = PBXBuildFile; fileRef = F826F9611821A78300F74FEF /* 792-tv.png */; };
+		F826F9641821A78300F74FEF /* 792-tv@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F826F9621821A78300F74FEF /* 792-tv@2x.png */; };
+		F826F9671821A7D800F74FEF /* 728-clock.png in Resources */ = {isa = PBXBuildFile; fileRef = F826F9651821A7D800F74FEF /* 728-clock.png */; };
+		F826F9681821A7D800F74FEF /* 728-clock@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F826F9661821A7D800F74FEF /* 728-clock@2x.png */; };
+		F826F96B1821A89300F74FEF /* 1099-list-1.png in Resources */ = {isa = PBXBuildFile; fileRef = F826F9691821A89300F74FEF /* 1099-list-1.png */; };
+		F826F96C1821A89300F74FEF /* 1099-list-1@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F826F96A1821A89300F74FEF /* 1099-list-1@2x.png */; };
+		F826F96F1821A90A00F74FEF /* 1097-timer-2.png in Resources */ = {isa = PBXBuildFile; fileRef = F826F96D1821A90A00F74FEF /* 1097-timer-2.png */; };
+		F826F9701821A90A00F74FEF /* 1097-timer-2@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F826F96E1821A90A00F74FEF /* 1097-timer-2@2x.png */; };
+		F826F9741821AA3C00F74FEF /* ShowTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F826F9731821AA3C00F74FEF /* ShowTableViewCell.m */; };
+		F826F9791821AEA100F74FEF /* 899-key.png in Resources */ = {isa = PBXBuildFile; fileRef = F826F9751821AEA100F74FEF /* 899-key.png */; };
+		F826F97A1821AEA100F74FEF /* 899-key@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F826F9761821AEA100F74FEF /* 899-key@2x.png */; };
+		F826F97B1821AEA100F74FEF /* 1008-desktop.png in Resources */ = {isa = PBXBuildFile; fileRef = F826F9771821AEA100F74FEF /* 1008-desktop.png */; };
+		F826F97C1821AEA100F74FEF /* 1008-desktop@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F826F9781821AEA100F74FEF /* 1008-desktop@2x.png */; };
 		F83907BE1688D1590083CBB5 /* SickBeardLogsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F83907BD1688D1590083CBB5 /* SickBeardLogsViewController.m */; };
 		F861F3061683CD7200949811 /* SickBeardMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F861F3051683CD7200949811 /* SickBeardMainViewController.m */; };
 		F861F3091683CFA200949811 /* SickBeardAddServerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F861F3081683CFA200949811 /* SickBeardAddServerViewController.m */; };
@@ -53,12 +62,6 @@
 		F8BB0B02167E355B0014977C /* SSBSickBeardEpisode.m in Sources */ = {isa = PBXBuildFile; fileRef = F8BB0B01167E355B0014977C /* SSBSickBeardEpisode.m */; };
 		F8BB0B05167E363E0014977C /* SSBSickBeardShow.m in Sources */ = {isa = PBXBuildFile; fileRef = F8BB0B04167E363E0014977C /* SSBSickBeardShow.m */; };
 		F8BC5186168481890053BBF9 /* SickBeardShowsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F8BC5185168481890053BBF9 /* SickBeardShowsViewController.m */; };
-		F8BC518A16848ABE0053BBF9 /* hd.png in Resources */ = {isa = PBXBuildFile; fileRef = F8BC518816848ABE0053BBF9 /* hd.png */; };
-		F8BC518B16848ABE0053BBF9 /* hd@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F8BC518916848ABE0053BBF9 /* hd@2x.png */; };
-		F8BC518E16848AD10053BBF9 /* sd.png in Resources */ = {isa = PBXBuildFile; fileRef = F8BC518C16848AD10053BBF9 /* sd.png */; };
-		F8BC518F16848AD10053BBF9 /* sd@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F8BC518D16848AD10053BBF9 /* sd@2x.png */; };
-		F8BC519216848AE30053BBF9 /* cu.png in Resources */ = {isa = PBXBuildFile; fileRef = F8BC519016848AE30053BBF9 /* cu.png */; };
-		F8BC519316848AE30053BBF9 /* cu@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F8BC519116848AE30053BBF9 /* cu@2x.png */; };
 		F8BC519616848FE50053BBF9 /* SSBSickBeardResult.m in Sources */ = {isa = PBXBuildFile; fileRef = F8BC519516848FE50053BBF9 /* SSBSickBeardResult.m */; };
 		F8E638C21685029200BDB58C /* SSBSickBeardUpcomingEpisodesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F8E638C11685029200BDB58C /* SSBSickBeardUpcomingEpisodesViewController.m */; };
 		F8F9DDC91686261600676BB2 /* SickBeardEpisodeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F8F9DDC81686261600676BB2 /* SickBeardEpisodeViewController.m */; };
@@ -106,14 +109,24 @@
 		F820E4B31687198D00E73795 /* SickBeardHistoryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SickBeardHistoryViewController.m; sourceTree = "<group>"; };
 		F820E4B616872D1000E73795 /* SickBeardServersViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SickBeardServersViewController.h; sourceTree = "<group>"; };
 		F820E4B716872D1000E73795 /* SickBeardServersViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SickBeardServersViewController.m; sourceTree = "<group>"; };
-		F820E4B91687382700E73795 /* server_secure.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = server_secure.png; sourceTree = "<group>"; };
-		F820E4BA1687382700E73795 /* server_secure@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "server_secure@2x.png"; sourceTree = "<group>"; };
-		F820E4BB1687382700E73795 /* server.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = server.png; sourceTree = "<group>"; };
-		F820E4BC1687382700E73795 /* server@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "server@2x.png"; sourceTree = "<group>"; };
 		F8233B931685D35D00E0AAAA /* SickBeardShowViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SickBeardShowViewController.h; sourceTree = "<group>"; };
 		F8233B941685D35D00E0AAAA /* SickBeardShowViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SickBeardShowViewController.m; sourceTree = "<group>"; };
 		F8233B971685F17000E0AAAA /* SickBeardEpisodesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SickBeardEpisodesViewController.h; sourceTree = "<group>"; };
 		F8233B981685F17000E0AAAA /* SickBeardEpisodesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SickBeardEpisodesViewController.m; sourceTree = "<group>"; };
+		F826F9611821A78300F74FEF /* 792-tv.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "792-tv.png"; sourceTree = "<group>"; };
+		F826F9621821A78300F74FEF /* 792-tv@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "792-tv@2x.png"; sourceTree = "<group>"; };
+		F826F9651821A7D800F74FEF /* 728-clock.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "728-clock.png"; sourceTree = "<group>"; };
+		F826F9661821A7D800F74FEF /* 728-clock@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "728-clock@2x.png"; sourceTree = "<group>"; };
+		F826F9691821A89300F74FEF /* 1099-list-1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "1099-list-1.png"; sourceTree = "<group>"; };
+		F826F96A1821A89300F74FEF /* 1099-list-1@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "1099-list-1@2x.png"; sourceTree = "<group>"; };
+		F826F96D1821A90A00F74FEF /* 1097-timer-2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "1097-timer-2.png"; sourceTree = "<group>"; };
+		F826F96E1821A90A00F74FEF /* 1097-timer-2@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "1097-timer-2@2x.png"; sourceTree = "<group>"; };
+		F826F9721821AA3C00F74FEF /* ShowTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShowTableViewCell.h; sourceTree = "<group>"; };
+		F826F9731821AA3C00F74FEF /* ShowTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShowTableViewCell.m; sourceTree = "<group>"; };
+		F826F9751821AEA100F74FEF /* 899-key.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "899-key.png"; sourceTree = "<group>"; };
+		F826F9761821AEA100F74FEF /* 899-key@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "899-key@2x.png"; sourceTree = "<group>"; };
+		F826F9771821AEA100F74FEF /* 1008-desktop.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "1008-desktop.png"; sourceTree = "<group>"; };
+		F826F9781821AEA100F74FEF /* 1008-desktop@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "1008-desktop@2x.png"; sourceTree = "<group>"; };
 		F83907BC1688D1590083CBB5 /* SickBeardLogsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SickBeardLogsViewController.h; sourceTree = "<group>"; };
 		F83907BD1688D1590083CBB5 /* SickBeardLogsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SickBeardLogsViewController.m; sourceTree = "<group>"; };
 		F861F3041683CD7200949811 /* SickBeardMainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SickBeardMainViewController.h; sourceTree = "<group>"; };
@@ -153,12 +166,6 @@
 		F8BB0B04167E363E0014977C /* SSBSickBeardShow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSBSickBeardShow.m; sourceTree = "<group>"; };
 		F8BC5184168481890053BBF9 /* SickBeardShowsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SickBeardShowsViewController.h; sourceTree = "<group>"; };
 		F8BC5185168481890053BBF9 /* SickBeardShowsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SickBeardShowsViewController.m; sourceTree = "<group>"; };
-		F8BC518816848ABE0053BBF9 /* hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = hd.png; sourceTree = "<group>"; };
-		F8BC518916848ABE0053BBF9 /* hd@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "hd@2x.png"; sourceTree = "<group>"; };
-		F8BC518C16848AD10053BBF9 /* sd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sd.png; sourceTree = "<group>"; };
-		F8BC518D16848AD10053BBF9 /* sd@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "sd@2x.png"; sourceTree = "<group>"; };
-		F8BC519016848AE30053BBF9 /* cu.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cu.png; sourceTree = "<group>"; };
-		F8BC519116848AE30053BBF9 /* cu@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cu@2x.png"; sourceTree = "<group>"; };
 		F8BC519416848FE50053BBF9 /* SSBSickBeardResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSBSickBeardResult.h; sourceTree = "<group>"; };
 		F8BC519516848FE50053BBF9 /* SSBSickBeardResult.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSBSickBeardResult.m; sourceTree = "<group>"; };
 		F8E638C01685029200BDB58C /* SSBSickBeardUpcomingEpisodesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSBSickBeardUpcomingEpisodesViewController.h; sourceTree = "<group>"; };
@@ -228,6 +235,15 @@
 			path = ../SBJson;
 			sourceTree = "<group>";
 		};
+		F826F9711821AA1F00F74FEF /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				F826F9721821AA3C00F74FEF /* ShowTableViewCell.h */,
+				F826F9731821AA3C00F74FEF /* ShowTableViewCell.m */,
+			);
+			name = Cells;
+			sourceTree = "<group>";
+		};
 		F89C47D2167E02AE007DB48C = {
 			isa = PBXGroup;
 			children = (
@@ -260,6 +276,7 @@
 		F89C47E7167E02AF007DB48C /* SickBeard Demo App */ = {
 			isa = PBXGroup;
 			children = (
+				F826F9711821AA1F00F74FEF /* Cells */,
 				F820939D167E4BB800872A10 /* MainStoryboard.storyboard */,
 				F89C47F0167E02AF007DB48C /* SSBAppDelegate.h */,
 				F89C47F1167E02AF007DB48C /* SSBAppDelegate.m */,
@@ -299,23 +316,25 @@
 		F89C47E8167E02AF007DB48C /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				F826F9751821AEA100F74FEF /* 899-key.png */,
+				F826F9761821AEA100F74FEF /* 899-key@2x.png */,
+				F826F9771821AEA100F74FEF /* 1008-desktop.png */,
+				F826F9781821AEA100F74FEF /* 1008-desktop@2x.png */,
+				F826F96D1821A90A00F74FEF /* 1097-timer-2.png */,
+				F826F96E1821A90A00F74FEF /* 1097-timer-2@2x.png */,
+				F826F9691821A89300F74FEF /* 1099-list-1.png */,
+				F826F96A1821A89300F74FEF /* 1099-list-1@2x.png */,
+				F826F9651821A7D800F74FEF /* 728-clock.png */,
+				F826F9661821A7D800F74FEF /* 728-clock@2x.png */,
+				F826F9611821A78300F74FEF /* 792-tv.png */,
+				F826F9621821A78300F74FEF /* 792-tv@2x.png */,
 				F8FF4C1C1689C6F20041A226 /* Icon@2x.png */,
 				F8FF4C1A1689C6EC0041A226 /* Icon.png */,
-				F820E4B91687382700E73795 /* server_secure.png */,
-				F820E4BA1687382700E73795 /* server_secure@2x.png */,
-				F820E4BB1687382700E73795 /* server.png */,
-				F820E4BC1687382700E73795 /* server@2x.png */,
-				F8BC519016848AE30053BBF9 /* cu.png */,
-				F8BC519116848AE30053BBF9 /* cu@2x.png */,
 				F89C47F7167E02AF007DB48C /* Default-568h@2x.png */,
 				F89C47F3167E02AF007DB48C /* Default.png */,
 				F89C47F5167E02AF007DB48C /* Default@2x.png */,
-				F8BC518816848ABE0053BBF9 /* hd.png */,
-				F8BC518916848ABE0053BBF9 /* hd@2x.png */,
 				F89C47EA167E02AF007DB48C /* InfoPlist.strings */,
 				F89C47ED167E02AF007DB48C /* main.m */,
-				F8BC518C16848AD10053BBF9 /* sd.png */,
-				F8BC518D16848AD10053BBF9 /* sd@2x.png */,
 				F89C47E9167E02AF007DB48C /* SickBeard Demo App-Info.plist */,
 				F89C47EF167E02AF007DB48C /* SickBeard Demo App-Prefix.pch */,
 			);
@@ -398,28 +417,30 @@
 			files = (
 				F89C47EC167E02AF007DB48C /* InfoPlist.strings in Resources */,
 				F89C47F4167E02AF007DB48C /* Default.png in Resources */,
+				F826F9671821A7D800F74FEF /* 728-clock.png in Resources */,
+				F826F97A1821AEA100F74FEF /* 899-key@2x.png in Resources */,
+				F826F97C1821AEA100F74FEF /* 1008-desktop@2x.png in Resources */,
+				F826F96C1821A89300F74FEF /* 1099-list-1@2x.png in Resources */,
 				F89C47F6167E02AF007DB48C /* Default@2x.png in Resources */,
 				F89C47F8167E02AF007DB48C /* Default-568h@2x.png in Resources */,
+				F826F9631821A78300F74FEF /* 792-tv.png in Resources */,
 				F820935D167E42F700872A10 /* .gitattributes in Resources */,
+				F826F97B1821AEA100F74FEF /* 1008-desktop.png in Resources */,
 				F820935E167E42F700872A10 /* .gitignore in Resources */,
+				F826F9641821A78300F74FEF /* 792-tv@2x.png in Resources */,
 				F820939E167E4BB800872A10 /* MainStoryboard.storyboard in Resources */,
-				F8BC518A16848ABE0053BBF9 /* hd.png in Resources */,
-				F8BC518B16848ABE0053BBF9 /* hd@2x.png in Resources */,
-				F8BC518E16848AD10053BBF9 /* sd.png in Resources */,
-				F8BC518F16848AD10053BBF9 /* sd@2x.png in Resources */,
-				F8BC519216848AE30053BBF9 /* cu.png in Resources */,
-				F8BC519316848AE30053BBF9 /* cu@2x.png in Resources */,
-				F820E4BD1687382700E73795 /* server_secure.png in Resources */,
-				F820E4BE1687382700E73795 /* server_secure@2x.png in Resources */,
-				F820E4BF1687382700E73795 /* server.png in Resources */,
-				F820E4C01687382700E73795 /* server@2x.png in Resources */,
+				F826F9701821A90A00F74FEF /* 1097-timer-2@2x.png in Resources */,
+				F826F96F1821A90A00F74FEF /* 1097-timer-2.png in Resources */,
 				F8FF4C111689C6090041A226 /* CREDITS.md in Resources */,
 				F8FF4C121689C6090041A226 /* INSTALL.md in Resources */,
 				F8FF4C131689C6090041A226 /* LICENSE.md in Resources */,
+				F826F9791821AEA100F74FEF /* 899-key.png in Resources */,
 				F8FF4C141689C6090041A226 /* NEWS.md in Resources */,
 				F8FF4C151689C6090041A226 /* README.md in Resources */,
 				F8FF4C1B1689C6ED0041A226 /* Icon.png in Resources */,
 				F8FF4C1D1689C6F20041A226 /* Icon@2x.png in Resources */,
+				F826F96B1821A89300F74FEF /* 1099-list-1.png in Resources */,
+				F826F9681821A7D800F74FEF /* 728-clock@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -452,6 +473,7 @@
 				F861F3061683CD7200949811 /* SickBeardMainViewController.m in Sources */,
 				F861F3091683CFA200949811 /* SickBeardAddServerViewController.m in Sources */,
 				F8BC5186168481890053BBF9 /* SickBeardShowsViewController.m in Sources */,
+				F826F9741821AA3C00F74FEF /* ShowTableViewCell.m in Sources */,
 				F8BC519616848FE50053BBF9 /* SSBSickBeardResult.m in Sources */,
 				F862D59C1684E20400AAFCD2 /* SSBSharedServer.m in Sources */,
 				F8E638C21685029200BDB58C /* SSBSickBeardUpcomingEpisodesViewController.m in Sources */,
@@ -519,7 +541,7 @@
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Stefan Klein Nulent";
 				COPY_PHASE_STRIP = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
@@ -527,6 +549,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "64D8C7DC-1AFA-499A-AB81-F69B348920BF";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
