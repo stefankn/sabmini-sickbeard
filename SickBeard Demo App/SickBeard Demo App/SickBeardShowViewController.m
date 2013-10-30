@@ -35,6 +35,8 @@
 {
     [super viewDidLoad];
     
+    self.title = self.show.show_name;
+    
     [self refreshShowDetails];
 }
 
@@ -255,7 +257,14 @@
     }
     else if (indexPath.section == 2) {
         cell = [tableView dequeueReusableCellWithIdentifier:SeasonCellIdentifier forIndexPath:indexPath];
-        cell.textLabel.text = [NSString stringWithFormat:@"Season %@", [_show.season_list objectAtIndex:indexPath.row]];
+        
+        if ([[_show.season_list objectAtIndex:indexPath.row] intValue] == 0) {
+            cell.textLabel.text = @"Specials";
+        }
+        else {
+            cell.textLabel.text = [NSString stringWithFormat:@"Season %@", [_show.season_list objectAtIndex:indexPath.row]];
+        }
+        
         cell.tag = [[_show.season_list objectAtIndex:indexPath.row] intValue];
     }
     else {

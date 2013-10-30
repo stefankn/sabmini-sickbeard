@@ -36,7 +36,14 @@
 {
     [super viewDidLoad];
     
-    self.title = [NSString stringWithFormat:@"Season %lu", (unsigned long)_season];
+    if (_season == 0) {
+        self.title = @"Specials";
+    }
+    else {
+        self.title = [NSString stringWithFormat:@"Season %lu", (unsigned long)_season];
+    }
+    
+    
     [self refreshEpisodes];
 }
 
