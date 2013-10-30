@@ -140,10 +140,10 @@
     }
     
     if (server.https) {
-        cell.imageView.image = [UIImage imageNamed:@"server_secure"];
+        cell.imageView.image = [UIImage imageNamed:@"899-key"];
     }
     else {
-        cell.imageView.image = [UIImage imageNamed:@"server"];
+        cell.imageView.image = [UIImage imageNamed:@"1008-desktop"];
     }
     
     if ([server.identifier isEqualToString:[SSBSickBeard getActiveServer].identifier]) {
