@@ -12,6 +12,7 @@
 #import "SSBSickBeardShow.h"
 #import "SSBSickBeardResult.h"
 #import "SickBeardShowViewController.h"
+#import "ShowTableViewCell.h"
 
 @interface SickBeardShowsViewController () {
     NSMutableArray *_shows;
@@ -86,22 +87,31 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *CellIdentifier = @"ShowCell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
+    ShowTableViewCell *cell = (ShowTableViewCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     
     SSBSickBeardShow *show = [_shows objectAtIndex:indexPath.row];
-    cell.textLabel.text = show.show_name;
     
-    if ([show.quality isEqualToString:@"HD"]) {
-        cell.imageView.image = [UIImage imageNamed:@"hd"];
-    }
-    else if ([show.quality isEqualToString:@"SD"]) {
-        cell.imageView.image = [UIImage imageNamed:@"sd"];
+    if ([show.quality isEqualToString:@"Custom"]) {
+        cell.qualityLabel.text = @"CU";
     }
     else {
-        cell.imageView.image = [UIImage imageNamed:@"cu"];
+        cell.qualityLabel.text = show.quality;
     }
     
-    cell.detailTextLabel.text = [NSString stringWithFormat:@"Next episode: %@", show.next_ep_airdate];
+    cell.titleLabel.text = show.show_name;
+    
+    if ([show.status isEqualToString:@"Continuing"]) {
+        if ([show.next_ep_airdate isEqualToString:@""]) {
+            cell.nextEpisodeLabel.text = [NSString stringWithFormat:@"Next episode: -"];
+        }
+        else {
+            cell.nextEpisodeLabel.text = [NSString stringWithFormat:@"Next episode: %@", show.next_ep_airdate];
+        }
+        
+    }
+    else {
+        cell.nextEpisodeLabel.text = show.status;
+    }
     
     return cell;
 }
