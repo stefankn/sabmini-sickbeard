@@ -47,8 +47,8 @@
     self.title = [_searchResult objectForKey:@"name"];
     _useDefaultRootDir = YES;
     _useDefaultStatus = YES;
-    _qualityEntries = [NSArray arrayWithObjects:@"fullhdbluray", @"hdbluray", @"hdwebdl", @"hdtv", @"sddvd", @"sdtv", @"unknown", nil];
-    _qualityEntriesFullNames = [NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:@"1080p BluRay", @"720p BluRay", @"720p WEB-DL", @"HD TV", @"SD DVD", @"SD TV", @"Unknown", nil] forKeys:_qualityEntries];
+    _qualityEntries = [NSArray arrayWithObjects:@"fullhdbluray", @"hdbluray", @"fullhdwebdl", @"hdwebdl", @"fullhdtv", @"rawhdtv", @"hdtv", @"sddvd", @"sdtv", @"any", nil];
+    _qualityEntriesFullNames = [NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:@"1080p BluRay", @"720p BluRay", @"1080p WEB-DL", @"720p WEB-DL", @"1080p HD TV", @"Raw HD TV", @"HD TV", @"SD DVD", @"SD TV", @"Any", nil] forKeys:_qualityEntries];
     
     [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
     [SSBSickBeard getRootDirs:^(NSDictionary *data) {

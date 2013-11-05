@@ -35,8 +35,8 @@
 {
     [super viewDidLoad];
 
-    _qualityEntries = [NSArray arrayWithObjects:@"fullhdbluray", @"hdbluray", @"hdwebdl", @"hdtv", @"sddvd", @"sdtv", @"any", nil];
-    _qualityEntriesFullNames = [NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:@"1080p BluRay", @"720p BluRay", @"720p WEB-DL", @"HD TV", @"SD DVD", @"SD TV", @"Any", nil] forKeys:_qualityEntries];
+    _qualityEntries = [NSArray arrayWithObjects:@"fullhdbluray", @"hdbluray", @"fullhdwebdl", @"hdwebdl", @"fullhdtv", @"rawhdtv", @"hdtv", @"sddvd", @"sdtv", @"any", nil];
+    _qualityEntriesFullNames = [NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:@"1080p BluRay", @"720p BluRay", @"1080p WEB-DL", @"720p WEB-DL", @"1080p HD TV", @"Raw HD TV", @"HD TV", @"SD DVD", @"SD TV", @"Any", nil] forKeys:_qualityEntries];
     
     _initial = [NSMutableArray arrayWithArray:[_show.quality_details objectForKey:@"initial"]];
     _archive = [NSMutableArray arrayWithArray:[_show.quality_details objectForKey:@"archive"]];
