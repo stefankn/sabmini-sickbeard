@@ -151,19 +151,28 @@
 - (void)getBanner:(SSBSickBeardShowRequestImageBlock)complete onFailure:(SSBSickBeardShowRequestResponseBlock)failed
 {
     NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@show.getbanner&tvdbid=%@", [[SSBSharedServer sharedServer].server urlString], self.identifier]];
-    NSData *imageData = [NSData dataWithContentsOfURL:url];
-    UIImage *banner = [UIImage imageWithData:imageData];
     
-    complete(banner);
+    NSURLRequest *request = [NSURLRequest requestWithURL:url];
+    [NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
+        NSData *imageData = [NSData dataWithContentsOfURL:url];
+        UIImage *banner = [UIImage imageWithData:imageData];
+        
+        complete(banner);
+    }];
 }
 
 - (void)getPoster:(SSBSickBeardShowRequestImageBlock)complete onFailure:(SSBSickBeardShowRequestResponseBlock)failed
 {
     NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@show.getposter&tvdbid=%@", [[SSBSharedServer sharedServer].server urlString], self.identifier]];
-    NSData *imageData = [NSData dataWithContentsOfURL:url];
-    UIImage *poster = [UIImage imageWithData:imageData];
     
-    complete(poster);
+    NSURLRequest *request = [NSURLRequest requestWithURL:url];
+    [NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
+        NSData *imageData = [NSData dataWithContentsOfURL:url];
+        UIImage *poster = [UIImage imageWithData:imageData];
+        
+        complete(poster);
+    }];
+    
 }
 
 - (void)changeStatus:(NSString *)newStatus forSeason:(int)season onComplete:(SSBSickBeardShowRequestResponseBlock)complete onFailure:(SSBSickBeardShowRequestResponseBlock)failed

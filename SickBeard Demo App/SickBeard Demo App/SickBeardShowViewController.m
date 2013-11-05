@@ -46,19 +46,18 @@
     [_show getFullDetails:^(SSBSickBeardResult *result) {
         [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
         [self.tableView reloadData];
-        
-        [_show getBanner:^(UIImage *banner) {
-            UIImageView *bannerView = [[UIImageView alloc] initWithImage:banner];
-            bannerView.contentMode = UIViewContentModeScaleAspectFit;
-            self.tableView.tableHeaderView = bannerView;
-            
-        } onFailure:nil];
-        
     } onFailure:^(SSBSickBeardResult *result) {
         [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"An error occurred" message:result.message delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
         [alert show];
     }];
+    
+    [_show getBanner:^(UIImage *banner) {
+        UIImageView *bannerView = [[UIImageView alloc] initWithImage:banner];
+        bannerView.contentMode = UIViewContentModeScaleAspectFit;
+        self.tableView.tableHeaderView = bannerView;
+        
+    } onFailure:nil];
 }
 
 - (void)didReceiveMemoryWarning

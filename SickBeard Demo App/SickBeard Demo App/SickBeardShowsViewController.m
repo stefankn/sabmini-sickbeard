@@ -91,12 +91,7 @@
     
     SSBSickBeardShow *show = [_shows objectAtIndex:indexPath.row];
     
-    if ([show.quality isEqualToString:@"Custom"]) {
-        cell.qualityLabel.text = @"CU";
-    }
-    else {
-        cell.qualityLabel.text = show.quality;
-    }
+    cell.qualityLabel.text = show.quality;
     
     cell.titleLabel.text = show.show_name;
     
