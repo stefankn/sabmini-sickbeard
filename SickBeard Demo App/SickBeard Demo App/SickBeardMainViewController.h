@@ -9,5 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface SickBeardMainViewController : UITableViewController
+- (IBAction)serverActions:(id)sender;
 
 @end

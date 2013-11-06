@@ -11,7 +11,7 @@
 #import "SSBSickBeard.h"
 #import "SSBSickBeardResult.h"
 
-@interface SickBeardMainViewController ()
+@interface SickBeardMainViewController () <UIActionSheetDelegate>
 
 @end
 
@@ -52,50 +52,6 @@
 
 #pragma mark - Table view delegate
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    if (indexPath.section == 1) {
-        
-        if (indexPath.row == 0) {
-            [SSBSickBeard forceSearch:^(SSBSickBeardResult *result) {
-                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Result" message:result.message delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
-                [alert show];
-                
-                [SSBSickBeard setActiveServer:nil];
-            } onFailure:^(SSBSickBeardResult *result) {
-                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"An error occurred" message:result.message delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
-                [alert show];
-            }];
-        }
-        
-        if (indexPath.row == 1) {
-            [SSBSickBeard restartActiveServer:^(SSBSickBeardResult *result) {
-                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Result" message:result.message delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
-                [alert show];
-                
-                [SSBSickBeard setActiveServer:nil];
-            } onFailure:^(SSBSickBeardResult *result) {
-                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"An error occurred" message:result.message delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
-                [alert show];
-            }];
-        }
-        
-        if (indexPath.row == 2) {
-            [SSBSickBeard shutdownActiveServer:^(SSBSickBeardResult *result) {
-                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Result" message:result.message delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
-                [alert show];
-                
-                [SSBSickBeard setActiveServer:nil];
-            } onFailure:^(SSBSickBeardResult *result) {
-                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"An error occurred" message:result.message delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
-                [alert show];
-            }];
-        }
-        
-        [self.tableView deselectRowAtIndexPath:[self.tableView indexPathForSelectedRow] animated:YES];
-    }
-}
-
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
 {
     if (section == 0) {
@@ -108,6 +64,57 @@
     }
 
     return nil;
+}
+
+- (IBAction)serverActions:(id)sender {
+    UIActionSheet *sheet = [[UIActionSheet alloc] initWithTitle:@"Actions" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Force episode search", @"Restart SickBeard", @"Shutdown SickBeard", nil];
+	[sheet showInView:[UIApplication sharedApplication].keyWindow];
+	sheet.actionSheetStyle = UIActionSheetStyleDefault;
+}
+
+#pragma mark -
+#pragma mark UIActionSheet Delegate Methods
+
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (buttonIndex == 0)
+    {
+        [SSBSickBeard forceSearch:^(SSBSickBeardResult *result) {
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Result" message:result.message delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+            [alert show];
+            
+            [SSBSickBeard setActiveServer:nil];
+        } onFailure:^(SSBSickBeardResult *result) {
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"An error occurred" message:result.message delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+            [alert show];
+        }];
+    }
+    
+    if (buttonIndex == 1)
+    {
+        [SSBSickBeard restartActiveServer:^(SSBSickBeardResult *result) {
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Result" message:result.message delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+            [alert show];
+            
+            [SSBSickBeard setActiveServer:nil];
+        } onFailure:^(SSBSickBeardResult *result) {
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"An error occurred" message:result.message delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+            [alert show];
+        }];
+    }
+    
+    if (buttonIndex == 2)
+    {
+        [SSBSickBeard shutdownActiveServer:^(SSBSickBeardResult *result) {
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Result" message:result.message delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+            [alert show];
+            
+            [SSBSickBeard setActiveServer:nil];
+        } onFailure:^(SSBSickBeardResult *result) {
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"An error occurred" message:result.message delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+            [alert show];
+        }];
+    }
 }
 
 @end
