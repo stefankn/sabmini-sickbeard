@@ -11,6 +11,7 @@
 #import "SSBSickBeardEpisode.h"
 #import "SickBeardEpisodeViewController.h"
 #import "SSBSickBeardResult.h"
+#import "EpisodeTableViewCell.h"
 
 @interface SickBeardEpisodesViewController () <UIActionSheetDelegate> {
     NSArray *_episodes;
@@ -131,14 +132,20 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *CellIdentifier = @"EpisodeCell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
+    EpisodeTableViewCell *cell = (EpisodeTableViewCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     
     SSBSickBeardEpisode *episode = [_episodes objectAtIndex:indexPath.row];
     
-    cell.textLabel.text = [NSString stringWithFormat:@"%@ - %@", episode.episode, episode.name];
-    cell.detailTextLabel.text = [NSString stringWithFormat:@"%@ - %@", episode.status, episode.airdate];
+    cell.numberLabel.text = episode.episode;
+    cell.titleLabel.text = episode.name;
+    cell.infoLabel.text = [NSString stringWithFormat:@"%@ - %@", episode.status, episode.airdate];
     
     return cell;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return 60;
 }
 
 /*

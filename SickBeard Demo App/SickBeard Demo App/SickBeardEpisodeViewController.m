@@ -150,9 +150,8 @@
     if (section == 0) {
         return [NSString stringWithFormat:@"Episode %@ - %@", _episode.episode, _episode.name];
     }
-    else {
-        return nil;
-    }
+    
+    return @"Episode description";
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
