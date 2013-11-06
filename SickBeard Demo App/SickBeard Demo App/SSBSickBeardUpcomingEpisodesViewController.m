@@ -11,6 +11,7 @@
 #import "SSBSickBeardResult.h"
 #import "SSBSickBeardEpisode.h"
 #import "SickBeardEpisodeViewController.h"
+#import "EpisodeTableViewCell.h"
 
 @interface SSBSickBeardUpcomingEpisodesViewController () {
     NSDictionary *_upcomingEpisodes;
@@ -103,15 +104,14 @@
     else if (section == 3 && [_upcomingEpisodes objectForKey:@"later"]) {
         return [[_upcomingEpisodes objectForKey:@"later"] count];
     }
-    else {
-        return 0;
-    }
+    
+    return 0;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *CellIdentifier = @"EpisodeCell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
+    EpisodeTableViewCell *cell = (EpisodeTableViewCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     
     SSBSickBeardEpisode *episode;
     
@@ -132,20 +132,16 @@
         return nil;
     }
     
-    cell.textLabel.text = episode.show_name;
-    cell.detailTextLabel.text = [NSString stringWithFormat:@"S%@E%@ - %@", episode.season, episode.episode, episode.ep_name];
-    
-    if ([episode.quality isEqualToString:@"HD"]) {
-        cell.imageView.image = [UIImage imageNamed:@"hd"];
-    }
-    else if ([episode.quality isEqualToString:@"SD"]) {
-        cell.imageView.image = [UIImage imageNamed:@"sd"];
-    }
-    else {
-        cell.imageView.image = [UIImage imageNamed:@"cu"];
-    }
+    cell.titleLabel.text = episode.show_name;
+    cell.numberLabel.text = [NSString stringWithFormat:@"S%02dE%02d", [episode.season intValue], [episode.episode intValue]];
+    cell.infoLabel.text = episode.quality;
     
     return cell;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return 60;
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
@@ -162,9 +158,8 @@
     else if (section == 3 && [_upcomingEpisodes objectForKey:@"later"]) {
         return @"Later";
     }
-    else {
-        return nil;
-    }
+    
+    return nil;
 }
 
 @end

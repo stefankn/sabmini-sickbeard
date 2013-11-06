@@ -11,6 +11,7 @@
 #import "SSBSickBeardEpisode.h"
 #import "SSBSickBeardResult.h"
 #import "SickBeardEpisodeViewController.h"
+#import "EpisodeTableViewCell.h"
 
 @interface SickBeardHistoryViewController () <UIActionSheetDelegate> {
     NSMutableArray *_episodes;
@@ -117,6 +118,11 @@
     return 1;
 }
 
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return 60;
+}
+
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     // Return the number of rows in the section.
@@ -126,11 +132,13 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *CellIdentifier = @"EpisodeCell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
+    EpisodeTableViewCell *cell = (EpisodeTableViewCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     
     SSBSickBeardEpisode *episode = [_episodes objectAtIndex:indexPath.row];
-    cell.textLabel.text = episode.show_name;
-    cell.detailTextLabel.text = [NSString stringWithFormat:@"S%@E%@ - %@ - %@", episode.season, episode.episode, episode.status, episode.quality];
+    
+    cell.titleLabel.text = episode.show_name;
+    cell.numberLabel.text = [NSString stringWithFormat:@"S%02dE%02d", [episode.season intValue], [episode.episode intValue]];
+    cell.infoLabel.text = [NSString stringWithFormat:@"%@ - %@", episode.status, episode.quality];
     
     return cell;
 }
