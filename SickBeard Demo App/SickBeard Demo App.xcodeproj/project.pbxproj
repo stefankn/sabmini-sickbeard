@@ -8,20 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		F810A356168869B400F6FA06 /* SickBeardAddShowFinishViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F810A355168869B400F6FA06 /* SickBeardAddShowFinishViewController.m */; };
-		F820935D167E42F700872A10 /* .gitattributes in Resources */ = {isa = PBXBuildFile; fileRef = F8209342167E42F700872A10 /* .gitattributes */; };
-		F820935E167E42F700872A10 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = F8209343167E42F700872A10 /* .gitignore */; };
-		F820935F167E42F700872A10 /* NSObject+SBJson.m in Sources */ = {isa = PBXBuildFile; fileRef = F8209345167E42F700872A10 /* NSObject+SBJson.m */; };
-		F8209360167E42F700872A10 /* SBJsonParser.m in Sources */ = {isa = PBXBuildFile; fileRef = F8209348167E42F700872A10 /* SBJsonParser.m */; };
-		F8209361167E42F700872A10 /* SBJsonStreamParser.m in Sources */ = {isa = PBXBuildFile; fileRef = F820934A167E42F700872A10 /* SBJsonStreamParser.m */; };
-		F8209362167E42F700872A10 /* SBJsonStreamParserAccumulator.m in Sources */ = {isa = PBXBuildFile; fileRef = F820934C167E42F700872A10 /* SBJsonStreamParserAccumulator.m */; };
-		F8209363167E42F700872A10 /* SBJsonStreamParserAdapter.m in Sources */ = {isa = PBXBuildFile; fileRef = F820934E167E42F700872A10 /* SBJsonStreamParserAdapter.m */; };
-		F8209364167E42F700872A10 /* SBJsonStreamParserState.m in Sources */ = {isa = PBXBuildFile; fileRef = F8209350167E42F700872A10 /* SBJsonStreamParserState.m */; };
-		F8209365167E42F700872A10 /* SBJsonStreamWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = F8209352167E42F700872A10 /* SBJsonStreamWriter.m */; };
-		F8209366167E42F700872A10 /* SBJsonStreamWriterAccumulator.m in Sources */ = {isa = PBXBuildFile; fileRef = F8209354167E42F700872A10 /* SBJsonStreamWriterAccumulator.m */; };
-		F8209367167E42F700872A10 /* SBJsonStreamWriterState.m in Sources */ = {isa = PBXBuildFile; fileRef = F8209356167E42F700872A10 /* SBJsonStreamWriterState.m */; };
-		F8209368167E42F700872A10 /* SBJsonTokeniser.m in Sources */ = {isa = PBXBuildFile; fileRef = F8209358167E42F700872A10 /* SBJsonTokeniser.m */; };
-		F8209369167E42F700872A10 /* SBJsonUTF8Stream.m in Sources */ = {isa = PBXBuildFile; fileRef = F820935A167E42F700872A10 /* SBJsonUTF8Stream.m */; };
-		F820936A167E42F700872A10 /* SBJsonWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = F820935C167E42F700872A10 /* SBJsonWriter.m */; };
 		F820939E167E4BB800872A10 /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F820939D167E4BB800872A10 /* MainStoryboard.storyboard */; };
 		F820E4B41687198D00E73795 /* SickBeardHistoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F820E4B31687198D00E73795 /* SickBeardHistoryViewController.m */; };
 		F820E4B816872D1000E73795 /* SickBeardServersViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F820E4B716872D1000E73795 /* SickBeardServersViewController.m */; };
@@ -58,11 +44,6 @@
 		F8BC519616848FE50053BBF9 /* SSBSickBeardResult.m in Sources */ = {isa = PBXBuildFile; fileRef = F8BC519516848FE50053BBF9 /* SSBSickBeardResult.m */; };
 		F8E638C21685029200BDB58C /* SSBSickBeardUpcomingEpisodesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F8E638C11685029200BDB58C /* SSBSickBeardUpcomingEpisodesViewController.m */; };
 		F8F9DDC91686261600676BB2 /* SickBeardEpisodeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F8F9DDC81686261600676BB2 /* SickBeardEpisodeViewController.m */; };
-		F8FF4C111689C6090041A226 /* CREDITS.md in Resources */ = {isa = PBXBuildFile; fileRef = F8FF4C0C1689C6090041A226 /* CREDITS.md */; };
-		F8FF4C121689C6090041A226 /* INSTALL.md in Resources */ = {isa = PBXBuildFile; fileRef = F8FF4C0D1689C6090041A226 /* INSTALL.md */; };
-		F8FF4C131689C6090041A226 /* LICENSE.md in Resources */ = {isa = PBXBuildFile; fileRef = F8FF4C0E1689C6090041A226 /* LICENSE.md */; };
-		F8FF4C141689C6090041A226 /* NEWS.md in Resources */ = {isa = PBXBuildFile; fileRef = F8FF4C0F1689C6090041A226 /* NEWS.md */; };
-		F8FF4C151689C6090041A226 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = F8FF4C101689C6090041A226 /* README.md */; };
 		F8FF4C1B1689C6ED0041A226 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = F8FF4C1A1689C6EC0041A226 /* Icon.png */; };
 		F8FF4C1D1689C6F20041A226 /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F8FF4C1C1689C6F20041A226 /* Icon@2x.png */; };
 /* End PBXBuildFile section */
@@ -70,33 +51,6 @@
 /* Begin PBXFileReference section */
 		F810A354168869B400F6FA06 /* SickBeardAddShowFinishViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SickBeardAddShowFinishViewController.h; sourceTree = "<group>"; };
 		F810A355168869B400F6FA06 /* SickBeardAddShowFinishViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SickBeardAddShowFinishViewController.m; sourceTree = "<group>"; };
-		F8209342167E42F700872A10 /* .gitattributes */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitattributes; sourceTree = "<group>"; };
-		F8209343167E42F700872A10 /* .gitignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
-		F8209344167E42F700872A10 /* NSObject+SBJson.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+SBJson.h"; sourceTree = "<group>"; };
-		F8209345167E42F700872A10 /* NSObject+SBJson.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+SBJson.m"; sourceTree = "<group>"; };
-		F8209346167E42F700872A10 /* SBJson.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJson.h; sourceTree = "<group>"; };
-		F8209347167E42F700872A10 /* SBJsonParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJsonParser.h; sourceTree = "<group>"; };
-		F8209348167E42F700872A10 /* SBJsonParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBJsonParser.m; sourceTree = "<group>"; };
-		F8209349167E42F700872A10 /* SBJsonStreamParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJsonStreamParser.h; sourceTree = "<group>"; };
-		F820934A167E42F700872A10 /* SBJsonStreamParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBJsonStreamParser.m; sourceTree = "<group>"; };
-		F820934B167E42F700872A10 /* SBJsonStreamParserAccumulator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJsonStreamParserAccumulator.h; sourceTree = "<group>"; };
-		F820934C167E42F700872A10 /* SBJsonStreamParserAccumulator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBJsonStreamParserAccumulator.m; sourceTree = "<group>"; };
-		F820934D167E42F700872A10 /* SBJsonStreamParserAdapter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJsonStreamParserAdapter.h; sourceTree = "<group>"; };
-		F820934E167E42F700872A10 /* SBJsonStreamParserAdapter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBJsonStreamParserAdapter.m; sourceTree = "<group>"; };
-		F820934F167E42F700872A10 /* SBJsonStreamParserState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJsonStreamParserState.h; sourceTree = "<group>"; };
-		F8209350167E42F700872A10 /* SBJsonStreamParserState.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBJsonStreamParserState.m; sourceTree = "<group>"; };
-		F8209351167E42F700872A10 /* SBJsonStreamWriter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJsonStreamWriter.h; sourceTree = "<group>"; };
-		F8209352167E42F700872A10 /* SBJsonStreamWriter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBJsonStreamWriter.m; sourceTree = "<group>"; };
-		F8209353167E42F700872A10 /* SBJsonStreamWriterAccumulator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJsonStreamWriterAccumulator.h; sourceTree = "<group>"; };
-		F8209354167E42F700872A10 /* SBJsonStreamWriterAccumulator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBJsonStreamWriterAccumulator.m; sourceTree = "<group>"; };
-		F8209355167E42F700872A10 /* SBJsonStreamWriterState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJsonStreamWriterState.h; sourceTree = "<group>"; };
-		F8209356167E42F700872A10 /* SBJsonStreamWriterState.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBJsonStreamWriterState.m; sourceTree = "<group>"; };
-		F8209357167E42F700872A10 /* SBJsonTokeniser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJsonTokeniser.h; sourceTree = "<group>"; };
-		F8209358167E42F700872A10 /* SBJsonTokeniser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBJsonTokeniser.m; sourceTree = "<group>"; };
-		F8209359167E42F700872A10 /* SBJsonUTF8Stream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJsonUTF8Stream.h; sourceTree = "<group>"; };
-		F820935A167E42F700872A10 /* SBJsonUTF8Stream.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBJsonUTF8Stream.m; sourceTree = "<group>"; };
-		F820935B167E42F700872A10 /* SBJsonWriter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJsonWriter.h; sourceTree = "<group>"; };
-		F820935C167E42F700872A10 /* SBJsonWriter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBJsonWriter.m; sourceTree = "<group>"; };
 		F820939D167E4BB800872A10 /* MainStoryboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = MainStoryboard.storyboard; sourceTree = "<group>"; };
 		F820E4B21687198D00E73795 /* SickBeardHistoryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SickBeardHistoryViewController.h; sourceTree = "<group>"; };
 		F820E4B31687198D00E73795 /* SickBeardHistoryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SickBeardHistoryViewController.m; sourceTree = "<group>"; };
@@ -159,11 +113,6 @@
 		F8E638C11685029200BDB58C /* SSBSickBeardUpcomingEpisodesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSBSickBeardUpcomingEpisodesViewController.m; sourceTree = "<group>"; };
 		F8F9DDC71686261600676BB2 /* SickBeardEpisodeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SickBeardEpisodeViewController.h; sourceTree = "<group>"; };
 		F8F9DDC81686261600676BB2 /* SickBeardEpisodeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SickBeardEpisodeViewController.m; sourceTree = "<group>"; };
-		F8FF4C0C1689C6090041A226 /* CREDITS.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = CREDITS.md; sourceTree = "<group>"; };
-		F8FF4C0D1689C6090041A226 /* INSTALL.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = INSTALL.md; sourceTree = "<group>"; };
-		F8FF4C0E1689C6090041A226 /* LICENSE.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE.md; sourceTree = "<group>"; };
-		F8FF4C0F1689C6090041A226 /* NEWS.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = NEWS.md; sourceTree = "<group>"; };
-		F8FF4C101689C6090041A226 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
 		F8FF4C1A1689C6EC0041A226 /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Icon.png; path = ../Icon.png; sourceTree = "<group>"; };
 		F8FF4C1C1689C6F20041A226 /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Icon@2x.png"; path = "../Icon@2x.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -182,46 +131,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		F8209341167E42F700872A10 /* SBJson */ = {
-			isa = PBXGroup;
-			children = (
-				F8209342167E42F700872A10 /* .gitattributes */,
-				F8209343167E42F700872A10 /* .gitignore */,
-				F8FF4C0C1689C6090041A226 /* CREDITS.md */,
-				F8FF4C0D1689C6090041A226 /* INSTALL.md */,
-				F8FF4C0E1689C6090041A226 /* LICENSE.md */,
-				F8FF4C0F1689C6090041A226 /* NEWS.md */,
-				F8209344167E42F700872A10 /* NSObject+SBJson.h */,
-				F8209345167E42F700872A10 /* NSObject+SBJson.m */,
-				F8FF4C101689C6090041A226 /* README.md */,
-				F8209346167E42F700872A10 /* SBJson.h */,
-				F8209347167E42F700872A10 /* SBJsonParser.h */,
-				F8209348167E42F700872A10 /* SBJsonParser.m */,
-				F8209349167E42F700872A10 /* SBJsonStreamParser.h */,
-				F820934A167E42F700872A10 /* SBJsonStreamParser.m */,
-				F820934B167E42F700872A10 /* SBJsonStreamParserAccumulator.h */,
-				F820934C167E42F700872A10 /* SBJsonStreamParserAccumulator.m */,
-				F820934D167E42F700872A10 /* SBJsonStreamParserAdapter.h */,
-				F820934E167E42F700872A10 /* SBJsonStreamParserAdapter.m */,
-				F820934F167E42F700872A10 /* SBJsonStreamParserState.h */,
-				F8209350167E42F700872A10 /* SBJsonStreamParserState.m */,
-				F8209351167E42F700872A10 /* SBJsonStreamWriter.h */,
-				F8209352167E42F700872A10 /* SBJsonStreamWriter.m */,
-				F8209353167E42F700872A10 /* SBJsonStreamWriterAccumulator.h */,
-				F8209354167E42F700872A10 /* SBJsonStreamWriterAccumulator.m */,
-				F8209355167E42F700872A10 /* SBJsonStreamWriterState.h */,
-				F8209356167E42F700872A10 /* SBJsonStreamWriterState.m */,
-				F8209357167E42F700872A10 /* SBJsonTokeniser.h */,
-				F8209358167E42F700872A10 /* SBJsonTokeniser.m */,
-				F8209359167E42F700872A10 /* SBJsonUTF8Stream.h */,
-				F820935A167E42F700872A10 /* SBJsonUTF8Stream.m */,
-				F820935B167E42F700872A10 /* SBJsonWriter.h */,
-				F820935C167E42F700872A10 /* SBJsonWriter.m */,
-			);
-			name = SBJson;
-			path = ../SBJson;
-			sourceTree = "<group>";
-		};
 		F826F9711821AA1F00F74FEF /* Cells */ = {
 			isa = PBXGroup;
 			children = (
@@ -236,7 +145,6 @@
 		F89C47D2167E02AE007DB48C = {
 			isa = PBXGroup;
 			children = (
-				F8209341167E42F700872A10 /* SBJson */,
 				F89C47FE167E02D0007DB48C /* sabmini-sickbeard */,
 				F89C47E7167E02AF007DB48C /* SickBeard Demo App */,
 				F89C47E0167E02AF007DB48C /* Frameworks */,
@@ -402,16 +310,9 @@
 				F826F97C1821AEA100F74FEF /* 1008-desktop@2x.png in Resources */,
 				F89C47F6167E02AF007DB48C /* Default@2x.png in Resources */,
 				F89C47F8167E02AF007DB48C /* Default-568h@2x.png in Resources */,
-				F820935D167E42F700872A10 /* .gitattributes in Resources */,
 				F826F97B1821AEA100F74FEF /* 1008-desktop.png in Resources */,
-				F820935E167E42F700872A10 /* .gitignore in Resources */,
 				F820939E167E4BB800872A10 /* MainStoryboard.storyboard in Resources */,
-				F8FF4C111689C6090041A226 /* CREDITS.md in Resources */,
-				F8FF4C121689C6090041A226 /* INSTALL.md in Resources */,
-				F8FF4C131689C6090041A226 /* LICENSE.md in Resources */,
 				F826F9791821AEA100F74FEF /* 899-key.png in Resources */,
-				F8FF4C141689C6090041A226 /* NEWS.md in Resources */,
-				F8FF4C151689C6090041A226 /* README.md in Resources */,
 				F8FF4C1B1689C6ED0041A226 /* Icon.png in Resources */,
 				F8FF4C1D1689C6F20041A226 /* Icon@2x.png in Resources */,
 			);
@@ -430,18 +331,6 @@
 				F8BB0AFE167E336B0014977C /* SSBSickBeard.m in Sources */,
 				F8BB0B02167E355B0014977C /* SSBSickBeardEpisode.m in Sources */,
 				F8BB0B05167E363E0014977C /* SSBSickBeardShow.m in Sources */,
-				F820935F167E42F700872A10 /* NSObject+SBJson.m in Sources */,
-				F8209360167E42F700872A10 /* SBJsonParser.m in Sources */,
-				F8209361167E42F700872A10 /* SBJsonStreamParser.m in Sources */,
-				F8209362167E42F700872A10 /* SBJsonStreamParserAccumulator.m in Sources */,
-				F8209363167E42F700872A10 /* SBJsonStreamParserAdapter.m in Sources */,
-				F8209364167E42F700872A10 /* SBJsonStreamParserState.m in Sources */,
-				F8209365167E42F700872A10 /* SBJsonStreamWriter.m in Sources */,
-				F8209366167E42F700872A10 /* SBJsonStreamWriterAccumulator.m in Sources */,
-				F8209367167E42F700872A10 /* SBJsonStreamWriterState.m in Sources */,
-				F8209368167E42F700872A10 /* SBJsonTokeniser.m in Sources */,
-				F8209369167E42F700872A10 /* SBJsonUTF8Stream.m in Sources */,
-				F820936A167E42F700872A10 /* SBJsonWriter.m in Sources */,
 				F8ADB913167FA88B00434FBD /* SSBSickBeardConnector.m in Sources */,
 				F861F3061683CD7200949811 /* SickBeardMainViewController.m in Sources */,
 				F861F3091683CFA200949811 /* SickBeardAddServerViewController.m in Sources */,

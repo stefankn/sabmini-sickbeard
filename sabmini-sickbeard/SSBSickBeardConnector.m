@@ -6,15 +6,13 @@
 //
 
 #import "SSBSickBeardConnector.h"
-#import "SBJson.h"
 #import "SSBSickBeardResult.h"
 
-@interface SSBSickBeardConnector() <SBJsonStreamParserAdapterDelegate>
+@interface SSBSickBeardConnector()
 
-@property (nonatomic, strong) SBJsonStreamParser *parser;
-@property (nonatomic, strong) SBJsonStreamParserAdapter *adapter;
 @property (nonatomic, strong) NSURLConnection *connection;
 @property (nonatomic, strong) NSURL *connectionUrl;
+@property (nonatomic, strong) NSMutableData *jsonData;
 @property (nonatomic, copy) SSBSickBeardConnectorFinishedBlock clb;
 @property (nonatomic, copy) SSBSickBeardConnectorFailedBlock clbFailed;
 
@@ -27,11 +25,6 @@
     self = [super init];
     if (self) {
         self.connectionUrl = url;
-        self.adapter = [[SBJsonStreamParserAdapter alloc] init];
-        self.adapter.delegate = self;
-        self.parser = [[SBJsonStreamParser alloc] init];
-        self.parser.delegate = self.adapter;
-        self.parser.supportMultipleDocuments = YES;
     }
     
     return self;
@@ -50,13 +43,12 @@
 
 - (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data
 {
-    SBJsonStreamParserStatus status = [self.parser parse:data];
-	
-	if (status == SBJsonStreamParserError) {
-        NSString *msg = [[NSString alloc] initWithData:data encoding:NSASCIIStringEncoding];
-        self.clbFailed([[SSBSickBeardResult alloc] initWithAttributes:[NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:msg, NO, nil] forKeys:[NSArray arrayWithObjects:@"message", @"result", nil]]]);
-	} else if (status == SBJsonStreamParserWaitingForData) {
-	}
+    if (_jsonData) {
+        [_jsonData appendData:data];
+    }
+    else {
+        _jsonData = [[NSMutableData alloc] initWithData:data];
+    }
 }
 
 - (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error
@@ -71,6 +63,21 @@
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection
 {
     self.connection = nil;
+    
+    NSError *error;
+    NSDictionary *json = [NSJSONSerialization JSONObjectWithData:_jsonData options:kNilOptions error:&error];
+    
+    if (!error) {
+        if ([[json objectForKey:@"result"] isEqualToString:@"success"]) {
+            self.clb(json);
+        }
+        else {
+            self.clbFailed([[SSBSickBeardResult alloc] initWithAttributes:json]);
+        }
+    }
+    else {
+        self.clbFailed([[SSBSickBeardResult alloc] initWithAttributes:[NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:error.localizedDescription, @"error", nil] forKeys:[NSArray arrayWithObjects:@"message", @"result", nil]]]);
+    }
 }
 
 - (BOOL)connection:(NSURLConnection *)connection canAuthenticateAgainstProtectionSpace:(NSURLProtectionSpace *)protectionSpace {
@@ -82,23 +89,6 @@
 	[challenge.sender useCredential:[NSURLCredential credentialForTrust:challenge.protectionSpace.serverTrust] forAuthenticationChallenge:challenge];
 	
 	[challenge.sender continueWithoutCredentialForAuthenticationChallenge:challenge];
-}
-
-#pragma mark -
-#pragma mark SBJsonStreamParserAdapterDelegate methods
-
-- (void)parser:(SBJsonStreamParser *)parser foundArray:(NSArray *)array {
-}
-
-- (void)parser:(SBJsonStreamParser *)parser foundObject:(NSDictionary *)dict {
-    
-    if ([[dict objectForKey:@"result"] isEqualToString:@"success"]) {
-        self.clb(dict);
-    }
-    else {
-        self.clbFailed([[SSBSickBeardResult alloc] initWithAttributes:dict]);
-    }
-    
 }
 
 @end
